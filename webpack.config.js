@@ -15,8 +15,8 @@ const postcss = {
   loader: 'postcss-loader',
   options: {
     sourceMap: true,
-    plugins() { 
-      return [autoprefixer({ browsers: 'last 3 versions' })]; 
+    plugins() {
+      return [autoprefixer({ browsers: 'last 3 versions' })];
     }
   }
 };
@@ -30,6 +30,18 @@ const uglify = new webpack.optimize.UglifyJsPlugin({
   compress: { warnings: false }
 });
 
+const fontAwesome = {
+  componentStyles: {
+    test: /\.scss$/,
+    loaders: ["style-loader", "css-loader", "sass-loader"],
+    exclude: path.resolve(__dirname, 'src/app')
+  },
+  fonts: {
+    test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+    loader: 'file-loader?name=fonts/[name].[ext]'
+  }
+};
+
 const config = {
   entry: {
     App: './public/js/budgetify.js'
@@ -40,8 +52,13 @@ const config = {
     filename: '[name].bundle.js'
   },
 
- module: {
-    rules: [javascript, styles]
+  module: {
+    rules: [
+      fontAwesome.componentStyles,
+      fontAwesome.fonts,
+      styles,
+      javascript
+    ]
   },
 
   // TODO uncomment
