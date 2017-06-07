@@ -1,7 +1,7 @@
 {
   "name": "budgetify",
   "version": "1.0.0",
-  "description": "Keep track of you expenses and your budgets",
+  "description": "Keep track of your expenses and your budgets",
   "main": "index.js",
   "repository": "git@github.com:NicolaFerracin/budgetify.git",
   "author": "NicolaFerracin <nicola.ferracin@gmail.com>",
