@@ -2,7 +2,10 @@
   "name": "budgetify",
   "version": "1.0.0",
   "description": "Keep track of your expenses and your budgets",
-  "main": "index.js",
+  "main": "index.js", 
+  "now": {
+    "dotenv": "variables.env.now"
+  },
   "scripts": {
     "start": "node ./index.js",
     "watch": "nodemon ./index.js --ignore public/",
