@@ -1,65 +1,37 @@
+include mixins/_flashes
+
 doctype html
 html
   head
-    title= `${title || ''} | ${h.siteName}`
+    title= `${title || ''} | ${h.siteName.text}`
     //- link(rel="shortcut icon" type="image/png" href="/images/icons/doughnut.png")
     include meta
     include styles
-  body.hold-transition.skin-green.sidebar-mini
-    .wrapper
-      block header
-        header.main-header
-          a.logo(href="#") 
-            span.logo-mini 
-              strong B
-            span.logo-lg 
-              strong B
-              | udgetify
-          nav.navbar.navbar-static-top
-            a.sidebar-toggle(href="#" data-toggle="push-menu" role="button")
-              span.sr-only Toggle navigation
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            div.navbar-custom-menu
-              ul.nav.navbar-nav
-                li
-                  a(href="#" data-toggle="control-sidebar")
-                    i.fa.fa-gears
+  block body
+    body.hold-transition.skin-green.sidebar-mini
+      .wrapper
+      
+        block header
+          include includes/header
 
+        block main-sidebar
+          include includes/sidebar
 
-      block main-sidebar
-        aside.main-sidebar
-          section.sidebar
-            div.user-panel
-              div.pull-left.image
-                //- img(src="")
-
-      .content-wrapper
-        block content
+        .content-wrapper
           block messages
-            if locals.flashes
-              .inner.row
-                .col-xs-10.col-xs-offset-1
-                  - const categories = Object.keys(locals.flashes)
-                  each category in categories
-                    each message in flashes[category]
-                      .alert.alert-dismissible(class=`alert-${category}`)
-                        button.close(type="button" data-dismiss="alert" aria-hidden="true" onclick="this.parentElement.remove()") &times;
-                        h4.capitalize
-                          i.icon.fa.fa-ban
-                          | #{category}
-                        p!= message
-                  
-        
-      include footer
-    
-      block control-sidebar
-        aside.control-sidebar.control-sidebar-dark
+            +flashes(locals.flashes)
+          
+          block content
+            | asdasd
+          
+        footer.main-footer            
+          block footer
+            include includes/footer
+      
+        block control-sidebar
+          include includes/control-sidebar
 
-      .control-sidebar-bg
+        block control-sidebar-bg
+          .control-sidebar-bg
 
-    
-    
-
-    include scripts
+      include scripts

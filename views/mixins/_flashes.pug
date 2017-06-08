@@ -1,0 +1,13 @@
+mixin flashes()
+    if locals.flashes
+        .inner.row.flashes
+            .col-xs-10.col-xs-offset-1
+                - const categories = Object.keys(locals.flashes)
+                each category in categories
+                    each message in flashes[category]
+                        .alert.alert-dismissible(class=`alert-${category}`)
+                            button.close(type="button" data-dismiss="alert" aria-hidden="true" onclick="this.parentElement.remove()") &times;
+                            h4.capitalize
+                                i.icon.fa.fa-ban
+                                | #{category}
+                            p!= message
