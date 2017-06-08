@@ -65,7 +65,7 @@ const config = {
   // plugins: [uglify]
 
   plugins: [
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('style.css')
   ]
 };
 process.noDeprecation = true;

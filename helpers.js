@@ -6,6 +6,8 @@ exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
 // exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 
+exports.currentYear = () => new Date().getFullYear();
+
 exports.siteName = `Budgetify`;
 
 exports.menu = [

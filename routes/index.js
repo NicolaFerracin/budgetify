@@ -9,6 +9,7 @@ router.get('/flashes', (req,res) => {
     req.flash('error', 'This is an error');
     req.flash('info', 'This is an info');
     req.flash('warning', 'This is an warning');
+    req.flash('success', 'This is an success');
     res.render('layout');
 });
 

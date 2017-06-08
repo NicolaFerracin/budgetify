@@ -38,6 +38,7 @@
     "file-loader": "^0.11.2",
     "font-awesome": "^4.7.0",
     "font-awesome-sass-loader": "^2.0.1",
+    "jquery": "^3.2.1",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.5",

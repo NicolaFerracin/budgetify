@@ -4,4 +4,9 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
 
+@import 'partials/variables';
+@import 'partials/typography';
 @import 'partials/layout';
+@import 'partials/flashes';
+@import 'partials/utils';
+@import 'partials/overrides';
