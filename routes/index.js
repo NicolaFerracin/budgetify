@@ -20,5 +20,17 @@ router.post('/register',
 router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 
+// Logout
+router.get('/logout', authController.logout);
+
+// Recover
+router.get('/recover', authController.recoverForm);
+router.post('/recover', catchErrors(authController.recover));
+router.get('/recover/:token', catchErrors(authController.reset));
+router.post('/recover/:token', 
+    authController.validateReset,
+    authController.confirmedPasswords,
+    catchErrors(authController.update)
+);
 
 module.exports = router;

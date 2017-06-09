@@ -33,7 +33,6 @@ exports.flashValidationErrors = (err, req, res, next) => {
     const errorKeys = Object.keys(err.errors);
     errorKeys.forEach(key => req.flash('error', err.errors[key].message));
   }
-  console.log(req.flash())
   res.redirect('back');
 };
 

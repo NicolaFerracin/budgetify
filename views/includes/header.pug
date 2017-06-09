@@ -13,6 +13,14 @@ header.main-header
             span.icon-bar
         div.navbar-custom-menu
             ul.nav.navbar-nav
-                li
-                    a(href="#" data-toggle="control-sidebar")
-                        i.fa.fa-gears
+                if user
+                    li
+                        a(href="#" data-toggle="control-sidebar")
+                            i.fa.fa-gears
+                    li
+                        a(href="/logout" data-toggle="control-sidebar") Logout
+                else
+                    li
+                        a(href="/register" data-toggle="control-sidebar") Register
+                    li
+                        a(href="/login" data-toggle="control-sidebar") Login

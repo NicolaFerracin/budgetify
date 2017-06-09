@@ -14,21 +14,18 @@ block body
                     a(href="#")
                         != h.siteName.html
                 .login-box-body
-                    p.login-box-msg Login
+                    p.login-box-msg Account Recovery
                     form(method="POST")
                         .form-group.has-feedback
                             input.form-control(type="email" name="email" placeholder="Email")
                             span.glyphicon.glyphicon-envelope.form-control-feedback
-                        .form-group.has-feedback
-                            input.form-control(type="password" name="password" placeholder="Password")
-                            span.glyphicon.glyphicon-lock.form-control-feedback
                         .row
                             .col-xs-4.col-xs-offset-8
-                                button.btn.btn-primary.btn-block.btn-flat(type="submit") Login
+                                button.btn.btn-primary.btn-block.btn-flat(type="submit") Recover
                         
                     a.text-center(href="/register") Go to register
                     br
-                    a.text-center(href="/recover") Recover account
+                    a.text-center(href="/login") Go to login
 
                         .box-body
                             .box-footer.text-center
