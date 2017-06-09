@@ -4,6 +4,7 @@ include mixins/_flashes
 
 block body
     body.hold-transition.register-page
+
         block messages
             +flashes(locals.flashes)
         
@@ -14,23 +15,23 @@ block body
                         != h.siteName.html
                 .register-box-body
                     p.login-box-msg Register a new membership
-                    form(action="" method="POST")
+                    form(method="POST")
                         .form-group.has-feedback
-                            input.form-control(type="text" placeholder="Full name")
+                            input.form-control(type="text" name="name" placeholder="Full name")
                             span.glyphicon.glyphicon-user.form-control-feedback
                         .form-group.has-feedback
-                            input.form-control(type="email" placeholder="Email")
+                            input.form-control(type="email" name="email" placeholder="Email")
                             span.glyphicon.glyphicon-envelope.form-control-feedback
                         .form-group.has-feedback
-                            input.form-control(type="password" placeholder="Password")
+                            input.form-control(type="password" name="password" placeholder="Password")
                             span.glyphicon.glyphicon-lock.form-control-feedback
                         .form-group.has-feedback
-                            input.form-control(type="password" placeholder="Confirm password")
+                            input.form-control(type="password" name="password-confirm" placeholder="Confirm password")
                             span.glyphicon.glyphicon-log-in.form-control-feedback
                         .row
                             .col-xs-4.col-xs-offset-8
                                 button.btn.btn-primary.btn-block.btn-flat(type="submit") Register
-                            
+
                         .box-body
                             .box-footer.text-center
                                 include includes/footer

@@ -8,7 +8,10 @@ exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
 exports.currentYear = () => new Date().getFullYear();
 
-exports.siteName = `Budgetify`;
+exports.siteName = {
+    text: `Budgetify`,
+    html: '<strong>B</strong>udgetify'
+};
 
 exports.menu = [
     { slug: '/one', title: 'One', icon: 'one', },

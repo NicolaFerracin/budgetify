@@ -1,16 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController')
+const authController = require('../controllers/authController')
+const { catchErrors } = require('../handlers/errors')
 
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
     res.render('layout', { title: 'Home' });
 });
 
-router.get('/flashes', (req,res) => {
-    req.flash('error', 'This is an error');
-    req.flash('info', 'This is an info');
-    req.flash('warning', 'This is an warning');
-    req.flash('success', 'This is an success');
-    res.render('layout');
-});
+// Registration
+router.get('/register', userController.registerForm);
+router.post('/register', 
+    userController.validateRegister,
+    catchErrors(userController.register)
+    // authController.login
+);
+
+// Login
+router.get('/login', userController.loginForm);
+router.post('/login', authController.login);
+
 
 module.exports = router;
