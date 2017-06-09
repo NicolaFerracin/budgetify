@@ -3,38 +3,32 @@ extends layout
 include mixins/_flashes
 
 block body
-    body.hold-transition.register-page
+    body.hold-transition.login-page
 
         block messages
             +flashes(locals.flashes)
         
         block content
-            .register-box
-                .register-logo
+            .login-box
+                .login-logo
                     a(href="#")
                         != h.siteName.html
-                .register-box-body
-                    p.login-box-msg Register
+                .login-box-body
+                    p.login-box-msg Login
                     form(method="POST")
-                        .form-group.has-feedback
-                            input.form-control(type="text" name="name" placeholder="Full name")
-                            span.glyphicon.glyphicon-user.form-control-feedback
                         .form-group.has-feedback
                             input.form-control(type="email" name="email" placeholder="Email")
                             span.glyphicon.glyphicon-envelope.form-control-feedback
                         .form-group.has-feedback
                             input.form-control(type="password" name="password" placeholder="Password")
                             span.glyphicon.glyphicon-lock.form-control-feedback
-                        .form-group.has-feedback
-                            input.form-control(type="password" name="password-confirm" placeholder="Confirm password")
-                            span.glyphicon.glyphicon-log-in.form-control-feedback
                         .row
                             .col-xs-4.col-xs-offset-8
-                                button.btn.btn-primary.btn-block.btn-flat(type="submit") Register
+                                button.btn.btn-primary.btn-block.btn-flat(type="submit") Login
                         
-                        a.text-center(href="/login") Go to login
+                        a.text-center(href="/register") Go to register
 
                         .box-body
                             .box-footer.text-center
                                 include includes/footer
-
+                    

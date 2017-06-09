@@ -7,9 +7,6 @@ exports.loginForm = (req, res) => {
 };
 
 exports.registerForm = (req, res) => {
-    console.log(req.flash())
-    req.flash('error', '0asdas')
-    console.log(req.flash())
     res.render('register', { title: 'Register' });
 };
 
@@ -23,6 +20,7 @@ exports.validateRegister = (req, res, next) => {
         gmail_remove_subaddress: false
     });
     req.checkBody('password', 'Password cannot be blank').notEmpty();
+    req.assert('password', 'Please user a stronger password, of at least 6 characters').len(6);
     req.checkBody('password-confirm', 'Confirmed Password cannot be blank').notEmpty();
     req.checkBody('password-confirm', 'Your passwords do not match').equals(req.body.password);
 
