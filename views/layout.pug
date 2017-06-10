@@ -10,27 +10,20 @@ html
   block body
     body.hold-transition.skin-green.sidebar-mini
       .wrapper
-      
-        block header
-          include includes/header
-
-        block main-sidebar
-          include includes/sidebar
-
+        include includes/header
+        include includes/sidebar
+        
         .content-wrapper
           block messages
             +flashes(locals.flashes)
           
           block content
           
-        footer.main-footer            
-          block footer
-            include includes/footer
+        footer.main-footer    
+          include includes/footer
       
-        block control-sidebar
-          include includes/control-sidebar
+        include includes/control-sidebar
 
-        block control-sidebar-bg
-          .control-sidebar-bg
+        .control-sidebar-bg
 
       include scripts

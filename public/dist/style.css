@@ -8164,4 +8164,8 @@ html {
 .capitalize {
   text-transform: capitalize; }
 
+.login-box, .register-box {
+  margin: auto !important;
+  padding-top: 7%; }
+
 /*# sourceMappingURL=style.css.map*/

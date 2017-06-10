@@ -1,36 +1,21 @@
 extends layout
 
-include mixins/_flashes
-
-block body
-    body.hold-transition.login-page
-
-        block messages
-            +flashes(locals.flashes)
-        
-        block content
-            .login-box
-                .login-logo
-                    a(href="#")
-                        != h.siteName.html
-                .login-box-body
-                    p.login-box-msg Login
-                    form(method="POST")
-                        .form-group.has-feedback
-                            input.form-control(type="email" name="email" placeholder="Email")
-                            span.glyphicon.glyphicon-envelope.form-control-feedback
-                        .form-group.has-feedback
-                            input.form-control(type="password" name="password" placeholder="Password")
-                            span.glyphicon.glyphicon-lock.form-control-feedback
-                        .row
-                            .col-xs-4.col-xs-offset-8
-                                button.btn.btn-primary.btn-block.btn-flat(type="submit") Login
-                        
-                    a.text-center(href="/register") Go to register
-                    br
-                    a.text-center(href="/recover") Recover account
-
-                        .box-body
-                            .box-footer.text-center
-                                include includes/footer
-                    
+block content
+    .login-box
+        .login-logo
+            a(href="#")
+                != h.siteName.html
+        .login-box-body
+            p.login-box-msg Login
+            form(method="POST")
+                .form-group.has-feedback
+                    input.form-control(type="email" name="email" placeholder="Email")
+                    span.glyphicon.glyphicon-envelope.form-control-feedback
+                .form-group.has-feedback
+                    input.form-control(type="password" name="password" placeholder="Password")
+                    span.glyphicon.glyphicon-lock.form-control-feedback
+                .row
+                    .col-xs-4.col-xs-offset-8
+                        button.btn.btn-primary.btn-block.btn-flat(type="submit") Login
+                
+            a.text-center(href="/recover") Recover account

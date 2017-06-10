@@ -1,36 +1,20 @@
 extends layout
 
-include mixins/_flashes
-
-block body
-    body.hold-transition.login-page
-
-        block messages
-            +flashes(locals.flashes)
-        
-        block content
-            .login-box
-                .login-logo
-                    a(href="#")
-                        != h.siteName.html
-                .login-box-body
-                    p.login-box-msg Account Recovery
-                    form(method="POST")
-                        .form-group.has-feedback
-                            input.form-control(type="password" name="password" placeholder="New Password")
-                            span.glyphicon.glyphicon-lock.form-control-feedback
-                        .form-group.has-feedback
-                            input.form-control(type="password" name="password-confirm" placeholder="Confirm new password")
-                            span.glyphicon.glyphicon-log-in.form-control-feedback
-                        .row
-                            .col-xs-4.col-xs-offset-8
-                                button.btn.btn-primary.btn-block.btn-flat(type="submit") Reset
+block content
+    .login-box
+        .login-logo
+            a(href="#")
+                != h.siteName.html
+        .login-box-body
+            p.login-box-msg Account Recovery
+            form(method="POST")
+                .form-group.has-feedback
+                    input.form-control(type="password" name="password" placeholder="New Password")
+                    span.glyphicon.glyphicon-lock.form-control-feedback
+                .form-group.has-feedback
+                    input.form-control(type="password" name="password-confirm" placeholder="Confirm new password")
+                    span.glyphicon.glyphicon-log-in.form-control-feedback
+                .row
+                    .col-xs-4.col-xs-offset-8
+                        button.btn.btn-primary.btn-block.btn-flat(type="submit") Reset
                         
-                    a.text-center(href="/register") Go to register
-                    br
-                    a.text-center(href="/login") Go to login
-
-                        .box-body
-                            .box-footer.text-center
-                                include includes/footer
-                    
