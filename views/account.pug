@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    .login-box
+        .login-box-body
+            p.login-box-msg Account
+            form(method="POST")
+                .form-group.has-feedback
+                    input.form-control(type="text" name="name" value=user.name)
+                    span.glyphicon.glyphicon-envelope.form-control-feedback
+                .form-group.has-feedback
+                    input.form-control(type="email" name="email" value=user.email)
+                    span.glyphicon.glyphicon-envelope.form-control-feedback
+                .form-group.has-feedback
+                    input.form-control(type="password" name="password" placeholder="Insert new password")
+                    span.glyphicon.glyphicon-lock.form-control-feedback
+                .row
+                    .col-xs-4.col-xs-offset-8
+                        button.btn.btn-primary.btn-block.btn-flat(type="submit") Update account
