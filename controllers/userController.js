@@ -56,5 +56,7 @@ exports.updateAccount = async (req, res) => {
         { new: true, runValidators: true, context: 'query'}
     );
 
+    req.flash('success', 'Your account has been updated!');
+    
     res.redirect('back');
 };

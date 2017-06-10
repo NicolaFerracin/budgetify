@@ -34,6 +34,8 @@ router.post('/recover/:token',
 );
 
 // Account
-router.get('/account', authController.accountForm);
+router.get('/account', userController.account);
+router.post('/account/updateAccount', catchErrors(userController.updateAccount));
+router.post('/account/changePassword', catchErrors(userController.changePassword));
 
 module.exports = router;

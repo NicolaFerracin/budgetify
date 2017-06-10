@@ -105,7 +105,3 @@ exports.update = async (req, res) => {
     req.flash('success', 'Your password has been updated');
     res.redirect('/');
 };
-
-exports.accountForm = (req, res) => {
-    res.render('account', { title: 'Account' });
-};
