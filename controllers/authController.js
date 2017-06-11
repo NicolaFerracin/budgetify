@@ -12,6 +12,24 @@ exports.login = passport.authenticate('local', {
     successFlash: 'You are now logged in!'
 });
 
+exports.changePassword = async (req, res) => {
+    const newPassword = req.body.password;
+    req.body.password = req.body['old-password'];
+    const user = await User.findOne({ email: req.user.email });
+    passport.authenticate('local', {
+        failureRedirect: '/login',
+        failureFlash: 'Failed login!',
+        successRedirect: '/',
+        successFlash: 'You are now logged in!'
+    });
+    const setPassword = promisify(user.setPassword, user);
+    await setPassword(newPassword);
+    const updatedUser = await user.save();
+    await req.login(updatedUser);
+    req.flash('success', 'Your password has been changed');
+    res.redirect('/account');
+};
+
 exports.logout = (req, res) => {
     req.logout();
     req.flash('success', 'You are now logged out');

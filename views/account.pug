@@ -15,18 +15,18 @@ block content
                     .col-xs-4.col-xs-offset-8
                         button.btn.btn-primary.btn-block.btn-flat(type="submit") Update
 
-            p.text-center - OR -
+            hr
 
             p.login-box-msg Change password
             form(method="POST" action="/account/changePassword")
                 .form-group.has-feedback
-                    input.form-control(type="password" name="password" placeholder="Insert current password")
+                    input.form-control(type="password" name="old-password" placeholder="Insert current password")
                     span.glyphicon.glyphicon-lock.form-control-feedback
                 .form-group.has-feedback
-                    input.form-control(type="password" name="password-new" placeholder="Insert new password")
+                    input.form-control(type="password" name="password" placeholder="Insert new password")
                     span.glyphicon.glyphicon-lock.form-control-feedback
                 .form-group.has-feedback
-                    input.form-control(type="password" name="password-new-confirm" placeholder="Confirm new password")
+                    input.form-control(type="password" name="password-confirm" placeholder="Confirm new password")
                     span.glyphicon.glyphicon-log-in.form-control-feedback
                 .row
                     .col-xs-4.col-xs-offset-8

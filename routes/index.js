@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController')
-const authController = require('../controllers/authController')
-const { catchErrors } = require('../handlers/errors')
+const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
+const { catchErrors } = require('../handlers/errors');
 
 router.get('/', (req, res) => {
     res.render('layout', { title: 'Home' });
@@ -36,6 +36,10 @@ router.post('/recover/:token',
 // Account
 router.get('/account', userController.account);
 router.post('/account/updateAccount', catchErrors(userController.updateAccount));
-router.post('/account/changePassword', catchErrors(userController.changePassword));
+router.post('/account/changePassword', 
+    authController.validateReset,
+    authController.confirmedPasswords,
+    catchErrors(authController.changePassword)
+);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
+const authController = require('../controllers/authController');
 
 exports.loginForm = (req, res) => {
     res.render('login', { title: 'Login' });
@@ -60,3 +61,12 @@ exports.updateAccount = async (req, res) => {
     
     res.redirect('back');
 };
+
+exports.changePassword = (req, res) => {
+    const newPassword = req.body.password;
+    req.body.password = req.body['old-password'];
+    req.body.email = req.user.email;
+    delete req.body['old-password'];
+    delete req.body['password-confirm'];
+    console.log(req.body);
+}
