@@ -1,16 +1,23 @@
 header.main-header
-    a.logo(href="#") 
-        span.logo-mini 
-            strong B
-        span.logo-lg 
-            strong B
-            | udgetify
+    if user
+        a.logo(href="#") 
+            span.logo-mini 
+                strong B
+            span.logo-lg 
+                strong B
+                | udgetify
     nav.navbar.navbar-static-top
-        a.sidebar-toggle(href="#" data-toggle="push-menu" role="button")
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
+        if user
+            a.sidebar-toggle(href="#" data-toggle="push-menu" role="button")
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+        else 
+            a.logo.logo-light.logo-full(href="#") 
+                span 
+                    strong B
+                    | udgetify
         div.navbar-custom-menu
             ul.nav.navbar-nav
                 if user

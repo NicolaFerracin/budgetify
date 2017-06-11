@@ -8,12 +8,14 @@ html
     include meta
     include styles
   block body
-    body.hold-transition.skin-green.sidebar-mini
+    body.hold-transition.skin-green.sidebar-mini(class=user ? '' : 'sidebar-collapse')
       .wrapper
         include includes/header
-        include includes/sidebar
+
+        if user
+          include includes/sidebar
         
-        .content-wrapper
+        .content-wrapper(class=user ? '' : 'no-sidebar no-user')
           block messages
             +flashes(locals.flashes)
           

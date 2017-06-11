@@ -8168,4 +8168,15 @@ html {
   margin: auto !important;
   padding-top: 7%; }
 
+.logo-light {
+  background-color: #00a65a !important; }
+
+.logo-full {
+  width: 230px !important; }
+
+body.skin-green.sidebar-mini.sidebar-collapse .no-sidebar.no-user,
+body.skin-green.sidebar-mini.sidebar-collapse .main-footer.no-user,
+body.skin-green.sidebar-mini.sidebar-collapse .navbar.no-user {
+  margin-left: 0px !important; }
+
 /*# sourceMappingURL=style.css.map*/

@@ -8,8 +8,7 @@ const mail = require('../handlers/mail');
 exports.login = passport.authenticate('local', {
     failureRedirect: '/login',
     failureFlash: 'Failed login!',
-    successRedirect: '/',
-    successFlash: 'You are now logged in!'
+    successRedirect: '/'
 });
 
 exports.changePassword = async (req, res) => {
@@ -17,10 +16,9 @@ exports.changePassword = async (req, res) => {
     req.body.password = req.body['old-password'];
     const user = await User.findOne({ email: req.user.email });
     passport.authenticate('local', {
-        failureRedirect: '/login',
-        failureFlash: 'Failed login!',
-        successRedirect: '/',
-        successFlash: 'You are now logged in!'
+        failureRedirect: '/account',
+        failureFlash: 'The current password you entered doesn\'t seem to be right',
+        successRedirect: '/'
     });
     const setPassword = promisify(user.setPassword, user);
     await setPassword(newPassword);

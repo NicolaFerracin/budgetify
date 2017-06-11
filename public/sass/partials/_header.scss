@@ -1,0 +1,13 @@
+.logo-light {
+    background-color: $light-green !important;
+}
+
+.logo-full {
+    width: 230px !important;
+}
+
+body.skin-green.sidebar-mini.sidebar-collapse .no-sidebar.no-user,
+body.skin-green.sidebar-mini.sidebar-collapse .main-footer.no-user,
+body.skin-green.sidebar-mini.sidebar-collapse .navbar.no-user {
+    margin-left: 0px !important;
+}
