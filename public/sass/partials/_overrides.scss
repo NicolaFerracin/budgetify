@@ -2,3 +2,15 @@
     margin: auto !important;
     padding-top: 7%;
 }
+
+body.skin-green.sidebar-mini.sidebar-collapse .no-sidebar.no-user,
+body.skin-green.sidebar-mini.sidebar-collapse .main-footer.no-user,
+body.skin-green.sidebar-mini.sidebar-collapse .navbar.no-user {
+    margin-left: 0px !important;
+}
+
+form {
+    textarea {
+        resize: vertical;
+    }
+}

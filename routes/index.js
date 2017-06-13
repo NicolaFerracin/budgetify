@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const walletController = require('../controllers/walletController');
 const { catchErrors } = require('../handlers/errors');
 
 router.get('/', (req, res) => {
@@ -41,5 +42,9 @@ router.post('/account/changePassword',
     authController.confirmedPasswords,
     catchErrors(authController.changePassword)
 );
+
+// Wallets
+router.get('/wallet', walletController.walletForm);
+router.post('/wallet', catchErrors(walletController.addWallet));
 
 module.exports = router;

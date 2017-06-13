@@ -1,4 +1,5 @@
 const fs = require('fs');
+const currencies = require('./src/currencies')
 
 exports.moment = require('moment');
 
@@ -18,3 +19,5 @@ exports.menu = [
     { slug: '/two', title: 'Two', icon: 'two', },
     { slug: '/three', title: 'Three', icon: 'three', }
 ];
+
+exports.currencies = currencies.currencies;

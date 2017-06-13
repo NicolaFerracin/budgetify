@@ -6,7 +6,7 @@ header.main-header
             span.logo-lg 
                 strong B
                 | udgetify
-    nav.navbar.navbar-static-top
+    nav.navbar.navbar-static-top(class=user ? '' : 'no-user')
         if user
             a.sidebar-toggle(href="#" data-toggle="push-menu" role="button")
                 span.sr-only Toggle navigation

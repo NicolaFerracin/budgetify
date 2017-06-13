@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    section.content-header
+        h1 Add new wallet
+    section.content
+        .row
+            .col-xs-6.col-xs-offset-3
+                .box.box-success
+                    .box-header.with-border
+                        h3.box-title New Wallet
+                    form(method="POST")
+                        .box-body
+                            .form-group
+                                label(for="name") Name
+                                input.form-control(type="text" name="name" required placeholder="Enter a name")
+                            .form-group
+                                label(for="description") Description
+                                textarea.form-control(type="text" rows="5" name="description" placeholder="Enter a description")
+                            .form-group
+                                label(for="currency") Currency
+                                    select(name="currency").form-control
+                                        option(disabled selected value) -- select an option -- 
+                                        - const currencies = h.currencies
+                                        for c, i in currencies
+                                            option(value=i)= `${i} ${c.label} - ${c.symbol}` 
+                        .box-footer
+                            button.btn.btn-primary(type="submit") Submit

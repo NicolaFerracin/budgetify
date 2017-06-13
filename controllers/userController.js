@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
-const authController = require('../controllers/authController');
 
 exports.loginForm = (req, res) => {
     res.render('login', { title: 'Login' });
