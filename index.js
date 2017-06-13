@@ -10,6 +10,7 @@ mongoose.connection.on('error', (err) => {
 
 // import models
 require('./models/User');
+require('./models/Wallet');
 
 const app = require('./app');
 app.set('port', process.env.PORT || 7777);
