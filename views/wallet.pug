@@ -7,25 +7,34 @@ block content
                 small #{wallet.description} - #{wallet.currency}
 
     section.content
-        .row
-            .col-xs-6.col-xs-offset-3
-                .box.box-success
-                    .box-header.with-border
-                        h3.box-title New Wallet
-                    form(method="POST")
-                        .box-body
-                            .form-group
-                                label(for="name") Name
-                                input.form-control(type="text" name="name" required placeholder="Enter a name")
-                            .form-group
-                                label(for="description") Description
-                                textarea.form-control(type="text" rows="5" name="description" placeholder="Enter a description")
-                            .form-group
-                                label(for="currency") Currency
-                                    select(name="currency").form-control
-                                        option(disabled selected value) -- select an option -- 
-                                        - const currencies = h.currencies
-                                        for c, i in currencies
-                                            option(value=i)= `${i} ${c.label} - ${c.symbol}` 
-                        .box-footer
-                            button.btn.btn-primary(type="submit") Submit
+        .col-xs-6.col-xs-offset-3
+            if transactions && wallets.length
+                each wallet in wallets
+                    +wallet(wallet)
+            else
+                .text-center
+                    h2 You don't have any transaction. Add one!
+                    button.btn.btn-primary.btn-lg(type="button" data-toggle="modal" data-target="#add-transaction-modal") Add Transaction
+
+                .modal.fade.in(id="add-transaction-modal")
+                    .modal-dialog
+                        .modal-content
+                            .modal-header
+                                button.close(type="button" data-dismiss="modal" aria-label="Close")
+                                    span(aria-hidden="true") ×
+                                h4.modal-title Add New Transaction
+                            .modal-body
+                                form(method="POST")
+                                    .form-group
+                                        label(for="amount") Category
+                                        input.form-control(type="text" name="name" required placeholder="Enter a name")
+                                    .form-group
+                                        label(for="amount") Amount
+                                        input.form-control(type="text" name="name" required placeholder="Enter a name")
+                                    .form-group
+                                        label(for="description") Description
+                                        textarea.form-control(type="text" rows="5" name="description" placeholder="Enter a description")
+                                    
+                            .modal-footer
+                                button.btn.btn-default.pull-left(type="button" data-dismiss="modal") Close
+                                a.btn.btn-primary(href="/") Add
