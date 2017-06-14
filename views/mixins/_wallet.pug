@@ -1,0 +1,14 @@
+mixin wallet(wallet)
+    if wallet
+        a.wallet(href=`/wallet/${wallet._id}`)
+            .info-box.bg-green
+                span.info-box-icon
+                    i.ion.ion-ios-pricetag-outline
+                .info-box-content
+                    span.info-box-text #{wallet.name}
+                        span.info-box-description #{wallet.description ? ' - ' + wallet.description : ''}
+                    span.info-box-number 
+
+                    .progress
+                        .progress-bar
+                        span.progress-description 50% Increase in 30 Days

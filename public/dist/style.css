@@ -8182,4 +8182,19 @@ form textarea {
 .logo-full {
   width: 230px !important; }
 
+.info-box-description {
+  text-transform: initial; }
+
+.wallet .info-box {
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s; }
+
+.wallet:hover .info-box {
+  margin-top: -5px;
+  margin-bottom: 20px;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s; }
+
 /*# sourceMappingURL=style.css.map*/

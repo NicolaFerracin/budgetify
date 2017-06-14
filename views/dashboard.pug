@@ -1,0 +1,17 @@
+extends layout
+
+include mixins/_wallet
+
+block content
+    section.content-header 
+        h1 Dashboard
+
+    section.content
+        .col-xs-6.col-xs-offset-3
+            if wallets && wallets.length
+                each wallet in wallets
+                    +wallet(wallet)
+            else
+                .text-center
+                    h2 You don't have any wallet. Create one!
+                    a.btn.btn-primary.btn-lg(href="/wallet") Add Wallet

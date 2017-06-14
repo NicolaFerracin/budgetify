@@ -6,8 +6,17 @@ const walletController = require('../controllers/walletController');
 const { catchErrors } = require('../handlers/errors');
 
 router.get('/', (req, res) => {
-    res.render('layout', { title: 'Home' });
+    if (req.isAuthenticated()) {
+        res.redirect('/home');
+    } else {
+        res.render('layout', { title: 'Home' });
+    }
 });
+
+router.get('/home', 
+    authController.isLoggedIn,
+    catchErrors(walletController.home)
+);
 
 // Registration
 router.get('/register', userController.registerForm);
@@ -46,5 +55,10 @@ router.post('/account/changePassword',
 // Wallets
 router.get('/wallet', walletController.walletForm);
 router.post('/wallet', catchErrors(walletController.addWallet));
+router.get('/wallet/:id', catchErrors(walletController.wallet));
+
+router.get('/favicon.ico', function(req, res) {
+    res.sendStatus(204);
+});
 
 module.exports = router;

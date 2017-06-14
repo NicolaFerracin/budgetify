@@ -1,0 +1,16 @@
+.info-box-description {
+    text-transform: initial;
+}
+
+.wallet {
+    .info-box {
+        transition: all 0.2s;        
+    }
+    &:hover {
+        .info-box {
+            margin-top: -5px;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+        }
+    }
+}
