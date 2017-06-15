@@ -19,10 +19,10 @@ block content
                                 textarea.form-control(type="text" rows="5" name="description" placeholder="Enter a description")
                             .form-group
                                 label(for="currency") Currency
-                                    select(name="currency").form-control
-                                        option(disabled selected value) -- select an option -- 
-                                        - const currencies = h.currencies
-                                        for c, i in currencies
-                                            option(value=i)= `${i} ${c.label} - ${c.symbol}` 
+                                select(name="currency").form-control
+                                    option(disabled selected value) -- select an option -- 
+                                    - const currencies = h.currencies
+                                    for c, i in currencies
+                                        option(value=i)= `${i} ${c.label} - ${c.symbol}` 
                         .box-footer
                             button.btn.btn-primary(type="submit") Submit
