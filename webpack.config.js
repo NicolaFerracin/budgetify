@@ -65,7 +65,11 @@ const config = {
   // plugins: [uglify]
 
   plugins: [
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.css'),
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+    })
   ]
 };
 process.noDeprecation = true;
