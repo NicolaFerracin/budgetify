@@ -57,6 +57,13 @@ router.get('/wallet', walletController.walletForm);
 router.post('/wallet', catchErrors(walletController.addWallet));
 router.get('/wallet/:id', catchErrors(walletController.wallet));
 
+// Transactions
+router.post('/transaction', (req, res) => {
+    console.log(req.body);
+    return;
+});
+
+
 router.get('/favicon.ico', function(req, res) {
     res.sendStatus(204);
 });
