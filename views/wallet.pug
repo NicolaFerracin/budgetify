@@ -12,50 +12,51 @@ block content
             if transactions && transactions.length
                 each transaction in transactions
                     p #{transaction.date} - #{transaction.amount}#{h.currencies[wallet.currency].symbol}
+                button.btn.btn-primary(type="button" data-toggle="modal" data-target="#add-transaction-modal") Add Transaction
             else
                 .text-center
                     h2 You don't have any transaction. Add one!
-                    button.btn.btn-primary.btn-lg(type="button" data-toggle="modal" data-target="#add-transaction-modal") Add Transaction
+                    button.btn.btn-primary(type="button" data-toggle="modal" data-target="#add-transaction-modal") Add Transaction
 
-                .modal.fade.in(id="add-transaction-modal")
-                    .modal-dialog
-                        form(method="POST" action="/transaction")
-                            .modal-content
-                                .modal-header
-                                    button.close(type="button" data-dismiss="modal" aria-label="Close")
-                                        span(aria-hidden="true") ×
-                                    h4.modal-title Add New Transaction
-                                .modal-body
-                                        .form-group.hidden
-                                            input(name="wallet" value=wallet.id)
-                                        .form-group
-                                            label(for="category") Category
-                                            select(name="category").form-control
-                                                option(disabled selected value) -- select an option -- 
-                                                for category in  user.categories
-                                                    option(value=category) #{category} 
-                                        .form-group
-                                            label(for="amount") Amount
-                                            input.form-control(type="number" step="any" name="amount" required placeholder="Enter an amount")
-                                        .form-group
-                                            label(for="date") Date
-                                            input.form-control(type="date" name="date" value=h.moment().format('YYYY-MM-DD'))
-                                        .form-group
-                                            label(for="time") Time
-                                            input.form-control(type="time" name="time" value=h.moment().format('HH:mm'))
-                                        .form-group
-                                            label(for="location") Location
-                                            input.form-control(type="text" id="location" name="location")
-                                        .form-group
-                                            label(for="description") Description
-                                            input.form-control(type="text" rows="5" name="description" placeholder="Enter a description")
-                                        .form-group
-                                            input(type="checkbox" name="recurrent")
-                                            label(for=recurrent) Is it recurrent?
-                                        .form-group
-                                            input(type="checkbox" name="shouldCount" checked) 
-                                            label(for=shouldCount) Consider in calculations?
-                                            
-                                .modal-footer
-                                    button.btn.btn-default.pull-left(type="button" data-dismiss="modal") Close
-                                    button.btn.btn-primary(type="submit") Add
+            .modal.fade.in(id="add-transaction-modal")
+                .modal-dialog
+                    form(method="POST" action="/transaction")
+                        .modal-content
+                            .modal-header
+                                button.close(type="button" data-dismiss="modal" aria-label="Close")
+                                    span(aria-hidden="true") ×
+                                h4.modal-title Add New Transaction
+                            .modal-body
+                                    .form-group.hidden
+                                        input(name="wallet" value=wallet.id)
+                                    .form-group
+                                        label(for="category") Category
+                                        select(name="category").form-control
+                                            option(disabled selected value) -- select an option -- 
+                                            for category in  user.categories
+                                                option(value=category) #{category} 
+                                    .form-group
+                                        label(for="amount") Amount
+                                        input.form-control(type="number" step="any" name="amount" required placeholder="Enter an amount")
+                                    .form-group
+                                        label(for="date") Date
+                                        input.form-control(type="date" name="date" value=h.moment().format('YYYY-MM-DD'))
+                                    .form-group
+                                        label(for="time") Time
+                                        input.form-control(type="time" name="time" value=h.moment().format('HH:mm'))
+                                    .form-group
+                                        label(for="location") Location
+                                        input.form-control(type="text" id="location" name="location")
+                                    .form-group
+                                        label(for="description") Description
+                                        input.form-control(type="text" rows="5" name="description" placeholder="Enter a description")
+                                    .form-group
+                                        input(type="checkbox" name="recurrent")
+                                        label(for=recurrent) Is it recurrent?
+                                    .form-group
+                                        input(type="checkbox" name="shouldCount" checked) 
+                                        label(for=shouldCount) Consider in calculations?
+                                        
+                            .modal-footer
+                                button.btn.btn-default.pull-left(type="button" data-dismiss="modal") Close
+                                button.btn.btn-primary(type="submit") Add

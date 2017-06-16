@@ -11,7 +11,8 @@ block content
             if wallets && wallets.length
                 each wallet in wallets
                     +wallet(wallet)
+                a.btn.btn-primary(href="/wallet") Add Wallet
             else
                 .text-center
                     h2 You don't have any wallet. Create one!
-                    a.btn.btn-primary.btn-lg(href="/wallet") Add Wallet
+                    a.btn.btn-primary(href="/wallet") Add Wallet
