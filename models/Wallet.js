@@ -24,6 +24,23 @@ const walletSchema = new mongoose.Schema({
         ref: 'User',
         required: 'A wallet must have an owner'
     }
+}, {
+    toJson: { virtuals: true },
+    toObject: { virtuals: true }
 });
+
+walletSchema.virtual('transactions', {
+    ref: 'Transaction',
+    localField: '_id',
+    foreignField: 'wallet'
+});
+
+function autopopulate(next) {
+    this.populate('transactions');
+    next();
+};
+
+walletSchema.pre('find', autopopulate);
+walletSchema.pre('findOne', autopopulate);
 
 module.exports = mongoose.model('Wallet', walletSchema);

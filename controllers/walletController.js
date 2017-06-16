@@ -20,6 +20,8 @@ exports.addWallet = async (req, res) => {
 };
 
 exports.wallet = async (req, res) => {
-    const wallet = await Wallet.findOne({ _id: req.params.id, owner: req.user._id });
+    const wallet = await Wallet
+        .findOne({ _id: req.params.id, owner: req.user._id })
+        .populate('transactions');
     res.render('wallet', { title: wallet.name, wallet });
 }

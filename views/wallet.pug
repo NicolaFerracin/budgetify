@@ -8,9 +8,10 @@ block content
 
     section.content
         .col-xs-6.col-xs-offset-3
-            if transactions && wallets.length
-                each wallet in wallets
-                    +wallet(wallet)
+            - const transactions = wallet.transactions
+            if transactions && transactions.length
+                each transaction in transactions
+                    p #{transaction.date} - #{transaction.amount}#{h.currencies[wallet.currency].symbol}
             else
                 .text-center
                     h2 You don't have any transaction. Add one!
