@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const walletController = require('../controllers/walletController');
+const transactionController = require('../controllers/transactionController');
 const { catchErrors } = require('../handlers/errors');
 
 router.get('/', (req, res) => {
@@ -58,10 +59,7 @@ router.post('/wallet', catchErrors(walletController.addWallet));
 router.get('/wallet/:id', catchErrors(walletController.wallet));
 
 // Transactions
-router.post('/transaction', (req, res) => {
-    console.log(req.body);
-    return;
-});
+router.post('/transaction', catchErrors(transactionController.addTransaction));
 
 
 router.get('/favicon.ico', function(req, res) {

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const walletSchema = new mongoose.Schema({
-     name: {
+    name: {
         type: String,
         trim: true,
         required: 'Please provide a name for your new wallet!'
