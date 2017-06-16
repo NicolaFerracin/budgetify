@@ -25,6 +25,8 @@ block content
                                         span(aria-hidden="true") ×
                                     h4.modal-title Add New Transaction
                                 .modal-body
+                                        .form-group.hidden
+                                            input(name="wallet" value=wallet.id)
                                         .form-group
                                             label(for="category") Category
                                             select(name="category").form-control
@@ -32,10 +34,13 @@ block content
                                                 option(value="Temp") Temp
                                         .form-group
                                             label(for="amount") Amount
-                                            input.form-control(type="number" name="amount" required placeholder="Enter an amount")
+                                            input.form-control(type="number" step="any" name="amount" required placeholder="Enter an amount")
                                         .form-group
                                             label(for="date") Date
-                                            input.form-control(id="datePicker" type="date" name="date" placeholder="Choose a date" value=h.moment().format('YYYY-MM-DD'))
+                                            input.form-control(type="date" name="date" value=h.moment().format('YYYY-MM-DD'))
+                                        .form-group
+                                            label(for="time") Time
+                                            input.form-control(type="time" name="time" value=h.moment().format('HH:mm'))
                                         .form-group
                                             label(for="location") Location
                                             input.form-control(type="text" id="location" name="location")
