@@ -32,7 +32,8 @@ block content
                                             label(for="category") Category
                                             select(name="category").form-control
                                                 option(disabled selected value) -- select an option -- 
-                                                option(value="Temp") Temp
+                                                for category in  user.categories
+                                                    option(value=category) #{category} 
                                         .form-group
                                             label(for="amount") Amount
                                             input.form-control(type="number" step="any" name="amount" required placeholder="Enter an amount")
