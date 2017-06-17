@@ -1,0 +1,22 @@
+mixin transactionDay(day)
+    .box.box-success.box-transactions-day
+        .box-header.with-border
+            h3.box-title #{day.date}
+            .box-tools.pull-right
+                button.btn.btn-box-tool(type="button" data-widget="collapse")
+                    i.fa.fa-minus
+        .box-body
+            for transaction, index in day.transactions
+                div
+                    if transaction.amount >= 0
+                        span.t-amount.t-income #{transaction.amount} #{h.currencies[wallet.currency].symbol}
+                    else
+                        span.t-amount.t-outcome #{transaction.amount} #{h.currencies[wallet.currency].symbol}
+                    div.pull-right.text-right
+                        strong #{transaction.category}
+                div
+                    span #{transaction.description}
+                div
+                    small.text-muted #{transaction.location['address']}
+                if index < day.transactions.length - 1
+                    hr

@@ -1,5 +1,7 @@
 extends layout
 
+include mixins/_transactionDay
+
 block content
     section.content-header 
         h1 #{wallet.name}
@@ -8,10 +10,10 @@ block content
 
     section.content
         .col-xs-6.col-xs-offset-3
-            - const transactions = wallet.transactions
-            if transactions && transactions.length
-                each transaction in transactions
-                    p #{transaction.date} - #{transaction.amount}#{h.currencies[wallet.currency].symbol}
+            - const transactionsByDay = h.transactionsByDay(wallet.transactions)
+            if transactionsByDay && !h.isEmpty(transactionsByDay)
+                each day in transactionsByDay
+                    +transactionDay(day)
                 button.btn.btn-primary(type="button" data-toggle="modal" data-target="#add-transaction-modal") Add Transaction
             else
                 .text-center
@@ -38,7 +40,7 @@ block content
                                                 option(value=category) #{category} 
                                     .form-group
                                         label(for="amount") Amount
-                                        input.form-control(type="number" step="any" name="amount" required placeholder="Enter an amount")
+                                        input.form-control(type="number" step=".01" name="amount" required placeholder="Enter an amount")
                                     .form-group
                                         label(for="date") Date
                                         input.form-control(type="date" name="date" value=h.moment().format('YYYY-MM-DD'))

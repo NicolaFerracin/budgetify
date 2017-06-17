@@ -1,7 +1,8 @@
 const fs = require('fs');
-const currencies = require('./src/currencies')
+const currencies = require('./src/currencies');
+const moment = require('moment');
 
-exports.moment = require('moment');
+exports.moment = moment;
 
 exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
@@ -21,3 +22,33 @@ exports.menu = [
 ];
 
 exports.currencies = currencies.currencies;
+
+exports.transactionsByDay = (transactions) => {
+    const days = [];
+    const temp = transactions.reduce((res, el) => {
+        const transactionDay = moment(el.timestamp).format('YYYY-MM-DD');
+        if (res[transactionDay]) {
+            res[transactionDay].push(el);
+        } else {
+            days.push(transactionDay);
+            res[transactionDay] = [el]
+        }
+        return res;
+    }, {});
+    return days.sort().reduce((res, el) => {
+        res.push({
+            date: el,
+            transactions: temp[el]
+        });
+        return res;
+    }, []);   
+};
+
+exports.isEmpty = (something) => {
+    if (something.constructor === Object) {
+        return Object.keys(something).length === 0;
+    }
+    if (something.constructor === Array) {
+        return something.length === 0;
+    }
+}

@@ -1,0 +1,11 @@
+.box-transactions-day {
+    .t-amount {
+        font-size: 24px;
+        &.t-income {
+            color: $green;
+        }
+        &.t-outcome {
+            color: $red;
+        }
+    }
+}
