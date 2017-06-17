@@ -42,6 +42,11 @@ const transactionSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Wallet',
         required: 'A transaction must be linked to a wallet'
+    },
+    owner: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: 'A transaction must be linked to a user'
     }
 });
 

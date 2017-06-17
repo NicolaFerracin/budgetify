@@ -15,7 +15,8 @@ exports.addTransaction = async (req, res) => {
         shouldCount: req.body.shouldCount,
         timestamp: date,
         location: req.body.location,
-        wallet: req.body.wallet
+        wallet: req.body.wallet,
+        owner: req.user._id
     };
     await (new Transaction(transaction)).save();
     res.redirect('back');
