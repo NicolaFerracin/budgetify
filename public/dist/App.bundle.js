@@ -11459,6 +11459,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var modal = $('#transaction-modal');
 var form = $('#transaction-form');
+var currentTransactionId = '';
 
 function editTransactionSetUp() {
     if (document.getElementsByClassName('t-body').length == 0) {
@@ -11489,13 +11490,20 @@ function editTransactionSetUp() {
             }
         }
     }
+
+    document.getElementById('deleteTransaction').addEventListener('click', onDelete, false);
+}
+
+function onDelete() {
+    _axios2.default.delete('/api/v1/transaction/' + currentTransactionId).then(function (res) {
+        location.reload();
+    });
 }
 
 function onTransactionClick() {
-    var _this = this;
-
+    currentTransactionId = this.getAttribute('id');
     var oldState = getCurrentState(form);
-    _axios2.default.get('/api/v1/transaction/' + this.getAttribute('id')).then(function (res) {
+    _axios2.default.get('/api/v1/transaction/' + currentTransactionId).then(function (res) {
         var rawData = res.data;
         var newState = {};
         newState.title = 'Edit Transaction';
@@ -11516,8 +11524,9 @@ function onTransactionClick() {
         newState.address = rawData.location.address;
         newState.lat = rawData.location.coordinates[1];
         newState.lng = rawData.location.coordinates[0];
-        newState.action = '/api/v1/transaction/' + _this.getAttribute('id');
+        newState.action = '/api/v1/transaction/' + currentTransactionId;
         newState.button = 'Edit';
+        newState.enableDelete = true;
         setNewState(form, newState);
         modal.modal().show();
         modal.on('hidden.bs.modal', function () {
@@ -11541,7 +11550,8 @@ function getCurrentState(form) {
         recurrent: form.find('input[name="recurrent"]').is(':checked'),
         shouldCount: form.find('input[name="shouldCount"]').is(':checked'),
         action: form.attr('action'),
-        button: form.find('button[type="submit"]').text()
+        button: form.find('button[type="submit"]').text(),
+        enableDelete: !form.find('#deleteTransaction').hasClass('hidden')
     };
     return state;
 }
@@ -11562,6 +11572,7 @@ function setNewState(form, newState) {
     form.find('input[name="shouldCount"]').prop("checked", newState.shouldCount);
     form.attr('action', newState.action);
     form.find('button[type="submit"]').text(newState.button);
+    form.find('#deleteTransaction').toggleClass('hidden', !newState.enableDelete);
 }
 
 exports.default = editTransactionSetUp();

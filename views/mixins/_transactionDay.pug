@@ -14,9 +14,9 @@ mixin transactionDay(day)
                         span.t-amount.t-outcome #{transaction.amount} #{h.currencies[wallet.currency].symbol}
                     div.pull-right.text-right
                         strong #{transaction.category}
-                div
-                    span #{transaction.description}
-                div
-                    small.text-muted #{transaction.location['address']}
-                if index < day.transactions.length - 1
-                    hr
+                    div
+                        span #{transaction.description}
+                    div
+                        small.text-muted #{transaction.location['address']}
+                    if index < day.transactions.length - 1
+                        hr

@@ -23,6 +23,13 @@ exports.editTransaction = async (req, res) => {
     res.redirect('back');
 };
 
+exports.deleteTransaction = async (req, res) => {
+    await Transaction.remove(
+        { _id: req.params.id }
+    );
+    res.sendStatus(200);
+};
+
 function prepareTransactionForDb(raw, userId) {
     const date = new Date(raw.date);
     [hours, minutes] = raw.time.split(':');
