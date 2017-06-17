@@ -34,7 +34,7 @@ block content
                                             button.btn.btn-default.btn-xs(type="button" data-dismiss="modal" data-toggle="modal" data-target="#edit-categories") Edit Categories
                                         select(name="category").form-control
                                             option(disabled selected value) -- select an option -- 
-                                            for category in  user.categories
+                                            for category in  user.categories.sort()
                                                 option(value=category) #{category} 
                                     .form-group
                                         label(for="amount") Amount
@@ -79,7 +79,7 @@ block content
                             form(method="POST" action="/categories" id="categories-form")
                                 .modal-body
                                     ul.categories-list(id="categories-list")
-                                        - const categories = user.categories
+                                        - const categories = user.categories.sort()
                                         for category in categories
                                             li(data-value=category)= `${category} `
                                                 span.fa.fa-remove(onclick="this.parentElement.remove()")

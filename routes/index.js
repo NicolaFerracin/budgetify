@@ -62,9 +62,7 @@ router.get('/wallet/:id', catchErrors(walletController.wallet));
 router.post('/transaction', catchErrors(transactionController.addTransaction));
 
 // Categories
-router.post('/categories', (req, res) => {
-    console.log(req.body)
-})
+router.post('/categories', catchErrors(userController.editCategories));
 
 
 router.get('/favicon.ico', function(req, res) {

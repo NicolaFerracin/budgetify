@@ -67,5 +67,14 @@ exports.changePassword = (req, res) => {
     req.body.email = req.user.email;
     delete req.body['old-password'];
     delete req.body['password-confirm'];
-    console.log(req.body);
+}
+
+exports.editCategories = async (req, res) => {
+    const newCategories = req.body.categories;
+    const user = await User.findOneAndUpdate(
+        { _id: req.user._id },
+        { $set: { 'categories': newCategories }}
+    );
+    req.flash('success', 'Categories update with success!');
+    res.redirect('back');
 }
