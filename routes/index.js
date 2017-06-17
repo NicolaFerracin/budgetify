@@ -55,14 +55,23 @@ router.post('/account/changePassword',
 
 // Wallets
 router.get('/wallet', walletController.walletForm);
-router.post('/wallet', catchErrors(walletController.addWallet));
+router.post('/wallet', 
+    authController.isLoggedIn,
+    catchErrors(walletController.addWallet)
+);
 router.get('/wallet/:id', catchErrors(walletController.wallet));
 
 // Transactions
-router.post('/transaction', catchErrors(transactionController.addTransaction));
+router.post('/transaction', 
+    authController.isLoggedIn,
+    catchErrors(transactionController.addTransaction)
+);
 
 // Categories
-router.post('/categories', catchErrors(userController.editCategories));
+router.post('/categories', 
+    authController.isLoggedIn,
+    catchErrors(userController.editCategories)
+);
 
 
 router.get('/favicon.ico', function(req, res) {
