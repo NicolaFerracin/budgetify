@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -9900,7 +9900,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)(module)))
 
 /***/ }),
 /* 1 */
@@ -10503,6 +10503,35 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+function autocomplete(input, latInput, lngInput) {
+    if (!input) {
+        return;
+    }
+    var dropdown = new google.maps.places.Autocomplete(input);
+    dropdown.addListener('place_changed', function () {
+        var place = dropdown.getPlace();
+        latInput.value = place.geometry.location.lat();
+        lngInput.value = place.geometry.location.lng();
+    });
+    input.addEventListener('keydown', function (e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+        }
+    });
+}
+
+exports.default = autocomplete;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 function initForm() {
     var form = document.getElementById('categories-form');
     var newCategoryForm = document.getElementById('new-category');
@@ -10535,7 +10564,7 @@ function initForm() {
 exports.default = initForm;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10556,13 +10585,13 @@ function setUpSidebar() {
 exports.default = setUpSidebar;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8);
+var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -10570,7 +10599,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(9)(content, options);
+var update = __webpack_require__(10)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -10587,7 +10616,7 @@ if(false) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10682,7 +10711,7 @@ module.exports = function (css) {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10712,13 +10741,13 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(4);
+__webpack_require__(5);
 
 var _jquery = __webpack_require__(0);
 
@@ -10726,13 +10755,17 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 __webpack_require__(1);
 
-var _sidebar = __webpack_require__(3);
+var _sidebar = __webpack_require__(4);
 
 var _sidebar2 = _interopRequireDefault(_sidebar);
 
-var _categories = __webpack_require__(2);
+var _categories = __webpack_require__(3);
 
 var _categories2 = _interopRequireDefault(_categories);
+
+var _autocomplete = __webpack_require__(2);
+
+var _autocomplete2 = _interopRequireDefault(_autocomplete);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10741,16 +10774,16 @@ window.$ = _jquery2.default;
 
 
 (0, _sidebar2.default)();
-
 if (document.getElementById('edit-categories')) {
     (0, _categories2.default)();
 }
+(0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(undefined);
+exports = module.exports = __webpack_require__(11)(undefined);
 // imports
 
 
@@ -10761,7 +10794,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10807,7 +10840,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(5);
+var	fixUrls = __webpack_require__(6);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -11120,7 +11153,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
