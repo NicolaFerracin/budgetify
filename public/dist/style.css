@@ -8164,6 +8164,11 @@ html {
 .capitalize {
   text-transform: capitalize; }
 
+.label-has-action {
+  display: blocK; }
+  .label-has-action button {
+    float: right; }
+
 .login-box, .register-box {
   margin: auto !important;
   padding-top: 7%; }
@@ -8196,5 +8201,14 @@ form textarea {
   -webkit-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s; }
+
+.categories-list {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3; }
+  .categories-list span.fa.fa-remove {
+    color: #E50714; }
+    .categories-list span.fa.fa-remove:hover {
+      cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map*/

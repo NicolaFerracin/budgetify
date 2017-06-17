@@ -30,7 +30,8 @@ block content
                                     .form-group.hidden
                                         input(name="wallet" value=wallet.id)
                                     .form-group
-                                        label(for="category") Category
+                                        label.label-has-action(for="category") Category
+                                            button.btn.btn-default.btn-xs(type="button" data-dismiss="modal" data-toggle="modal" data-target="#edit-categories") Edit Categories
                                         select(name="category").form-control
                                             option(disabled selected value) -- select an option -- 
                                             for category in  user.categories
@@ -60,3 +61,29 @@ block content
                             .modal-footer
                                 button.btn.btn-default.pull-left(type="button" data-dismiss="modal") Close
                                 button.btn.btn-primary(type="submit") Add
+
+            .modal.fade.in(id="edit-categories")
+                .modal-dialog
+                        .modal-content
+                            .modal-header
+                                button.close(type="button" data-dismiss="modal" aria-label="Close")
+                                    span(aria-hidden="true") ×
+                                h4.modal-title Edit Categories
+                                p Don't forget to save to apply the changes
+                            form(id="new-category")
+                                .modal-body
+                                    .input-group.margin
+                                        input.form-control(type="text" name="new-category" placeholder="Add New Category")
+                                        span.input-group-btn
+                                            button.btn.btn-success.btn-flat(type="submit") Add
+                            form(method="POST" action="/categories" id="categories-form")
+                                .modal-body
+                                    ul.categories-list(id="categories-list")
+                                        - const categories = user.categories
+                                        for category in categories
+                                            li(data-value=category)= `${category} `
+                                                span.fa.fa-remove(onclick="this.parentElement.remove()")
+                                
+                                .modal-footer
+                                    button.btn.btn-default.pull-left(type="button" data-dismiss="modal") Close
+                                    button.btn.btn-primary(type="submit") Save

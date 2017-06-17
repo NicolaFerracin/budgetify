@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -9900,7 +9900,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	return jQuery;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)(module)))
 
 /***/ }),
 /* 1 */
@@ -10503,30 +10503,66 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var scripts = {
-    init: function init() {
-        this.setUpSidebar();
-    },
-    setUpSidebar: function setUpSidebar() {
-        window.addEventListener('load', function () {
-            var sidebar = document.getElementsByClassName('sidebar-menu')[0];
-            if (sidebar) {
-                sidebar.tree();
-            }
-        }, false);
-    }
-};
+function initForm() {
+    var form = document.getElementById('categories-form');
+    var newCategoryForm = document.getElementById('new-category');
+    var listContainer = document.getElementById('categories-list');
+    var list = listContainer.getElementsByTagName('li');
+    form.addEventListener('submit', onSubmit, false);
+    newCategoryForm.addEventListener('submit', addCategory, false);
 
-exports.default = scripts;
+    function onSubmit(e) {
+        e.preventDefault();
+        for (var i = 0; i < list.length; i++) {
+            var categoriesInput = document.createElement('input');
+            categoriesInput.name = 'categories';
+            categoriesInput.type = 'hidden';
+            categoriesInput.value = list[i].dataset.value.trim();
+            form.appendChild(categoriesInput);
+        }
+        form.submit();
+    }
+
+    function addCategory(e) {
+        e.preventDefault();
+        var newCategory = newCategoryForm.getElementsByTagName('input')[0].value.trim();
+        if (newCategory && newCategory != '') {
+            listContainer.innerHTML = '<li data-value="' + newCategory + '">' + newCategory + ' <span class="fa fa-remove" onclick="this.parentElement.remove()"></li>' + listContainer.innerHTML;
+        }
+    }
+}
+
+exports.default = initForm;
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function setUpSidebar() {
+    window.addEventListener('load', function () {
+        var sidebar = document.getElementsByClassName('sidebar-menu')[0];
+        if (sidebar) {
+            sidebar.tree();
+        }
+    }, false);
+}
+
+exports.default = setUpSidebar;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(7);
+var content = __webpack_require__(8);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -10534,7 +10570,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(8)(content, options);
+var update = __webpack_require__(9)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -10551,7 +10587,7 @@ if(false) {
 }
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10646,7 +10682,7 @@ module.exports = function (css) {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10676,13 +10712,13 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(3);
+__webpack_require__(4);
 
 var _jquery = __webpack_require__(0);
 
@@ -10690,22 +10726,31 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 __webpack_require__(1);
 
-var _scripts = __webpack_require__(2);
+var _sidebar = __webpack_require__(3);
 
-var _scripts2 = _interopRequireDefault(_scripts);
+var _sidebar2 = _interopRequireDefault(_sidebar);
+
+var _categories = __webpack_require__(2);
+
+var _categories2 = _interopRequireDefault(_categories);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.jQuery = _jquery2.default;
 window.$ = _jquery2.default;
 
-_scripts2.default.init();
+
+(0, _sidebar2.default)();
+
+if (document.getElementById('edit-categories')) {
+    (0, _categories2.default)();
+}
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(undefined);
+exports = module.exports = __webpack_require__(10)(undefined);
 // imports
 
 
@@ -10716,7 +10761,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -10762,7 +10807,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(4);
+var	fixUrls = __webpack_require__(5);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -11075,7 +11120,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

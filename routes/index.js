@@ -61,6 +61,11 @@ router.get('/wallet/:id', catchErrors(walletController.wallet));
 // Transactions
 router.post('/transaction', catchErrors(transactionController.addTransaction));
 
+// Categories
+router.post('/categories', (req, res) => {
+    console.log(req.body)
+})
+
 
 router.get('/favicon.ico', function(req, res) {
     res.sendStatus(204);
