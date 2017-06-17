@@ -1,0 +1,89 @@
+import axios from 'axios';
+
+const modal = $('#transaction-modal');
+const form = $('#transaction-form');
+
+function editTransactionSetUp() {
+    if (document.getElementsByClassName('t-body').length == 0) {
+        return;
+    }
+    const transactions = document.getElementsByClassName('t-body');
+    for (var t of transactions) {
+        t.addEventListener('click', onTransactionClick, false)
+    }
+}
+
+function onTransactionClick() {
+    const oldState = getCurrentState(form);
+    axios
+        .get(`/api/v1/transaction/${this.getAttribute('id')}`)
+        .then(res => {
+            const rawData = res.data;
+            const newState = {};
+            newState.title = 'Edit Transaction';
+            newState.amount = rawData.amount;
+            newState.category = rawData.category;
+            newState.description = rawData.description;
+            newState.wallet = rawData.wallet;
+            newState.recurrent = rawData.recurrent;
+            newState.shouldCount = rawData.shouldCount;
+            const dateRaw = new Date(rawData.timestamp);
+            const year = dateRaw.getFullYear();
+            const month = dateRaw.getMonth() + 1 < 10 ? `0${dateRaw.getMonth() + 1}` : dateRaw.getMonth() + 1;
+            const day = dateRaw.getDate();
+            newState.date = `${year}-${month}-${day}`;
+            const hours = dateRaw.getHours().toString().length < 2 ? `0${dateRaw.getHours()}` : dateRaw.getHours();
+            const minutes = dateRaw.getMinutes().toString().length < 2 ? `0${dateRaw.getMinutes()}` : dateRaw.getMinutes();
+            newState.time = `${hours}:${minutes}`;
+            newState.address = rawData.location.address;
+            newState.lat = rawData.location.coordinates[1];
+            newState.lng = rawData.location.coordinates[0];
+            newState.action = `/api/v1/transaction/${this.getAttribute('id')}`;
+            newState.button = 'Edit';
+            setNewState(form, newState);
+            modal.modal().show();
+            modal.on('hidden.bs.modal', function () {
+                setNewState(form, oldState);
+            });
+        });
+}
+
+function getCurrentState(form) {
+    const state = {
+        title: form.find('h4.modal-title').text(),
+        category: form.find('select[name="category"]').val(),
+        amount: form.find('input[name="amount"]').val(),
+        date: form.find('input[name="date"]').val(),
+        time: form.find('input[name="time"]').val(),
+        description: form.find('input[name="description"]').val(),
+        wallet: form.find('input[name="wallet"]').val(),
+        address: form.find('input[name="location[address]"]').val(),
+        lat: form.find('input[name="location[coordinates][0]"]').val(),
+        lng: form.find('input[name="location[coordinates][1]"]').val(),
+        recurrent: form.find('input[name="recurrent"]').is(':checked'),
+        shouldCount: form.find('input[name="shouldCount"]').is(':checked'),
+        action: form.attr('action'),
+        button: form.find('button[type="submit"]').text()
+    };
+    return state;
+}
+
+function setNewState(form, newState) {
+    form.find('h4.modal-title').text(newState.title);
+    form.find('select[name="category"]').val(newState.category);
+    form.find('input[name="amount"]').val(newState.amount);
+    form.find('input[name="date"]').val(newState.date);
+    form.find('input[name="time"]').val(newState.time);
+    form.find('input[name="description"]').val(newState.description);
+    form.find('input[name="wallet"]').val(newState.wallet);
+    form.find('input[name="location[address]"]').val(newState.address);
+    form.find('input[name="location[coordinates][0]"]').val(newState.lng);
+    form.find('input[name="location[coordinates][1]"]').val(newState.lat);
+    form.find('input[name="recurrent"]').prop("checked", newState.recurrent);
+    form.find('input[name="shouldCount"]').prop("checked", newState.shouldCount);
+    form.find('input[name="shouldCount"]').prop("checked", newState.shouldCount);
+    form.attr('action', newState.action);
+    form.find('button[type="submit"]').text(newState.button);
+}
+
+export default editTransactionSetUp();

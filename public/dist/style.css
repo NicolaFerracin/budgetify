@@ -8224,6 +8224,9 @@ form textarea {
 .modal-backdrop {
   z-index: 1000; }
 
+.box-transactions-day .box-body {
+  cursor: pointer; }
+
 .box-transactions-day .t-amount {
   font-size: 24px; }
   .box-transactions-day .t-amount.t-income {

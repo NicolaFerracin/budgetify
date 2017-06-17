@@ -7,7 +7,7 @@ mixin transactionDay(day)
                     i.fa.fa-minus
         .box-body
             for transaction, index in day.transactions
-                div
+                div.t-body(id=transaction._id)
                     if transaction.amount >= 0
                         span.t-amount.t-income #{transaction.amount} #{h.currencies[wallet.currency].symbol}
                     else

@@ -1,4 +1,7 @@
 function initForm() {
+    if (!document.getElementById('edit-categories')) {
+        return;
+    }
     const form = document.getElementById('categories-form');
     const newCategoryForm = document.getElementById('new-category');
     const listContainer = document.getElementById('categories-list')

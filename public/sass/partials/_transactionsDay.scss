@@ -1,4 +1,7 @@
 .box-transactions-day {
+    .box-body {
+        cursor: pointer;
+    }
     .t-amount {
         font-size: 24px;
         &.t-income {
