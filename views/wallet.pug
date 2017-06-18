@@ -7,6 +7,8 @@ block content
         h1 #{wallet.name}
             if wallet.description || wallet.currency
                 small #{wallet.description} - #{wallet.currency}
+        a.btn.btn-default.btn-flat(type="button" href=`/wallet/${wallet.id}/edit`) Edit
+
 
     section.content
         .col-xs-6.col-xs-offset-3
