@@ -7,12 +7,27 @@ block content
         h1 Dashboard
 
     section.content
-        .col-xs-6.col-xs-offset-3
-            if wallets && wallets.length
-                each wallet in wallets
-                    +wallet(wallet)
-                a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet
-            else
-                .text-center
-                    h2 You don't have any wallet. Create one!
+        .box.box-success.box-solid
+            .box-header.with-border
+                h3.box-title My Wallets
+                .box-tools.pull-right
+                    button.btn.btn-box-tool(type="button" data-widget="collapse")
+                        i.fa.fa-minus
+            .box-body  
+                if wallets && wallets.length
+                    each wallet in wallets
+                        +wallet(wallet)
+                    - const total = h.getTotalByCurrency(wallets)
+                    div
+                        h3.text-right Total: 
+                            for c, index in total
+                                if c.amount != 0
+                                    - const currencySymbol = c.currency ? h.currencies[c.currency].symbol : ''
+                                    span #{c.amount}#{currencySymbol}
+                                    if index < total.length -1
+                                        |  | 
                     a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet
+                else
+                    .text-center
+                        h3 You don't have any wallet. Create one!
+                        a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet

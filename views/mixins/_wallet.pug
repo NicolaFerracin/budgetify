@@ -1,10 +1,13 @@
 mixin wallet(wallet)
     if wallet
         a.wallet(href=`/wallet/${wallet._id}`)
-            div.info-box.bg-green
-                .info-box-icon
-                    i.ion.ion-ios-pricetag-outline
-                .info-box-content
-                    span.info-box-text #{wallet.name}
-                    span.info-box-description #{wallet.description ? ' - ' + wallet.description : ''}
-                    span.info-box-number
+            .wallet-content
+                h3.wallet-name #{wallet.name}
+                    small.wallet-description #{wallet.description ? ' - ' + wallet.description : ''}
+                - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
+                - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
+                if total >= 0
+                    h3.wallet-total.income #{total} #{currencySymbol}
+                else
+                    h3.wallet-total.outcome #{total} #{currencySymbol}
+        hr

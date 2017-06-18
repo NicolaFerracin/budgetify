@@ -41,7 +41,7 @@ exports.transactionsByDay = (transactions) => {
             transactions: temp[el]
         });
         return res;
-    }, []);   
+    }, []);
 };
 
 exports.isEmpty = (something) => {
@@ -51,4 +51,26 @@ exports.isEmpty = (something) => {
     if (something.constructor === Array) {
         return something.length === 0;
     }
-}
+};
+
+exports.getTotalByCurrency = (wallets) => {
+    const temp = [];
+    const c = {};
+    wallets.forEach(w => {
+        const currency = w.currency;
+        const total = w.transactions.reduce((res2, t) => res2 += t.amount, 0);
+        if (c[currency]) {
+            c[currency] += total;
+        } else {
+            temp.push(currency);
+            c[currency] = total;
+        }
+    });
+    return temp.reduce((res, el) => {
+        res.push({
+            currency: el,
+            amount: c[el]
+        });
+        return res;
+    }, []);
+};

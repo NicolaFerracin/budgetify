@@ -3,14 +3,22 @@
 }
 
 .wallet {
-    .info-box {
-        transition: all 0.2s;        
+    color: initial;
+    &:hover, &:active, &:focus {
+        color: initial;
     }
-    &:hover {
-        .info-box {
-            margin-top: -5px;
-            margin-bottom: 20px;
-            transition: all 0.2s;
+    .wallet-content {
+        .wallet-name {
+            display: inline-block;
+        }
+        .wallet-total {
+            float: right;
+            &.income {
+                color: $green;
+            }
+            &.outcome {
+                color: $red;
+            }
         }
     }
 }

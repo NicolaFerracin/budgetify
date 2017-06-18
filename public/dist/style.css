@@ -8190,17 +8190,18 @@ form textarea {
 .info-box-description {
   text-transform: initial; }
 
-.wallet .info-box {
-  -webkit-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s; }
-
-.wallet:hover .info-box {
-  margin-top: -5px;
-  margin-bottom: 20px;
-  -webkit-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s; }
+.wallet {
+  color: initial; }
+  .wallet:hover, .wallet:active, .wallet:focus {
+    color: initial; }
+  .wallet .wallet-content .wallet-name {
+    display: inline-block; }
+  .wallet .wallet-content .wallet-total {
+    float: right; }
+    .wallet .wallet-content .wallet-total.income {
+      color: #00a65a; }
+    .wallet .wallet-content .wallet-total.outcome {
+      color: #E50714; }
 
 .categories-list {
   -webkit-column-count: 3;
