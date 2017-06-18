@@ -38,7 +38,7 @@ exports.transactionsByDay = (transactions) => {
     return days.sort().reduce((res, el) => {
         res.push({
             date: el,
-            transactions: temp[el]
+            transactions: orderByHour(temp[el])
         });
         return res;
     }, []);
@@ -76,3 +76,7 @@ exports.getTotalByCurrency = (wallets) => {
         return res;
     }, []);
 };
+
+function orderByHour(transactions) {
+    return transactions.sort((x, y) => x.timestamp > y.timestamp);
+}
