@@ -5,10 +5,7 @@ mixin wallet(wallet)
                 span.info-box-icon
                     i.ion.ion-ios-pricetag-outline
                 .info-box-content
+                    a.btn.btn-default.btn-xs.pull-right(type="button" href=`/wallet/${wallet.id}/edit`) Edit
                     span.info-box-text #{wallet.name}
-                        span.info-box-description #{wallet.description ? ' - ' + wallet.description : ''}
-                    span.info-box-number 
-
-                    .progress
-                        .progress-bar
-                        span.progress-description 50% Increase in 30 Days
+                    span.info-box-description #{wallet.description ? ' - ' + wallet.description : ''}
+                    span.info-box-number

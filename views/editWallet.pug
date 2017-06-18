@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_walletForm
+
+block content  
+    section.content-header
+        asda
+        h1= title
+    section.content
+        .row
+            .col-xs-6.col-xs-offset-3
+                +walletForm(wallet)

@@ -59,7 +59,12 @@ router.post('/wallet',
     authController.isLoggedIn,
     catchErrors(walletController.addWallet)
 );
+router.post('/wallet/:id', 
+    authController.isLoggedIn,
+    catchErrors(walletController.updateWallet)
+);
 router.get('/wallet/:id', catchErrors(walletController.wallet));
+router.get('/wallet/:id/edit', catchErrors(walletController.editWallet));
 
 // Transactions
 router.post('/transaction', 
@@ -72,7 +77,6 @@ router.post('/categories',
     authController.isLoggedIn,
     catchErrors(userController.editCategories)
 );
-
 
 router.get('/favicon.ico', (req, res) => res.sendStatus(204));
 
