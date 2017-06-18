@@ -8,48 +8,48 @@ block content
         h1 #{wallet.name}
             if wallet.description || wallet.currency
                 small #{wallet.description} - #{wallet.currency}
-        a.btn.btn-default.btn-flat(type="button" href=`/wallet/${wallet.id}/edit`) Edit
-        - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
-        h2.text-center #{total} #{currencySymbol}
-
+        a.btn.btn-default.btn-flat.header-right(type="button" href=`/wallet/${wallet.id}/edit`) Edit
 
     section.content
-        .col-md-6.col-md-offset-3
-            - const transactionsByDay = h.transactionsByDay(wallet.transactions)
-            if transactionsByDay && !h.isEmpty(transactionsByDay)
-                each day in transactionsByDay
-                    +transactionDay(day)
-                button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
-            else
-                .text-center
-                    h2 You don't have any transaction. Add one!
+        .row
+            .col-md-6.col-md-offset-3
+                - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
+                h2.text-center #{total} #{currencySymbol}
+                - const transactionsByDay = h.transactionsByDay(wallet.transactions)
+                if transactionsByDay && !h.isEmpty(transactionsByDay)
+                    each day in transactionsByDay
+                        +transactionDay(day)
                     button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
+                else
+                    .text-center
+                        h2 You don't have any transaction. Add one!
+                        button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
 
-            include includes/transactionModal
+                include includes/transactionModal
 
-            .modal.fade.in(id="edit-categories")
-                .modal-dialog
-                        .modal-content
-                            .modal-header
-                                button.close(type="button" data-dismiss="modal" aria-label="Close")
-                                    span(aria-hidden="true") ×
-                                h4.modal-title Edit Categories
-                                p Don't forget to save to apply the changes
-                            form(id="new-category")
-                                .modal-body
-                                    .input-group.margin
-                                        input.form-control(type="text" name="new-category" placeholder="Add New Category")
-                                        span.input-group-btn
-                                            button.btn.btn-success.btn-flat(type="submit") Add
-                            form(method="POST" action="/categories" id="categories-form")
-                                .modal-body
-                                    ul.categories-list(id="categories-list")
-                                        - const categories = user.categories.sort()
-                                        for category in categories
-                                            li(data-value=category)
-                                                i.fa.fa-remove(onclick="this.parentElement.remove()") &nbsp;
-                                                span=`${category}`
-                                
-                                .modal-footer
-                                    button.btn.btn-default.btn-flat.pull-left(type="button" data-dismiss="modal") Close
-                                    button.btn.btn-primary.btn-flat(type="submit") Save
+                .modal.fade.in(id="edit-categories")
+                    .modal-dialog
+                            .modal-content
+                                .modal-header
+                                    button.close(type="button" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") ×
+                                    h4.modal-title Edit Categories
+                                    p Don't forget to save to apply the changes
+                                form(id="new-category")
+                                    .modal-body
+                                        .input-group.margin
+                                            input.form-control(type="text" name="new-category" placeholder="Add New Category")
+                                            span.input-group-btn
+                                                button.btn.btn-success.btn-flat(type="submit") Add
+                                form(method="POST" action="/categories" id="categories-form")
+                                    .modal-body
+                                        ul.categories-list(id="categories-list")
+                                            - const categories = user.categories.sort()
+                                            for category in categories
+                                                li(data-value=category)
+                                                    i.fa.fa-remove(onclick="this.parentElement.remove()") &nbsp;
+                                                    span=`${category}`
+                                    
+                                    .modal-footer
+                                        button.btn.btn-default.btn-flat.pull-left(type="button" data-dismiss="modal") Close
+                                        button.btn.btn-primary.btn-flat(type="submit") Save
