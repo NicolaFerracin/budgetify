@@ -20,6 +20,10 @@ const walletSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    shouldCount: {
+        type: Boolean,
+        default: false
+    },
     owner: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',

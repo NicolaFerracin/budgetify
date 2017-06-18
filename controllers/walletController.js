@@ -43,7 +43,6 @@ exports.wallet = async (req, res) => {
 };
 
 exports.deleteWallet = async (req, res) => {
-    // delete all associated transactions
     await Transaction.remove(
         { wallet: req.params.id }
     );

@@ -6,8 +6,11 @@ mixin wallet(wallet)
                     small.wallet-description #{wallet.description ? ' - ' + wallet.description : ''}
                 - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
                 - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
-                if total >= 0
-                    h3.wallet-total.income #{total} #{currencySymbol}
+                if !wallet.shouldCount
+                    h3.wallet-total.text-muted #{total} #{currencySymbol}
                 else
-                    h3.wallet-total.outcome #{total} #{currencySymbol}
+                    if total >= 0
+                        h3.wallet-total.income #{total} #{currencySymbol}
+                    else
+                        h3.wallet-total.outcome #{total} #{currencySymbol}
         hr

@@ -20,7 +20,7 @@ const transactionSchema = new mongoose.Schema({
     },
     shouldCount: {
         type: Boolean,
-        default: true
+        default: false
     },
     timestamp: {
         type: Date,

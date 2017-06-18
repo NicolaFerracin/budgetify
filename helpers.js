@@ -57,13 +57,15 @@ exports.getTotalByCurrency = (wallets) => {
     const temp = [];
     const c = {};
     wallets.forEach(w => {
-        const currency = w.currency;
-        const total = w.transactions.reduce((res2, t) => res2 += t.amount, 0);
-        if (c[currency]) {
-            c[currency] += total;
-        } else {
-            temp.push(currency);
-            c[currency] = total;
+        if (w.shouldCount) {
+            const currency = w.currency;
+            const total = w.transactions.reduce((res2, t) => res2 += t.amount, 0);
+            if (c[currency]) {
+                c[currency] += total;
+            } else {
+                temp.push(currency);
+                c[currency] = total;
+            }
         }
     });
     return temp.reduce((res, el) => {

@@ -20,8 +20,10 @@ block content
                     - const total = h.getTotalByCurrency(wallets)
                     div
                         h3.text-right Total: 
-                            for c, index in total
-                                if c.amount != 0
+                            if h.isEmpty(total)
+                                | -
+                            else
+                                for c, index in total
                                     - const currencySymbol = c.currency ? h.currencies[c.currency].symbol : ''
                                     span #{c.amount}#{currencySymbol}
                                     if index < total.length -1
