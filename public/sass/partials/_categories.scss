@@ -1,8 +1,12 @@
 .categories-list {
+    padding: 0;
     -webkit-column-count: 3;
     -moz-column-count: 3;
     column-count: 3;
-    span.fa.fa-remove {
+    li {
+        list-style: none;
+    }
+    i.fa.fa-remove {
         color: $red;
         &:hover {
             cursor: pointer;

@@ -8,6 +8,9 @@
         color: initial;
     }
     .wallet-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
         .wallet-name {
             display: inline-block;
         }

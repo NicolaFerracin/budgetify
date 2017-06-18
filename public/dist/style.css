@@ -8194,22 +8194,34 @@ form textarea {
   color: initial; }
   .wallet:hover, .wallet:active, .wallet:focus {
     color: initial; }
-  .wallet .wallet-content .wallet-name {
-    display: inline-block; }
-  .wallet .wallet-content .wallet-total {
-    float: right; }
-    .wallet .wallet-content .wallet-total.income {
-      color: #00a65a; }
-    .wallet .wallet-content .wallet-total.outcome {
-      color: #E50714; }
+  .wallet .wallet-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    .wallet .wallet-content .wallet-name {
+      display: inline-block; }
+    .wallet .wallet-content .wallet-total {
+      float: right; }
+      .wallet .wallet-content .wallet-total.income {
+        color: #00a65a; }
+      .wallet .wallet-content .wallet-total.outcome {
+        color: #E50714; }
 
 .categories-list {
+  padding: 0;
   -webkit-column-count: 3;
   -moz-column-count: 3;
   column-count: 3; }
-  .categories-list span.fa.fa-remove {
+  .categories-list li {
+    list-style: none; }
+  .categories-list i.fa.fa-remove {
     color: #E50714; }
-    .categories-list span.fa.fa-remove:hover {
+    .categories-list i.fa.fa-remove:hover {
       cursor: pointer; }
 
 .pac-container {
