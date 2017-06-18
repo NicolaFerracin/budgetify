@@ -4,10 +4,13 @@ include mixins/_transactionDay
 
 block content
     section.content-header 
+        - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
         h1 #{wallet.name}
             if wallet.description || wallet.currency
                 small #{wallet.description} - #{wallet.currency}
         a.btn.btn-default.btn-flat(type="button" href=`/wallet/${wallet.id}/edit`) Edit
+        - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
+        h2.text-center #{total} #{currencySymbol}
 
 
     section.content

@@ -1,14 +1,13 @@
 mixin transactionDay(day)
     .box.box-success.box-transactions-day
+        - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
         .box-header.with-border
             h3.box-title #{day.date}
-            .box-tools.pull-right
-                button.btn.btn-box-tool(type="button" data-widget="collapse")
-                    i.fa.fa-minus
+            - dayTotal = day.transactions.reduce((res, el) => res += el.amount, 0);
+            h3.box-title.pull-right #{dayTotal} #{currencySymbol}
         .box-body
             for transaction, index in day.transactions
                 div.t-body(id=transaction._id)
-                    - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
                     if transaction.amount >= 0
                         span.t-amount.t-income #{transaction.amount} #{currencySymbol}
                     else
