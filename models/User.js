@@ -73,7 +73,24 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+}, {
+    toJson: { virtuals: true },
+    toObject: { virtuals: true }
 });
+
+userSchema.virtual('wallets', {
+    ref: 'Wallet',
+    localField: '_id',
+    foreignField: 'owner'
+});
+
+function autopopulate(next) {
+    this.populate('wallets');
+    next();
+};
+
+userSchema.pre('find', autopopulate);
+userSchema.pre('findOne', autopopulate);
 
 userSchema.virtual('gravatar').get(function () {
     const hash = md5(this.email);

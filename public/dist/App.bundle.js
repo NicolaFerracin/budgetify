@@ -11420,27 +11420,7 @@ function initForm() {
 exports.default = initForm;
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-function setUpSidebar() {
-    window.addEventListener('load', function () {
-        var sidebar = document.getElementsByClassName('sidebar-menu')[0];
-        if (sidebar) {
-            sidebar.tree();
-        }
-    }, false);
-}
-
-exports.default = setUpSidebar;
-
-/***/ }),
+/* 12 */,
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12581,10 +12561,6 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 __webpack_require__(9);
 
-var _sidebar = __webpack_require__(12);
-
-var _sidebar2 = _interopRequireDefault(_sidebar);
-
 var _categories = __webpack_require__(11);
 
 var _categories2 = _interopRequireDefault(_categories);
@@ -12607,7 +12583,6 @@ window.jQuery = _jquery2.default;
 window.$ = _jquery2.default;
 
 
-(0, _sidebar2.default)();
 (0, _categories2.default)();
 (0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
 (0, _transactions2.default)();

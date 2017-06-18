@@ -8,7 +8,10 @@ exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
 // exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
 
-exports.currentYear = () => new Date().getFullYear();
+exports.yearForFooter = () => {
+    const year = new Date().getFullYear();
+    return year === 2017 ? year : `2017 - ${year}`;
+};
 
 exports.siteName = {
     text: `Budgetify`,

@@ -1,12 +1,23 @@
 aside.main-sidebar
     section.sidebar
-        div.user-panel
-            div.pull-left.image
-                //- img(src="")
-        //- ul.sidebar-menu(data-widget="tree")
-        ul.sidebar-menu
+        ul.sidebar-menu(data-widget="tree")
+            li.header NAVIGATION
+            li(class=currentPath === '/home' ? 'active' : '')
+                a(href="/home")
+                    i.fa.fa-home
+                    span Home
+                    span.pull-right-container
+                        i.pull-right.fa.fa-chevron-right
             li.header MY WALLETS
-            li
+            for wallet in user.wallets
+                li(class=currentPath === `/wallet/${wallet._id}` ? 'active' : '')
+                    a(href=`/wallet/${wallet._id}`)
+                        i.fa.fa-dollar 
+                        span #{wallet.name}
+                        span.pull-right-container
+                            i.pull-right.fa.fa-chevron-right
+            li.header ACTIONS
+            li(class=currentPath === '/wallet' ? 'active' : '')
                 a(href="/wallet")
                     i.fa.fa-money 
                     span Add Wallet
