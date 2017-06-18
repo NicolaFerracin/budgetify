@@ -25,7 +25,7 @@ function onDelete() {
 
 function onTransactionClick() {
     currentTransactionId = this.getAttribute('id')
-    const oldState = getCurrentState(form);
+    let oldState = getCurrentState(form);
     axios
         .get(`/api/v1/transaction/${currentTransactionId}`)
         .then(res => {
@@ -55,7 +55,10 @@ function onTransactionClick() {
             setNewState(form, newState);
             modal.modal().show();
             modal.on('hidden.bs.modal', function () {
-                setNewState(form, oldState);
+                if (oldState) {
+                    setNewState(form, oldState);
+                }
+                oldState = null;
             });
         });
 }

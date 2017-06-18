@@ -11530,7 +11530,10 @@ function onTransactionClick() {
         setNewState(form, newState);
         modal.modal().show();
         modal.on('hidden.bs.modal', function () {
-            setNewState(form, oldState);
+            if (oldState) {
+                setNewState(form, oldState);
+            }
+            oldState = null;
         });
     });
 }
