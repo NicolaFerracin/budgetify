@@ -14,11 +14,11 @@ block content
             if transactionsByDay && !h.isEmpty(transactionsByDay)
                 each day in transactionsByDay
                     +transactionDay(day)
-                button.btn.btn-primary(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
+                button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
             else
                 .text-center
                     h2 You don't have any transaction. Add one!
-                    button.btn.btn-primary(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
+                    button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
 
             include includes/transactionModal
 
@@ -45,5 +45,5 @@ block content
                                                 span.fa.fa-remove(onclick="this.parentElement.remove()")
                                 
                                 .modal-footer
-                                    button.btn.btn-default.pull-left(type="button" data-dismiss="modal") Close
-                                    button.btn.btn-primary(type="submit") Save
+                                    button.btn.btn-default.btn-flat.pull-left(type="button" data-dismiss="modal") Close
+                                    button.btn.btn-primary.btn-flat(type="submit") Save
