@@ -8,7 +8,10 @@ import setUpSidebar from './modules/sidebar';
 import initForm from './modules/categories';
 import autocomplete from './modules/autocomplete';
 import editTransactionSetUp from './modules/transactions';
+import initWallet from './modules/wallet';
 
 setUpSidebar();
 initForm();
 autocomplete(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
+editTransactionSetUp();
+initWallet();

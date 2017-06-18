@@ -11575,7 +11575,7 @@ function setNewState(form, newState) {
     form.find('#deleteTransaction').toggleClass('hidden', !newState.enableDelete);
 }
 
-exports.default = editTransactionSetUp();
+exports.default = editTransactionSetUp;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
@@ -12594,6 +12594,10 @@ var _transactions = __webpack_require__(13);
 
 var _transactions2 = _interopRequireDefault(_transactions);
 
+var _wallet = __webpack_require__(40);
+
+var _wallet2 = _interopRequireDefault(_wallet);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.jQuery = _jquery2.default;
@@ -12603,6 +12607,8 @@ window.$ = _jquery2.default;
 (0, _sidebar2.default)();
 (0, _categories2.default)();
 (0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
+(0, _transactions2.default)();
+(0, _wallet2.default)();
 
 /***/ }),
 /* 37 */
@@ -13058,6 +13064,37 @@ function toComment(sourceMap) {
 
 	return '/*# ' + data + ' */';
 }
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _axios = __webpack_require__(15);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function initWallet() {
+    var deleteWallet = document.getElementById('deleteWallet');
+    if (deleteWallet) {
+        deleteWallet.addEventListener('click', function () {
+            var walletId = deleteWallet.parentElement.parentElement.dataset.wallet;
+            _axios2.default.delete('/api/v1/wallet/' + walletId).then(function (res) {
+                window.location = '/home';
+            });
+        });
+    }
+}
+
+exports.default = initWallet;
 
 /***/ })
 /******/ ]);

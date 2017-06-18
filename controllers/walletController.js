@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Wallet = mongoose.model('Wallet');
+const Transaction = mongoose.model('Transaction');
 const promisify = require('es6-promisify');
 const authController = require('./authController');
 
@@ -39,7 +40,18 @@ exports.wallet = async (req, res) => {
         .findOne({ _id: req.params.id, owner: req.user._id })
         .populate('transactions');
     res.render('wallet', { title: wallet.name, wallet });
-}
+};
+
+exports.deleteWallet = async (req, res) => {
+    // delete all associated transactions
+    await Transaction.remove(
+        { wallet: req.params.id }
+    );
+    await Wallet.remove(
+        { _id: req.params.id }
+    );
+    res.sendStatus(200);
+};
 
 const confirmOwner = (wallet, user) => {
     if (!wallet.owner.equals(user._id)) {

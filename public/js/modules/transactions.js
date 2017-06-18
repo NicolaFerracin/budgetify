@@ -100,4 +100,4 @@ function setNewState(form, newState) {
     form.find('#deleteTransaction').toggleClass('hidden', !newState.enableDelete);
 }
 
-export default editTransactionSetUp();
+export default editTransactionSetUp;

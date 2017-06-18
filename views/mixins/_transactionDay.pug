@@ -8,10 +8,11 @@ mixin transactionDay(day)
         .box-body
             for transaction, index in day.transactions
                 div.t-body(id=transaction._id)
+                    - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
                     if transaction.amount >= 0
-                        span.t-amount.t-income #{transaction.amount} #{h.currencies[wallet.currency].symbol}
+                        span.t-amount.t-income #{transaction.amount} #{currencySymbol}
                     else
-                        span.t-amount.t-outcome #{transaction.amount} #{h.currencies[wallet.currency].symbol}
+                        span.t-amount.t-outcome #{transaction.amount} #{currencySymbol}
                     div.pull-right.text-right
                         strong #{transaction.category}
                     div
