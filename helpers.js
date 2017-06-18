@@ -80,6 +80,16 @@ exports.getTotalByCurrency = (wallets) => {
     }, []);
 };
 
+exports.getIconForFlash = (type) => {
+    if (type === 'info' || type === 'warning') {
+        return type;
+    }
+    if (type === 'danger') {
+        return 'ban';
+    }
+    return 'check';
+}
+
 function orderByHour(transactions) {
     return transactions.sort((x, y) => x.timestamp > y.timestamp);
 }

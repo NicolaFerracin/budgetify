@@ -7,7 +7,8 @@ mixin flashes()
                     each message in flashes[category]
                         .alert.alert-dismissible(class=`alert-${category}`)
                             button.close(type="button" data-dismiss="alert" aria-hidden="true" onclick="this.parentElement.remove()") &times;
+                            - const icon = h.getIconForFlash(category)
                             h4.capitalize
-                                i.icon.fa.fa-ban
+                                i.icon.fa(class=`fa-${icon}`)
                                 | #{category}
                             p!= message
