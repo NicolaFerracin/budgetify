@@ -26,7 +26,7 @@ exports.menu = [
 
 exports.currencies = currencies.currencies;
 
-exports.transactionsByDay = (transactions) => {
+exports.getTransactionsByDay = (transactions) => {
     const days = [];
     const temp = transactions.reduce((res, el) => {
         const transactionDay = moment(el.timestamp).format('YYYY-MM-DD');
@@ -42,6 +42,46 @@ exports.transactionsByDay = (transactions) => {
         res.push({
             date: el,
             transactions: orderByHour(temp[el])
+        });
+        return res;
+    }, []);
+};
+
+exports.getYears = (transactions) => {
+    return transactions.reduce((res, t) => {
+        const date = moment(t.timestamp);
+        const year = date.format('YYYY');
+        const month = date.format('MM');
+        if (res[year]) {
+            if (res[year].indexOf(month) === -1) {
+                res[year].push(month);
+            }
+        } else {
+            res[year] = [month];
+        }
+        return res;
+    }, {});
+}
+
+exports.getTransactionsByMonth = (transactions, month = null) => {
+    const days = [];
+    const temp = transactions.reduce((res, el) => {
+        if (!month || new Date(el.timestamp).getMonth() + 1 === month) {
+            const transactionDay = moment(el.timestamp).format('YYYY-MM-DD');
+            if (res[transactionDay]) {
+                res[transactionDay].push(el);
+            } else {
+                days.push(transactionDay);
+                res[transactionDay] = [el]
+            }
+        }
+        return res;
+    }, {});
+    return days.sort().reduce((res, el) => {
+        res.push({
+            date: el,
+            transactions: orderByHour(temp[el]),
+            total: temp[el].reduce((res, item) => res += item.amount, 0)
         });
         return res;
     }, []);
@@ -89,6 +129,8 @@ exports.getIconForFlash = (type) => {
     }
     return 'check';
 }
+
+exports.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function orderByHour(transactions) {
     return transactions.sort((x, y) => x.timestamp > y.timestamp);

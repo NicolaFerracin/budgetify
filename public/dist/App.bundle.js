@@ -75,7 +75,7 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var bind = __webpack_require__(7);
+var bind = __webpack_require__(8);
 var isBuffer = __webpack_require__(33);
 
 /*global toString:true*/
@@ -10234,10 +10234,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(3);
+    adapter = __webpack_require__(4);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(3);
+    adapter = __webpack_require__(4);
   }
   return adapter;
 }
@@ -10301,10 +10301,19 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 });
 
 module.exports = defaults;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(16);
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10315,7 +10324,7 @@ var settle = __webpack_require__(22);
 var buildURL = __webpack_require__(25);
 var parseHeaders = __webpack_require__(31);
 var isURLSameOrigin = __webpack_require__(29);
-var createError = __webpack_require__(6);
+var createError = __webpack_require__(7);
 var btoa = typeof window !== 'undefined' && window.btoa && window.btoa.bind(window) || __webpack_require__(24);
 
 module.exports = function xhrAdapter(config) {
@@ -10482,10 +10491,10 @@ module.exports = function xhrAdapter(config) {
     request.send(requestData);
   });
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10511,7 +10520,7 @@ Cancel.prototype.__CANCEL__ = true;
 module.exports = Cancel;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10522,7 +10531,7 @@ module.exports = function isCancel(value) {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10546,7 +10555,7 @@ module.exports = function createError(message, config, code, request, response) 
 };
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10563,7 +10572,7 @@ module.exports = function bind(fn, thisArg) {
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10756,7 +10765,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11347,7 +11356,7 @@ if ("undefined" == typeof jQuery) throw new Error("Bootstrap's JavaScript requir
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11376,7 +11385,7 @@ function autocomplete(input, latInput, lngInput) {
 exports.default = autocomplete;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11420,7 +11429,6 @@ function initForm() {
 exports.default = initForm;
 
 /***/ }),
-/* 12 */,
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11431,7 +11439,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _axios = __webpack_require__(15);
+var _axios = __webpack_require__(3);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -11565,6 +11573,37 @@ exports.default = editTransactionSetUp;
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _axios = __webpack_require__(3);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function initWallet() {
+    var deleteWallet = document.getElementById('deleteWallet');
+    if (deleteWallet) {
+        deleteWallet.addEventListener('click', function () {
+            var walletId = deleteWallet.parentElement.parentElement.dataset.wallet;
+            _axios2.default.delete('/api/v1/wallet/' + walletId).then(function (res) {
+                window.location = '/home';
+            });
+        });
+    }
+}
+
+exports.default = initWallet;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
@@ -11593,15 +11632,6 @@ if(false) {
 }
 
 /***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(16);
-
-/***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11609,7 +11639,7 @@ module.exports = __webpack_require__(16);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(7);
+var bind = __webpack_require__(8);
 var Axios = __webpack_require__(18);
 var defaults = __webpack_require__(2);
 
@@ -11644,9 +11674,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(4);
+axios.Cancel = __webpack_require__(5);
 axios.CancelToken = __webpack_require__(17);
-axios.isCancel = __webpack_require__(5);
+axios.isCancel = __webpack_require__(6);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -11666,7 +11696,7 @@ module.exports.default = axios;
 "use strict";
 
 
-var Cancel = __webpack_require__(4);
+var Cancel = __webpack_require__(5);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -11881,7 +11911,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(23);
-var isCancel = __webpack_require__(5);
+var isCancel = __webpack_require__(6);
 var defaults = __webpack_require__(2);
 
 /**
@@ -11973,7 +12003,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var createError = __webpack_require__(6);
+var createError = __webpack_require__(7);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -12553,19 +12583,19 @@ module.exports = function (module) {
 "use strict";
 
 
-__webpack_require__(14);
+__webpack_require__(15);
 
 var _jquery = __webpack_require__(1);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-__webpack_require__(9);
+__webpack_require__(10);
 
-var _categories = __webpack_require__(11);
+var _categories = __webpack_require__(12);
 
 var _categories2 = _interopRequireDefault(_categories);
 
-var _autocomplete = __webpack_require__(10);
+var _autocomplete = __webpack_require__(11);
 
 var _autocomplete2 = _interopRequireDefault(_autocomplete);
 
@@ -12573,9 +12603,13 @@ var _transactions = __webpack_require__(13);
 
 var _transactions2 = _interopRequireDefault(_transactions);
 
-var _wallet = __webpack_require__(40);
+var _wallet = __webpack_require__(14);
 
 var _wallet2 = _interopRequireDefault(_wallet);
+
+var _transactionWidget = __webpack_require__(40);
+
+var _transactionWidget2 = _interopRequireDefault(_transactionWidget);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12587,6 +12621,7 @@ window.$ = _jquery2.default;
 (0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
 (0, _transactions2.default)();
 (0, _wallet2.default)();
+(0, _transactionWidget2.default)();
 
 /***/ }),
 /* 37 */
@@ -13053,26 +13088,28 @@ function toComment(sourceMap) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _axios = __webpack_require__(15);
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function initWallet() {
-    var deleteWallet = document.getElementById('deleteWallet');
-    if (deleteWallet) {
-        deleteWallet.addEventListener('click', function () {
-            var walletId = deleteWallet.parentElement.parentElement.dataset.wallet;
-            _axios2.default.delete('/api/v1/wallet/' + walletId).then(function (res) {
-                window.location = '/home';
+function calendarSetup() {
+    if (!document.getElementById('transactionCalendar')) {
+        return;
+    }
+    var cal = document.getElementById('transactionCalendar');
+    var transactions = document.querySelectorAll('.box-transactions-day');
+    cal.querySelectorAll('[data-widget="transaction"]').forEach(function (el) {
+        el.addEventListener('click', function () {
+            var month = this.dataset.month;
+            var year = this.dataset.year;
+            transactions.forEach(function (t) {
+                if (t.dataset.year === year && t.dataset.month === month) {
+                    t.classList.remove('hidden');
+                } else {
+                    t.classList.add('hidden');
+                }
             });
         });
-    }
+    });
 }
 
-exports.default = initWallet;
+exports.default = calendarSetup;
 
 /***/ })
 /******/ ]);

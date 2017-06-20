@@ -11,13 +11,33 @@ block content
         a.btn.btn-default.btn-flat.header-right(type="button" href=`/wallet/${wallet.id}/edit`) Edit
 
     section.content
+        - const years = h.getYears(wallet.transactions)
+        - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
         .row
-            .col-md-6.col-md-offset-3
-                - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
-                h2.text-center #{total} #{currencySymbol}
-                - const transactionsByDay = h.transactionsByDay(wallet.transactions)
-                if transactionsByDay && !h.isEmpty(transactionsByDay)
-                    each day in transactionsByDay
+            .col-xs-12
+                h2.text-center Total: #{total} #{currencySymbol}
+        .row
+            .col-md-3
+                .box.box-widget
+                    .box.box-success.box-solid
+                        .box-header.with-border
+                            h3.box-title Calendar
+                            .box-tools.pull-right
+                                button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
+                                    i.fa.fa-minus
+                        .box-body(id="transactionCalendar")
+                            ul
+                                for months, year in years
+                                    li #{year}
+                                        ul
+                                            for month in months.sort()
+                                                li 
+                                                    a(href="#" data-widget="transaction" data-month=month data-year=year) #{h.months[month - 1].substring(0, 3)}
+
+            - const transactions = h.getTransactionsByDay(wallet.transactions)
+            .col-md-6
+                if transactions && !h.isEmpty(transactions)
+                    each day in transactions
                         +transactionDay(day)
                     button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
                 else

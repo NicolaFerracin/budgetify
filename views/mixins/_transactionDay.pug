@@ -1,8 +1,11 @@
 mixin transactionDay(day)
-    .box.box-success.box-transactions-day
-        - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
+    - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
+    - const date = h.moment(day.date)
+    - const month = date.format('MM')
+    - const year = date.format('YYYY')
+    .box.box-success.box-transactions-day(data-year=year data-month=month)
         .box-header.with-border
-            h3.box-title= h.moment(day.date).format('DD MMM [-] dddd')
+            h3.box-title= date.format('DD MMM [-] dddd')
             - dayTotal = day.transactions.reduce((res, el) => res += el.amount, 0);
             h3.box-title.pull-right #{dayTotal} #{currencySymbol}
         .box-body

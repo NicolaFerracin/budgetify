@@ -8189,7 +8189,7 @@ form textarea {
 
 .content-header .header-right {
   position: absolute;
-  right: 0;
+  right: 10px;
   top: 10px; }
 
 .info-box-description {
