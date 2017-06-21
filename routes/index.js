@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const walletController = require('../controllers/walletController');
@@ -14,18 +15,27 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/home', 
+router.get('/home',
     authController.isLoggedIn,
     catchErrors(walletController.home)
 );
 
 // Registration
 router.get('/register', userController.registerForm);
-router.post('/register', 
+router.post('/register',
     userController.validateRegister,
     catchErrors(userController.register),
     authController.login
 );
+
+router.get('/auth/facebook',
+    passport.authenticate('facebook', { scope: [ 'email' ] }));
+router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home. 
+        res.redirect('/');
+    });
 
 // Login
 router.get('/login', userController.loginForm);
@@ -38,7 +48,7 @@ router.get('/logout', authController.logout);
 router.get('/recover', authController.recoverForm);
 router.post('/recover', catchErrors(authController.recover));
 router.get('/recover/:token', catchErrors(authController.reset));
-router.post('/recover/:token', 
+router.post('/recover/:token',
     authController.validateReset,
     authController.confirmedPasswords,
     catchErrors(authController.update)
@@ -47,7 +57,7 @@ router.post('/recover/:token',
 // Account
 router.get('/account', userController.account);
 router.post('/account/updateAccount', catchErrors(userController.updateAccount));
-router.post('/account/changePassword', 
+router.post('/account/changePassword',
     authController.validateReset,
     authController.confirmedPasswords,
     catchErrors(authController.changePassword)
@@ -55,11 +65,11 @@ router.post('/account/changePassword',
 
 // Wallets
 router.get('/wallet', walletController.walletForm);
-router.post('/wallet', 
+router.post('/wallet',
     authController.isLoggedIn,
     catchErrors(walletController.addWallet)
 );
-router.post('/wallet/:id', 
+router.post('/wallet/:id',
     authController.isLoggedIn,
     catchErrors(walletController.updateWallet)
 );
@@ -67,13 +77,13 @@ router.get('/wallet/:id', catchErrors(walletController.wallet));
 router.get('/wallet/:id/edit', catchErrors(walletController.editWallet));
 
 // Transactions
-router.post('/transaction', 
+router.post('/transaction',
     authController.isLoggedIn,
     catchErrors(transactionController.addTransaction)
 );
 
 // Categories
-router.post('/categories', 
+router.post('/categories',
     authController.isLoggedIn,
     catchErrors(userController.editCategories)
 );

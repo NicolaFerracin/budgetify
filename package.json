@@ -35,6 +35,7 @@
     "mongoose-mongodb-errors": "0.0.2",
     "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "passport-local-mongoose": "^4.0.0",
     "pug": "^2.0.0-rc.2",
     "validator": "^7.0.0"

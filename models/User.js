@@ -6,6 +6,10 @@ const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
+    facebook: {
+        id: String,
+        token: String
+    },
     email: {
         type: String,
         unique: true,
@@ -74,9 +78,9 @@ const userSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpires: Date,
 }, {
-    toJson: { virtuals: true },
-    toObject: { virtuals: true }
-});
+        toJson: { virtuals: true },
+        toObject: { virtuals: true }
+    });
 
 userSchema.virtual('wallets', {
     ref: 'Wallet',
