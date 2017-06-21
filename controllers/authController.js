@@ -121,3 +121,19 @@ exports.update = async (req, res) => {
     req.flash('success', 'Your password has been updated');
     res.redirect('/');
 };
+
+exports.facebook = passport.authenticate('facebook', { scope: [ 'email' ] });
+
+exports.facebookCallback = passport.authenticate('facebook', {
+    failureRedirect: '/login',
+    failureFlash: 'Failed login!',
+    successRedirect: '/'
+});
+
+exports.google = passport.authenticate('google', { scope : ['profile', 'email'] });
+
+exports.googleCallback = passport.authenticate('google', {
+    failureRedirect: '/login',
+    failureFlash: 'Failed login!',
+    successRedirect: '/'
+});

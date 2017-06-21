@@ -28,18 +28,13 @@ router.post('/register',
     authController.login
 );
 
-router.get('/auth/facebook',
-    passport.authenticate('facebook', { scope: [ 'email' ] }));
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function (req, res) {
-        // Successful authentication, redirect home. 
-        res.redirect('/');
-    });
-
 // Login
 router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
+router.get('/auth/facebook', authController.facebook);
+router.get('/auth/facebook/callback', authController.facebookCallback);
+router.get('/auth/google', authController.google);
+router.get('/auth/google/callback', authController.googleCallback);
 
 // Logout
 router.get('/logout', authController.logout);
