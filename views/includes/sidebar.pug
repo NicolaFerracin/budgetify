@@ -8,14 +8,15 @@ aside.main-sidebar
                     span Home
                     span.pull-right-container
                         i.pull-right.fa.fa-chevron-right
-            li.header MY WALLETS
-            for wallet in user.wallets
-                li(class=currentPath === `/wallet/${wallet._id}` ? 'active' : '')
-                    a(href=`/wallet/${wallet._id}`)
-                        i.fa.fa-dollar 
-                        span #{wallet.name}
-                        span.pull-right-container
-                            i.pull-right.fa.fa-chevron-right
+            if !h.isEmpty(user.wallets)
+                li.header MY WALLETS
+                for wallet in user.wallets
+                    li(class=currentPath === `/wallet/${wallet._id}` ? 'active' : '')
+                        a(href=`/wallet/${wallet._id}`)
+                            i.fa.fa-dollar 
+                            span #{wallet.name}
+                            span.pull-right-container
+                                i.pull-right.fa.fa-chevron-right
             li.header ACTIONS
             li(class=currentPath === '/wallet' ? 'active' : '')
                 a(href="/wallet")

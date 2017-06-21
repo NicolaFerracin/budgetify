@@ -18,21 +18,22 @@ block content
                 h2.text-center Total: #{total} #{currencySymbol}
         .row
             .col-md-3
-                .box.box-widget
-                    .box.box-success.box-solid
-                        .box-header.with-border
-                            h3.box-title Calendar
-                            .box-tools.pull-right
-                                button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
-                                    i.fa.fa-minus
-                        .box-body(id="transactionCalendar")
-                            ul
-                                for months, year in years
-                                    li #{year}
-                                        ul
-                                            for month in months.sort()
-                                                li 
-                                                    a(href="#" data-widget="transaction" data-month=month data-year=year) #{h.months[month - 1].substring(0, 3)}
+                if !h.isEmpty(years)
+                    .box.box-widget
+                        .box.box-success.box-solid
+                            .box-header.with-border
+                                h3.box-title Calendar
+                                .box-tools.pull-right
+                                    button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
+                                        i.fa.fa-minus
+                            .box-body(id="transactionCalendar")
+                                ul
+                                    for months, year in years
+                                        li #{year}
+                                            ul
+                                                for month in months.sort()
+                                                    li 
+                                                        a(href="#" data-widget="transaction" data-month=month                                                           data-year=year) #{h.months[month - 1].substring(0, 3)}
 
             - const transactions = h.getTransactionsByDay(wallet.transactions)
             .col-md-6
