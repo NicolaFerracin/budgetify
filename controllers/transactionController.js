@@ -39,7 +39,6 @@ function prepareTransactionForDb(raw, userId) {
         amount: Number(raw.amount).toFixed(2),
         category: raw.category,
         description: raw.description,
-        recurrent: raw.recurrent,
         shouldCount: raw.shouldCount,
         timestamp: date,
         location: raw.location,

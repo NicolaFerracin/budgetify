@@ -36,7 +36,6 @@ function onTransactionClick() {
             newState.category = rawData.category;
             newState.description = rawData.description;
             newState.wallet = rawData.wallet;
-            newState.recurrent = rawData.recurrent;
             newState.shouldCount = rawData.shouldCount;
             const dateRaw = new Date(rawData.timestamp);
             const year = dateRaw.getFullYear();
@@ -75,7 +74,6 @@ function getCurrentState(form) {
         address: form.find('input[name="location[address]"]').val(),
         lat: form.find('input[name="location[coordinates][0]"]').val(),
         lng: form.find('input[name="location[coordinates][1]"]').val(),
-        recurrent: form.find('input[name="recurrent"]').is(':checked'),
         shouldCount: form.find('input[name="shouldCount"]').is(':checked'),
         action: form.attr('action'),
         button: form.find('button[type="submit"]').text(),
@@ -95,7 +93,6 @@ function setNewState(form, newState) {
     form.find('input[name="location[address]"]').val(newState.address);
     form.find('input[name="location[coordinates][0]"]').val(newState.lng);
     form.find('input[name="location[coordinates][1]"]').val(newState.lat);
-    form.find('input[name="recurrent"]').prop("checked", newState.recurrent);
     form.find('input[name="shouldCount"]').prop("checked", newState.shouldCount);
     form.find('input[name="shouldCount"]').prop("checked", newState.shouldCount);
     form.attr('action', newState.action);

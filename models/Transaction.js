@@ -14,10 +14,6 @@ const transactionSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    recurrent: {
-        type: Boolean,
-        default: false
-    },
     shouldCount: {
         type: Boolean,
         default: false
