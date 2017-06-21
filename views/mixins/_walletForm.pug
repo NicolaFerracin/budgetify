@@ -31,6 +31,6 @@ mixin walletForm(wallet = {})
                     label(for=shouldCount) Consider this wallet when calculating totals and budgets?
             .box-footer
                 if !h.isEmpty(wallet)
-                    a.btn.btn-danger.btn-flat(type="button" id="deleteWallet") Delete 
+                    a.btn.btn-danger.btn-flat(type="button" data-action="delete" id="deleteWallet") Delete 
                         span.fa.fa-trash-o
                 button.btn.btn-primary.btn-flat.pull-right(type="submit") Submit
