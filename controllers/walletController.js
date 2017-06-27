@@ -4,9 +4,9 @@ const Transaction = mongoose.model('Transaction');
 const promisify = require('es6-promisify');
 const authController = require('./authController');
 
-exports.home = async (req, res) => {
+exports.dashboard = async (req, res) => {
     const wallets = await Wallet.find({ owner: req.user._id });
-    res.render('dashboard', { title: 'Home', wallets });
+    res.render('dashboard', { title: 'Dashboard', wallets });
 };
 
 exports.walletForm = (req, res) => {

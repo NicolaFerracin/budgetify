@@ -12,6 +12,8 @@ block content
 
     section.content
         - const years = h.getYears(wallet.transactions)
+        - const t = h.getTranasctionsByYMD(wallet.transactions)
+        pre=h.dump(wallet.transactions)
         - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12

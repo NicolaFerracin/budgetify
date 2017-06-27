@@ -9,15 +9,15 @@ const { catchErrors } = require('../handlers/errors');
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        res.redirect('/home');
+        res.redirect('/dashboard');
     } else {
-        res.render('layout', { title: 'Home' });
+        res.render('layout', { title: 'Dashboard' });
     }
 });
 
-router.get('/home',
+router.get('/dashboard',
     authController.isLoggedIn,
-    catchErrors(walletController.home)
+    catchErrors(walletController.dashboard)
 );
 
 // Registration
@@ -84,6 +84,7 @@ router.post('/categories',
 );
 
 router.get('/favicon.ico', (req, res) => res.sendStatus(204));
+router.get('/transactions', catchErrors(transactionController.getTransactions));
 
 // API
 router.get('/api/v1/transaction/:id', catchErrors(transactionController.getTransaction));

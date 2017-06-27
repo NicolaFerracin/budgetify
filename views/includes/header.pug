@@ -1,6 +1,6 @@
 header.main-header
     if user
-        a.logo(href="/home") 
+        a.logo(href="/dashboard") 
             span.logo-mini 
                 strong B
             span.logo-lg 
@@ -8,13 +8,13 @@ header.main-header
                 | udgetify
     nav.navbar.navbar-static-top(class=user ? '' : 'no-user')
         if user
-            a.sidebar-toggle(href="/home" data-toggle="push-menu" role="button")
+            a.sidebar-toggle(href="/dashboard" data-toggle="push-menu" role="button")
                 span.sr-only Toggle navigation
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
         else 
-            a.logo.logo-light.logo-full(href="#") 
+            a.logo.logo-light.logo-full(href="/login") 
                 span 
                     strong B
                     | udgetify

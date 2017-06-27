@@ -4,7 +4,7 @@ img {
   max-width: 100%; }
 
 body {
-  background-color: #303030;
+  background-color: #ecf0f5;
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
@@ -54,7 +54,8 @@ table {
 ------------------------------------- */
 .main {
   background: #fff;
-  border-top:20px solid #fff200;
+  border-top:3px solid #00a65a;
+  border-radius: 3px;
   width: 100%; }
 
 .wrapper {
@@ -109,7 +110,7 @@ ol {
     margin-left: 5px; }
 
 a {
-  color: #fff200;
+  color: #00a65a;
   text-decoration: underline; }
 
 /* -------------------------------------
@@ -128,10 +129,10 @@ a {
     text-align: center; }
   .btn a {
     background-color: #ffffff;
-    border: solid 1px #fff200;
+    border: solid 1px #00a65a;
     border-radius: 5px;
     box-sizing: border-box;
-    color: #fff200;
+    color: #00a65a;
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
@@ -142,11 +143,11 @@ a {
     text-transform: capitalize; }
 
 .btn-primary table td {
-  background-color: #fff200; }
+  background-color: #00a65a; }
 
 .btn-primary a {
-  background-color: #fff200;
-  border-color: #fff200;
+  background-color: #00a65a;
+  border-color: #00a65a;
   color: #3a3a3a; }
 
 /* -------------------------------------
@@ -252,7 +253,7 @@ hr {
     line-height: inherit !important;
     text-decoration: none !important; }
   .btn-primary table td:hover {
-    background-color: #00ffde !important; }
+    background-color: #008d4c !important; }
   .btn-primary a:hover {
-    background-color: #00ffde !important;
-    border-color: #00ffde !important; } }
+    background-color: #008d4c !important;
+    border-color: #008d4c !important; } }
