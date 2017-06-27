@@ -30,6 +30,27 @@ exports.deleteTransaction = async (req, res) => {
     res.sendStatus(200);
 };
 
+exports.getTransactions = async (req, res) => {
+    const transactions = await Transaction.aggregate([
+        { 
+            $match: {
+                owner: req.user._id
+            }
+        }, 
+        {
+            $group: {
+                _id: {
+                    year: { $year: "$timestamp" },
+                    month: { $month: "$timestamp" },
+                    day: { $dayOfMonth: "$timestamp" }  
+                },
+                transactions: { '$push': '$$ROOT' },
+                amountByDay: { '$sum': '$amount' } 
+            }
+        }
+    ]);
+}
+
 function prepareTransactionForDb(raw, userId) {
     const date = new Date(raw.date);
     [hours, minutes] = raw.time.split(':');

@@ -81,10 +81,11 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-}, {
-        toJson: { virtuals: true },
-        toObject: { virtuals: true }
-    });
+}, 
+{
+    toJson: { virtuals: true },
+    toObject: { virtuals: true }
+});
 
 userSchema.virtual('wallets', {
     ref: 'Wallet',

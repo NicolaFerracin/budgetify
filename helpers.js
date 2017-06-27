@@ -26,6 +26,32 @@ exports.menu = [
 
 exports.currencies = currencies.currencies;
 
+exports.getTranasctionsByYMD = (transactions) => {
+    const years = [];
+    const months = [];
+    const days = [];
+    return transactions.reduce((res, t) => {
+        const date = moment(t.timestamp);
+        const year = date.format('YYYY');
+        const month = date.format('MM');
+        const day = date.format('DD');
+    
+        if (years.indexOf(year) >= 0) {
+            if (months.indexOf(month) >= 0) {
+
+            } else {
+                
+            }
+        } else {
+            res.push({ year, months: [{ month, days: [{ day, transactions: [t] }] }] });
+            years.push(year);
+            months.push(month);
+            days.push(day);
+        }
+        return res;
+    }, []);
+}
+
 exports.getTransactionsByDay = (transactions) => {
     const days = [];
     const temp = transactions.reduce((res, el) => {

@@ -84,6 +84,7 @@ router.post('/categories',
 );
 
 router.get('/favicon.ico', (req, res) => res.sendStatus(204));
+router.get('/transactions', catchErrors(transactionController.getTransactions));
 
 // API
 router.get('/api/v1/transaction/:id', catchErrors(transactionController.getTransaction));
