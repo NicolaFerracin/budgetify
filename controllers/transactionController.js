@@ -30,25 +30,51 @@ exports.deleteTransaction = async (req, res) => {
     res.sendStatus(200);
 };
 
-exports.getTransactions = async (req, res) => {
-    const transactions = await Transaction.aggregate([
+exports.getTotalPerMonth = async (userId, walletId) => {
+    const total = await Transaction.aggregate([
         { 
             $match: {
-                owner: req.user._id
+                owner: userId,
+                wallet: walletId
             }
         }, 
         {
             $group: {
                 _id: {
-                    year: { $year: "$timestamp" },
-                    month: { $month: "$timestamp" },
-                    day: { $dayOfMonth: "$timestamp" }  
+                    year: { $year: '$timestamp' },
+                    month: { $month: '$timestamp' },
+                    day: { $dayOfMonth: '$timestamp' }  
                 },
-                transactions: { '$push': '$$ROOT' },
-                amountByDay: { '$sum': '$amount' } 
+                transactions: { $push: '$$ROOT' },
+                amountDay: { $sum: '$amount' } 
             }
+        },
+        {
+            $group: {
+                _id: {
+                    year : '$_id.year',
+                    month : '$_id.month',
+                },
+                amount : {
+                    $sum : '$amountDay'
+                }
+            }
+        },
+        {
+            $project: {
+                date: {
+                    year: '$_id.year',
+                    month:'$_id.month',
+                },
+                amount: true,
+                _id: 0
+            }
+        },
+        {
+            $sort: { date: -1 }
         }
     ]);
+    return total;
 }
 
 function prepareTransactionForDb(raw, userId) {

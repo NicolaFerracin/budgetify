@@ -3,7 +3,7 @@ function calendarSetup() {
         return;
     }
     const cal = document.getElementById('transactionCalendar');
-    const transactions = document.querySelectorAll('.box-transactions-day');
+    const transactions = document.querySelectorAll('.month');
     cal.querySelectorAll('[data-widget="transaction"]').forEach(el => {
         el.addEventListener('click', function() {
             const month = this.dataset.month;

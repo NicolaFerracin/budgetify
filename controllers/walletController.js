@@ -3,6 +3,8 @@ const Wallet = mongoose.model('Wallet');
 const Transaction = mongoose.model('Transaction');
 const promisify = require('es6-promisify');
 const authController = require('./authController');
+const transactionController = require('./transactionController');
+const { catchErrors } = require('../handlers/errors');
 
 exports.dashboard = async (req, res) => {
     const wallets = await Wallet.find({ owner: req.user._id });
@@ -39,7 +41,8 @@ exports.wallet = async (req, res) => {
     const wallet = await Wallet
         .findOne({ _id: req.params.id, owner: req.user._id })
         .populate('transactions');
-    res.render('wallet', { title: wallet.name, wallet });
+    const totalPerMonth = await transactionController.getTotalPerMonth(req.user._id, wallet._id);
+    res.render('wallet', { title: wallet.name, wallet, totalPerMonth });
 };
 
 exports.deleteWallet = async (req, res) => {

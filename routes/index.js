@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
         res.redirect('/dashboard');
     } else {
-        res.render('layout', { title: 'Dashboard' });
+        res.redirect('/login');
     }
 });
 
@@ -84,7 +84,6 @@ router.post('/categories',
 );
 
 router.get('/favicon.ico', (req, res) => res.sendStatus(204));
-router.get('/transactions', catchErrors(transactionController.getTransactions));
 
 // API
 router.get('/api/v1/transaction/:id', catchErrors(transactionController.getTransaction));

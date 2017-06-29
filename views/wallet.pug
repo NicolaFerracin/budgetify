@@ -12,8 +12,6 @@ block content
 
     section.content
         - const years = h.getYears(wallet.transactions)
-        - const t = h.getTranasctionsByYMD(wallet.transactions)
-        pre=h.dump(wallet.transactions)
         - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12
@@ -33,20 +31,20 @@ block content
                                     for months, year in years
                                         li #{year}
                                             ul
-                                                for month in months.sort()
+                                                for month in months.sort().reverse()
                                                     li 
                                                         a(href="#" data-widget="transaction" data-month=month                                                           data-year=year) #{h.months[month - 1].substring(0, 3)}
 
-            - const transactions = h.getTransactionsByDay(wallet.transactions)
             .col-md-6
-                if transactions && !h.isEmpty(transactions)
-                    each day in transactions
-                        +transactionDay(day)
-                    button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
-                else
-                    .text-center
-                        h2 You don't have any transaction. Add one!
-                        button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
+                for month in totalPerMonth
+                    .month(data-year=month.date.year data-month=month.date.month)
+                        h4.text-center #{h.months[month.date.month - 1].substring(0, 3)}: #{month.amount} #{currencySymbol}
+                        - const transactions = h.getTransactionsByMonth(wallet.transactions, month.date.month)
+                        for day in transactions
+                                | #{day.amount}
+                                +transactionDay(day)
+                            
+                button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
 
                 include includes/transactionModal
 
