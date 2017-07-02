@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
+/******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/ 		}
+/******/
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 39);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -4065,12 +4065,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	jQuery.fn.ready = function (fn) {
 
-		readyList.then(fn
+		readyList.then(fn)
 
 		// Wrap jQuery.readyException in a function so that the lookup
 		// happens at the time of error handling instead of callback
 		// registration.
-		).catch(function (error) {
+		.catch(function (error) {
 			jQuery.readyException(error);
 		});
 
@@ -7350,10 +7350,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		fadeTo: function fadeTo(speed, to, easing, callback) {
 
 			// Show any hidden elements after setting opacity to 0
-			return this.filter(isHiddenWithinTree).css("opacity", 0).show
+			return this.filter(isHiddenWithinTree).css("opacity", 0).show()
 
 			// Animate to the value specified
-			().end().animate({ opacity: to }, speed, easing, callback);
+			.end().animate({ opacity: to }, speed, easing, callback);
 		},
 		animate: function animate(prop, speed, easing, callback) {
 			var empty = jQuery.isEmptyObject(prop),
@@ -11637,7 +11637,7 @@ exports.default = initWallet;
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(38);
+var content = __webpack_require__(37);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -11645,7 +11645,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(39)(content, options);
+var update = __webpack_require__(38)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -12610,53 +12610,6 @@ module.exports = function (module) {
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-__webpack_require__(16);
-
-var _jquery = __webpack_require__(1);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-__webpack_require__(10);
-
-var _categories = __webpack_require__(12);
-
-var _categories2 = _interopRequireDefault(_categories);
-
-var _autocomplete = __webpack_require__(11);
-
-var _autocomplete2 = _interopRequireDefault(_autocomplete);
-
-var _transactions = __webpack_require__(14);
-
-var _transactions2 = _interopRequireDefault(_transactions);
-
-var _wallet = __webpack_require__(15);
-
-var _wallet2 = _interopRequireDefault(_wallet);
-
-var _submitInterceptor = __webpack_require__(13);
-
-var _submitInterceptor2 = _interopRequireDefault(_submitInterceptor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-window.jQuery = _jquery2.default;
-window.$ = _jquery2.default;
-
-
-(0, _categories2.default)();
-(0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
-(0, _transactions2.default)();
-(0, _wallet2.default)();
-(0, _submitInterceptor2.default)();
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
 exports = module.exports = __webpack_require__(40)(undefined);
 // imports
 
@@ -12668,7 +12621,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -13027,86 +12980,51 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-	var list = [];
+__webpack_require__(16);
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if (item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
+var _jquery = __webpack_require__(1);
 
-	// import a list of modules into the list
-	list.i = function (modules, mediaQuery) {
-		if (typeof modules === "string") modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for (var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if (typeof id === "number") alreadyImportedModules[id] = true;
-		}
-		for (i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if (mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if (mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
+var _jquery2 = _interopRequireDefault(_jquery);
 
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
+__webpack_require__(10);
 
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-		});
+var _categories = __webpack_require__(12);
 
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
+var _categories2 = _interopRequireDefault(_categories);
 
-	return [content].join('\n');
-}
+var _autocomplete = __webpack_require__(11);
 
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+var _autocomplete2 = _interopRequireDefault(_autocomplete);
 
-	return '/*# ' + data + ' */';
-}
+var _transactions = __webpack_require__(14);
+
+var _transactions2 = _interopRequireDefault(_transactions);
+
+var _wallet = __webpack_require__(15);
+
+var _wallet2 = _interopRequireDefault(_wallet);
+
+var _submitInterceptor = __webpack_require__(13);
+
+var _submitInterceptor2 = _interopRequireDefault(_submitInterceptor);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+window.jQuery = _jquery2.default;
+window.$ = _jquery2.default;
+
+
+(0, _categories2.default)();
+(0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
+(0, _transactions2.default)();
+(0, _wallet2.default)();
+(0, _submitInterceptor2.default)();
 
 /***/ })
 /******/ ]);

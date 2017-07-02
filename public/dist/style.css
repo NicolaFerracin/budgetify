@@ -8220,7 +8220,6 @@ form textarea {
 .categories-list {
   padding: 0;
   -webkit-column-count: 3;
-  -moz-column-count: 3;
   column-count: 3; }
   .categories-list li {
     list-style: none; }
