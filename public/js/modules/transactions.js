@@ -40,7 +40,7 @@ function onTransactionClick() {
             const dateRaw = new Date(rawData.timestamp);
             const year = dateRaw.getFullYear();
             const month = dateRaw.getMonth() + 1 < 10 ? `0${dateRaw.getMonth() + 1}` : dateRaw.getMonth() + 1;
-            const day = dateRaw.getDate();
+            const day = dateRaw.getDate() < 10 ? `0${dateRaw.getDate()}` : dateRaw.getDate();
             newState.date = `${year}-${month}-${day}`;
             const hours = dateRaw.getHours().toString().length < 2 ? `0${dateRaw.getHours()}` : dateRaw.getHours();
             const minutes = dateRaw.getMinutes().toString().length < 2 ? `0${dateRaw.getMinutes()}` : dateRaw.getMinutes();
@@ -49,7 +49,7 @@ function onTransactionClick() {
             newState.lat = rawData.location.coordinates[1];
             newState.lng = rawData.location.coordinates[0];
             newState.action = `/api/v1/transaction/${currentTransactionId}`;
-            newState.button = 'Edit';
+            newState.button = 'Save';
             newState.enableDelete = true;
             setNewState(form, newState);
             modal.modal().show();
@@ -87,6 +87,8 @@ function setNewState(form, newState) {
     form.find('select[name="category"]').val(newState.category);
     form.find('input[name="amount"]').val(newState.amount);
     form.find('input[name="date"]').val(newState.date);
+    console.log(form.find('input[name="date"]'))
+    console.log(newState.date)
     form.find('input[name="time"]').val(newState.time);
     form.find('input[name="description"]').val(newState.description);
     form.find('input[name="wallet"]').val(newState.wallet);

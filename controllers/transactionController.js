@@ -46,6 +46,7 @@ exports.getTransactionsCalendar = async (userId, walletId) => {
                 }
             }
         },
+        { $sort: { '_id.year': 1, '_id.month': 1 } },
         {
             $group: {
                 _id: {
@@ -64,9 +65,6 @@ exports.getTransactionsCalendar = async (userId, walletId) => {
                 months: '$months',
                 _id: 0
             }
-        },
-        {
-            $sort: { year: -1 }
         }
     ]);
     return calendar;
@@ -92,6 +90,7 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
                 amountDay: { $sum: '$amount' }
             }
         },
+        { $sort: { '_id.day': -1 }},
         {
             $group: {
                 _id: {
@@ -113,7 +112,6 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
                 year: '$_id.year',
                 month: '$_id.month',
                 days: '$days',
-                transactions: true,
                 amountMonth: true,
                 _id: 0
             }
@@ -123,10 +121,7 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
                 year: year,
                 month: month
             }
-        },
-        {
-            $sort: { year: -1, month: -1 }
-        }
+        },  
     ]);
     return transactions;
 };
