@@ -11,14 +11,13 @@ block content
         a.btn.btn-default.btn-flat.header-right(type="button" href=`/wallet/${wallet.id}/edit`) Edit
 
     section.content
-        - const years = h.getYears(wallet.transactions)
         - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12
                 h2.text-center Total: #{total} #{currencySymbol}
         .row
             .col-md-3
-                if !h.isEmpty(years)
+                if !h.isEmpty(calendar)
                     .box.box-widget
                         .box.box-success.box-solid
                             .box-header.with-border
@@ -28,21 +27,22 @@ block content
                                         i.fa.fa-minus
                             .box-body(id="transactionCalendar")
                                 ul
-                                    for months, year in years
-                                        li #{year}
+                                    for year in calendar
+                                        li #{year.year}
                                             ul
-                                                for month in months.sort().reverse()
+                                                for month in year.months
                                                     li 
-                                                        a(href="#" data-widget="transaction" data-month=month                                                           data-year=year) #{h.months[month - 1].substring(0, 3)}
+                                                        a(href=`/wallet/${wallet._id}?y=${year.year}&m=${month.month}`) #{h.months[month.month - 1].substring(0, 3)}
 
             .col-md-6
-                for month in totalPerMonth
-                    .month(data-year=month.date.year data-month=month.date.month)
-                        h4.text-center #{h.months[month.date.month - 1].substring(0, 3)}: #{month.amount} #{currencySymbol}
-                        - const transactions = h.getTransactionsByMonth(wallet.transactions, month.date.month)
-                        for day in transactions
-                                | #{day.amount}
-                                +transactionDay(day)
+                if h.isEmpty(transactions)
+                    h4.text-center No transaction found for #{h.months[query.month - 1].substring(0, 3)} #{query.year}
+                else
+                    - const month = transactions[0]
+                    .month
+                        h4.text-center #{h.months[month.month - 1].substring(0, 3)}: #{month.amountMonth} #{currencySymbol}
+                        for day in month.days
+                            +transactionDay(day)
                             
                 button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
 

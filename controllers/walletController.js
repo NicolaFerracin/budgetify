@@ -39,10 +39,13 @@ exports.updateWallet = async (req, res) => {
 
 exports.wallet = async (req, res) => {
     const wallet = await Wallet
-        .findOne({ _id: req.params.id, owner: req.user._id })
-        .populate('transactions');
-    const totalPerMonth = await transactionController.getTotalPerMonth(req.user._id, wallet._id);
-    res.render('wallet', { title: wallet.name, wallet, totalPerMonth });
+        .findOne({ _id: req.params.id, owner: req.user._id });
+    const year = req.query.y ? Number(req.query.y) : new Date().getFullYear();
+    const month = req.query.m ? Number(req.query.m) : new Date().getMonth() + 1;
+    const query = { year, month };
+    const transactions = await transactionController.getTransactionsForMonth(req.user._id, wallet._id, year, month);
+    const calendar = await transactionController.getTransactionsCalendar(req.user._id, wallet._id);
+    res.render('wallet', { title: wallet.name, wallet, transactions, calendar, query });
 };
 
 exports.deleteWallet = async (req, res) => {
