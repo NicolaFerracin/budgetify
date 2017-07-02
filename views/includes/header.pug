@@ -21,8 +21,9 @@ header.main-header
         div.navbar-custom-menu
             ul.nav.navbar-nav
                 if user
-                    li
-                        a(href="/account") Account
+                    if !user.google && !user.facebook
+                        li
+                            a(href="/account") Account
                     li
                         a(href="/logout") Logout
                 else

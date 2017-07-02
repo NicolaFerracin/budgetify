@@ -42,7 +42,7 @@ exports.isLoggedIn = (req, res, next) => {
         next();
         return;
     } else {
-        req.flash('error', 'Oops, you must logged in.');
+        req.flash('error', 'Oops, you must login first.');
         res.redirect('/login');
     }
 };

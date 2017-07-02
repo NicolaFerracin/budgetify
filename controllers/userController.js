@@ -41,21 +41,30 @@ exports.register = async (req, res, next) => {
 };
 
 exports.account = (req, res) => {
-    res.render('account', { title: 'Edit your account' });
+    if (req.user.google || req.user.facebook) {
+        res.redirect('back');
+    } else {
+        res.render('account', { title: 'Edit your account' });
+    }
 };
 
 exports.updateAccount = async (req, res) => {
-    const updates = {
-        name: req.body.name,
-        email: req.body.email
-    };
-    const user = await User.findOneAndUpdate(
-        { _id: req.user._id },
-        { $set: updates },
-        { new: true, runValidators: true, context: 'query'}
-    );
-    req.flash('success', 'Your account has been updated!');
-    res.redirect('back');
+    if (req.user.google || req.user.facebook) {
+        req.flash('error', 'It seems you are logged in with either Facebook or Google, therefore you cannot update your email and/or password.');
+        res.redirect('/dashboard');
+    } else {
+        const updates = {
+            name: req.body.name,
+            email: req.body.email
+        };
+        const user = await User.findOneAndUpdate(
+            { _id: req.user._id },
+            { $set: updates },
+            { new: true, runValidators: true, context: 'query'}
+        );
+        req.flash('success', 'Your account has been updated!');
+        res.redirect('back');
+    }
 };
 
 exports.changePassword = (req, res) => {

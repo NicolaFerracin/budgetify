@@ -15,7 +15,7 @@ passport.use(new FacebookStrategy({
   function (token, refreshToken, profile, done) {
     process.nextTick(function () {
       User.findOne(
-        { $or: [{ 'facebook.id': profile.id }, { 'email': profile.emails[0].value }] },
+        { 'facebook.id': profile.id },
         function (err, user) {
           if (err) {
             return done(err);
@@ -35,7 +35,7 @@ passport.use(new FacebookStrategy({
               }
             }
             newUser.name = name;
-            newUser.email = profile.emails[0].value;
+            newUser.facebook.email = profile.emails[0].value;
             newUser.save(function (err) {
               if (err) {
                 throw err;
@@ -56,7 +56,7 @@ passport.use(new GoogleStrategy({
   function (token, refreshToken, profile, done) {
     process.nextTick(function () {
       User.findOne(
-        { $or: [{ 'google.id': profile.id }, { 'email': profile.emails[0].value }] },
+        { 'google.id': profile.id },
         function (err, user) {
           if (err) {
             return done(err);
@@ -68,7 +68,7 @@ passport.use(new GoogleStrategy({
             newUser.google.id = profile.id;
             newUser.google.token = token;
             newUser.name = profile.displayName;
-            newUser.email = profile.emails[0].value;
+            newUser.google.email = profile.emails[0].value;
             newUser.save(function (err) {
               if (err) {
                 throw err;
