@@ -1,0 +1,13 @@
+extends email-layout
+
+block content
+  h1 
+    strong B
+    | udgetify
+  h2 Account Activation
+  p Hello and welcome to Budgetify!
+  p To activate your account, please click on the following button within the next 24 hours.
+  +button(activateUrl, 'Activate my account →')
+  p If you can't click the above button please visit #{activateUrl}
+  br
+  p If you didn't create an account on Budgetify.me, please ignore this email. As long as you don't activate the account you will not receive any email from us.

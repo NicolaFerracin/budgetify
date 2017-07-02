@@ -28,6 +28,11 @@ router.post('/register',
     authController.login
 );
 
+// Activation
+router.get('/activate/:token', 
+    catchErrors(userController.activateAccount)
+);
+
 // Login
 router.get('/login', userController.loginForm);
 router.post('/login', authController.login);

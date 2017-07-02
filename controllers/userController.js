@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const crypto = require('crypto');
 const promisify = require('es6-promisify');
+const mail = require('../handlers/mail');
 
 exports.loginForm = (req, res) => {
     res.render('login', { title: 'Login' });
@@ -34,14 +36,42 @@ exports.validateRegister = (req, res, next) => {
 };
 
 exports.register = async (req, res, next) => {
-    const user = new User({ email: req.body.email, name: req.body.name });
+    const user = new User({ 
+        email: req.body.email, 
+        name: req.body.name, 
+        activateAccountToken: crypto.randomBytes(20).toString('hex')
+    });
     const register = promisify(User.register, User);
     await register(user, req.body.password);
+    const activateUrl = `https://${req.headers.host}/activate/${user.activateAccountToken}`;
+    await mail.send({
+        user,
+        subject: 'Account Activation',
+        activateUrl,
+        filename: 'account-activation'
+    });
+    req.flash('success', `Welcome to Budgetify! You have been emailed an activation link. Please check your inbox and activate your account before the link expires in the next 24 hours.`);
     next();
 };
 
+exports.activateAccount = async (req, res) => {
+    const user = await User.findOne({
+        activateAccountToken: req.params.token
+    });
+    if (!user) {
+        req.flash('error', 'Invalid activation link.');
+        return res.redirect('/login');
+    }
+    user.isActive = true;
+    user.activateAccountToken = undefined;
+    const updatedUser = await user.save();
+    await req.login(updatedUser);
+    req.flash('success', 'Account activated with success!');
+    res.redirect('/login');
+};
+
 exports.account = (req, res) => {
-    if (req.user.google || req.user.facebook) {
+    if (req.user.google.email || req.user.facebook.email) {
         res.redirect('back');
     } else {
         res.render('account', { title: 'Edit your account' });
@@ -49,7 +79,7 @@ exports.account = (req, res) => {
 };
 
 exports.updateAccount = async (req, res) => {
-    if (req.user.google || req.user.facebook) {
+    if (req.user.google.email || req.user.facebook.email) {
         req.flash('error', 'It seems you are logged in with either Facebook or Google, therefore you cannot update your email and/or password.');
         res.redirect('/dashboard');
     } else {

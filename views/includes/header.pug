@@ -21,7 +21,7 @@ header.main-header
         div.navbar-custom-menu
             ul.nav.navbar-nav
                 if user
-                    if !user.google && !user.facebook
+                    if !user.google.email && !user.facebook.email
                         li
                             a(href="/account") Account
                     li

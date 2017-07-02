@@ -8,11 +8,13 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const userSchema = new mongoose.Schema({
     facebook: {
         id: String,
-        token: String
+        token: String,
+        email: String
     },
     google: {
         id: String,
-        token: String
+        token: String,
+        email: String
     },
     email: {
         type: String,
@@ -81,6 +83,11 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+    activateAccountToken: String,
+    isActive: {
+        type: Boolean,
+        default: false
+    }
 }, 
 {
     toJson: { virtuals: true },
