@@ -50,8 +50,9 @@ exports.register = async (req, res, next) => {
         activateUrl,
         filename: 'account-activation'
     });
+    await req.login(user);
     req.flash('success', `Welcome to Budgetify! You have been emailed an activation link. Please check your inbox and activate your account.`);
-    next();
+    res.redirect('/dashboard');
 };
 
 exports.activateAccount = async (req, res) => {
