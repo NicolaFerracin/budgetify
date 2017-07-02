@@ -29,9 +29,8 @@ router.post('/register',
 );
 
 // Activation
-router.get('/activate/:token', 
-    catchErrors(userController.activateAccount)
-);
+router.get('/activate/:token', catchErrors(userController.activateAccount));
+router.post('/activate/resend', catchErrors(userController.resendActivation));
 
 // Login
 router.get('/login', userController.loginForm);

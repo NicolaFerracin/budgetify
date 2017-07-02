@@ -70,6 +70,32 @@ exports.activateAccount = async (req, res) => {
     res.redirect('/login');
 };
 
+exports.resendActivation = async (req, res) => {
+    const user = await User.findOne({
+        email: req.user.email,
+        _id: req.user._id
+    });
+    if (!user) {
+        req.flash('error', 'We experienced a problem while checking your account. Please try to login again.');
+        return res.redirect('/logout');
+    }
+    if (user.isActive) {
+        req.flash('info', 'This account is already active.');
+        return res.redirect('back');
+    }
+    user.activateAccountToken = crypto.randomBytes(20).toString('hex');
+    const activateUrl = `https://${req.headers.host}/activate/${user.activateAccountToken}`;
+    await mail.send({
+        user,
+        subject: 'Account Activation',
+        activateUrl,
+        filename: 'account-activation'
+    });
+    await user.save();    
+    req.flash('success', `Your new activation link has been sent with success.`);
+    res.redirect('back');
+};
+
 exports.account = (req, res) => {
     if (req.user.google.email || req.user.facebook.email) {
         res.redirect('back');
