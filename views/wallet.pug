@@ -14,9 +14,9 @@ block content
         - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12
-                h2.text-center Total: #{total} #{currencySymbol}
+                h2.text-center Balance: #{total} #{currencySymbol}
         .row
-            .col-md-3
+            .col-md-2
                 if !h.isEmpty(calendar)
                     .box.box-widget
                         .box.box-success.box-solid
@@ -25,22 +25,24 @@ block content
                                 .box-tools.pull-right
                                     button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
                                         i.fa.fa-minus
-                            .box-body(id="transactionCalendar")
+                            .box-body.t-calendar.text-center
                                 ul
                                     for year in calendar
-                                        li #{year.year}
+                                        li.t-calendar-year #{year.year}
                                             ul
                                                 for month in year.months
-                                                    li 
-                                                        a(href=`/wallet/${wallet._id}?y=${year.year}&m=${month.month}`) #{h.months[month.month - 1].substring(0, 3)}
+                                                    li.t-calendar-month 
+                                                        a(href=`/wallet/${wallet._id}?y=${year.year}&m=${month.month}`) #{h.months[month.month - 1]}&nbsp;
+                                                            i.fa.fa-angle-double-right
 
-            .col-md-6
+            .col-md-6.col-md-offset-1
                 if h.isEmpty(transactions)
-                    h4.text-center No transaction found for #{h.months[query.month - 1].substring(0, 3)} #{query.year}
+                    h4.text-center No transaction found for #{h.months[query.month - 1]} #{query.year}
                 else
                     - const month = transactions[0]
                     .month
-                        h4.text-center #{h.months[month.month - 1].substring(0, 3)}: #{month.amountMonth} #{currencySymbol}
+                        h4.text-center #{h.months[month.month - 1]} #{month.year}
+                        h4.text-center #{month.amountMonth} #{currencySymbol}
                         for day in month.days
                             +transactionDay(day)
                             

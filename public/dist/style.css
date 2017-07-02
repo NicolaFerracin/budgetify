@@ -8252,4 +8252,20 @@ form textarea {
   .box-transactions-day .t-amount.t-outcome {
     color: #E50714; }
 
+.t-calendar ul {
+  padding: 0; }
+
+.t-calendar-year {
+  font-weight: bold;
+  list-style: none;
+  margin-bottom: 20px;
+  font-size: 20px; }
+
+.t-calendar-month {
+  list-style: none;
+  font-weight: initial;
+  font-size: initial; }
+  .t-calendar-month a {
+    color: inherit; }
+
 /*# sourceMappingURL=style.css.map*/

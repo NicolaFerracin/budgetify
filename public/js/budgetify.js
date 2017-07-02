@@ -8,7 +8,6 @@ import initForm from './modules/categories';
 import autocomplete from './modules/autocomplete';
 import editTransactionSetUp from './modules/transactions';
 import initWallet from './modules/wallet';
-import calendarSetup from './modules/transactionWidget';
 import setupSubmitInterceptor from './modules/submitInterceptor';
 
 initForm();
@@ -19,5 +18,4 @@ autocomplete(
 );
 editTransactionSetUp();
 initWallet();
-calendarSetup();
 setupSubmitInterceptor();

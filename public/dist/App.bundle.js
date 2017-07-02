@@ -11460,39 +11460,7 @@ function formSubmitInterceptor() {
 exports.default = setupSubmitInterceptor;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-function calendarSetup() {
-    if (!document.getElementById('transactionCalendar')) {
-        return;
-    }
-    var cal = document.getElementById('transactionCalendar');
-    var transactions = document.querySelectorAll('.month');
-    cal.querySelectorAll('[data-widget="transaction"]').forEach(function (el) {
-        el.addEventListener('click', function () {
-            var month = this.dataset.month;
-            var year = this.dataset.year;
-            transactions.forEach(function (t) {
-                if (t.dataset.year === year && t.dataset.month === month) {
-                    t.classList.remove('hidden');
-                } else {
-                    t.classList.add('hidden');
-                }
-            });
-        });
-    });
-}
-
-exports.default = calendarSetup;
-
-/***/ }),
+/* 14 */,
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12668,10 +12636,6 @@ var _wallet = __webpack_require__(16);
 
 var _wallet2 = _interopRequireDefault(_wallet);
 
-var _transactionWidget = __webpack_require__(14);
-
-var _transactionWidget2 = _interopRequireDefault(_transactionWidget);
-
 var _submitInterceptor = __webpack_require__(13);
 
 var _submitInterceptor2 = _interopRequireDefault(_submitInterceptor);
@@ -12686,7 +12650,6 @@ window.$ = _jquery2.default;
 (0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
 (0, _transactions2.default)();
 (0, _wallet2.default)();
-(0, _transactionWidget2.default)();
 (0, _submitInterceptor2.default)();
 
 /***/ }),

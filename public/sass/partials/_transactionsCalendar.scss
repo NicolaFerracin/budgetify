@@ -1,0 +1,20 @@
+.t-calendar {
+    ul {
+        padding: 0;
+    }
+    &-year {
+        font-weight: bold;
+        list-style: none;
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+    
+    &-month {
+        list-style: none;  
+        font-weight: initial;  
+        font-size: initial;    
+        a {
+            color: inherit;
+        }
+    }
+}

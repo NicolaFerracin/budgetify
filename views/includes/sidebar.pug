@@ -8,6 +8,13 @@ aside.main-sidebar
                     span Dashboard
                     span.pull-right-container
                         i.pull-right.fa.fa-chevron-right
+            li.header ACTIONS
+            li(class=currentPath === '/wallet' ? 'active' : '')
+                a(href="/wallet")
+                    i.fa.fa-money 
+                    span Add Wallet
+                    span.pull-right-container
+                        i.pull-right.fa.fa-plus-square
             if !h.isEmpty(user.wallets)
                 li.header MY WALLETS
                 for wallet in user.wallets
@@ -17,10 +24,3 @@ aside.main-sidebar
                             span #{wallet.name}
                             span.pull-right-container
                                 i.pull-right.fa.fa-chevron-right
-            li.header ACTIONS
-            li(class=currentPath === '/wallet' ? 'active' : '')
-                a(href="/wallet")
-                    i.fa.fa-money 
-                    span Add Wallet
-                    span.pull-right-container
-                        i.pull-right.fa.fa-plus-square
