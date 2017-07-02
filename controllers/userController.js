@@ -82,6 +82,9 @@ exports.updateAccount = async (req, res) => {
     if (req.user.google.email || req.user.facebook.email) {
         req.flash('error', 'It seems you are logged in with either Facebook or Google, therefore you cannot update your email and/or password.');
         res.redirect('/dashboard');
+    } else if (!req.user.isActive) {
+        req.flash('error', 'This account has not been activated yet, therefore you cannot update it. Please check your email or create a new activation link under \'Account\'.');
+        res.redirect('/account');
     } else {
         const updates = {
             name: req.body.name,

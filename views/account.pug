@@ -4,30 +4,35 @@ block content
     .login-box
         .login-box-body
             p.login-box-msg Update Account
-            form(method="POST" action="/account/updateAccount")
-                .form-group.has-feedback
-                    input.form-control(type="text" name="name" value=user.name)
-                    span.glyphicon.glyphicon-user.form-control-feedback
-                .form-group.has-feedback
-                    input.form-control(type="email" name="email" value=user.email)
-                    span.glyphicon.glyphicon-envelope.form-control-feedback
-                .row
-                    .col-xs-4.col-xs-offset-8
-                        button.btn.btn-primary.btn-block.btn-flat(type="submit") Update
+            if !user.isActive
+                p This account has not been activated yet.
+                p Please check your email or click the button below to receive a new activation link.
+                a.btn.btn-primary.btn-block.btn-flat(type="submit" href="#") Send new activation link
+            else
+                form(method="POST" action="/account/updateAccount")
+                    .form-group.has-feedback
+                        input.form-control(type="text" name="name" value=user.name)
+                        span.glyphicon.glyphicon-user.form-control-feedback
+                    .form-group.has-feedback
+                        input.form-control(type="email" name="email" value=user.email)
+                        span.glyphicon.glyphicon-envelope.form-control-feedback
+                    .row
+                        .col-xs-4.col-xs-offset-8
+                            button.btn.btn-primary.btn-block.btn-flat(type="submit") Update
 
-            hr
+                hr
 
-            p.login-box-msg Change password
-            form(method="POST" action="/account/changePassword")
-                .form-group.has-feedback
-                    input.form-control(type="password" name="old-password" placeholder="Insert current password")
-                    span.glyphicon.glyphicon-lock.form-control-feedback
-                .form-group.has-feedback
-                    input.form-control(type="password" name="password" placeholder="Insert new password")
-                    span.glyphicon.glyphicon-lock.form-control-feedback
-                .form-group.has-feedback
-                    input.form-control(type="password" name="password-confirm" placeholder="Confirm new password")
-                    span.glyphicon.glyphicon-log-in.form-control-feedback
-                .row
-                    .col-xs-4.col-xs-offset-8
-                        button.btn.btn-primary.btn-block.btn-flat(type="submit") Change
+                p.login-box-msg Change password
+                form(method="POST" action="/account/changePassword")
+                    .form-group.has-feedback
+                        input.form-control(type="password" name="old-password" placeholder="Insert current password")
+                        span.glyphicon.glyphicon-lock.form-control-feedback
+                    .form-group.has-feedback
+                        input.form-control(type="password" name="password" placeholder="Insert new password")
+                        span.glyphicon.glyphicon-lock.form-control-feedback
+                    .form-group.has-feedback
+                        input.form-control(type="password" name="password-confirm" placeholder="Confirm new password")
+                        span.glyphicon.glyphicon-log-in.form-control-feedback
+                    .row
+                        .col-xs-4.col-xs-offset-8
+                            button.btn.btn-primary.btn-block.btn-flat(type="submit") Change
