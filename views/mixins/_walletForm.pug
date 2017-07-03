@@ -27,7 +27,7 @@ mixin walletForm(wallet = {})
                             for c, i in currencies
                                 option(value=i)= `${i} ${c.label} - ${c.symbol}` 
                 .form-group
-                    input(type="checkbox" name="shouldCount" checked) 
+                    input(type="checkbox" name="shouldCount" checked=!h.isEmpty(wallet) ? wallet.shouldCount : true) 
                     label(for=shouldCount) Consider this wallet when calculating totals and budgets?
             .box-footer
                 if !h.isEmpty(wallet)
