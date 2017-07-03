@@ -92,7 +92,7 @@ exports.resendActivation = async (req, res) => {
         activateUrl,
         filename: 'account-activation'
     });
-    await user.save();    
+    await user.save();
     req.flash('success', `Your new activation link has been sent with success.`);
     res.redirect('back');
 };
@@ -113,16 +113,32 @@ exports.updateAccount = async (req, res) => {
         req.flash('error', 'This account has not been activated yet, therefore you cannot update it. Please check your email or create a new activation link under \'Account\'.');
         res.redirect('/account');
     } else {
+        const user = await User.findOne(
+            { _id: req.user._id }
+        );
         const updates = {
             name: req.body.name,
             email: req.body.email
         };
-        const user = await User.findOneAndUpdate(
-            { _id: req.user._id },
+        console.log(user)
+        if (updates.email != user.email) {
+            updates.activateAccountToken = crypto.randomBytes(20).toString('hex');
+            updates.isActive = false;
+            const activateUrl = `https://${req.headers.host}/activate/${updates.activateAccountToken}`;
+            await mail.send({
+                user,
+                subject: 'Account Activation',
+                activateUrl,
+                filename: 'account-activation'
+            });
+            req.flash('success', 'Your account has been updated! You will find a new activation link in your email.');
+        } else {
+            req.flash('success', 'Your account has been updated!');
+        }
+        await user.update(
             { $set: updates },
             { new: true, runValidators: true, context: 'query'}
         );
-        req.flash('success', 'Your account has been updated!');
         res.redirect('back');
     }
 };
