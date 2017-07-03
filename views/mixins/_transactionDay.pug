@@ -25,10 +25,16 @@ mixin transactionDay(day)
                         else
                             i.fa.fa-clock-o 
                             span &nbsp;#{time}
-                    div
-                        if transaction.location['address']
+                            
+                    if transaction.location['address']
+                        div
                             small.text-muted 
                                 i.fa.fa-map-marker
                                 span &nbsp;#{transaction.location['address']}
+                    if !transaction.shouldCount
+                        div
+                            small.text-muted
+                                i.fa.fa-close 
+                                span &nbsp;Not included in total calculations
                     if index < day.transactions.length - 1
                         hr
