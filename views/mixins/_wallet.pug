@@ -2,8 +2,14 @@ mixin wallet(wallet)
     if wallet
         a.wallet(href=`/wallet/${wallet._id}`)
             .wallet-content
-                h3.wallet-name #{wallet.name}
-                    small.wallet-description #{wallet.description ? ' - ' + wallet.description : ''}
+                .wallet-content-header
+                    h3.wallet-name #{wallet.name}
+                        small.wallet-description #{wallet.description ? ' - ' + wallet.description : ''}
+                    if !wallet.shouldCount
+                        div
+                            small.text-muted
+                                i.fa.fa-close 
+                                span &nbsp;Not included in total calculations
                 - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
                 - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
                 if !wallet.shouldCount
