@@ -5,6 +5,9 @@ const promisify = require('es6-promisify');
 const mail = require('../handlers/mail');
 
 exports.loginForm = (req, res) => {
+    if (req.isAuthenticated()){
+        return res.redirect('dashboard');
+    }
     res.render('login', { title: 'Login' });
 };
 
@@ -120,7 +123,6 @@ exports.updateAccount = async (req, res) => {
             name: req.body.name,
             email: req.body.email
         };
-        console.log(user)
         if (updates.email != user.email) {
             updates.activateAccountToken = crypto.randomBytes(20).toString('hex');
             updates.isActive = false;
