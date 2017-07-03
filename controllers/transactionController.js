@@ -55,7 +55,7 @@ exports.getTransactionsCalendar = async (userId, walletId) => {
                 months: {
                     $push: {
                         month: "$_id.month"
-                    } 
+                    }
                 }
             }
         },
@@ -85,12 +85,16 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
                     month: { $month: '$timestamp' },
                     day: { $dayOfMonth: '$timestamp' }
                 },
-                date : { $first : '$timestamp' },
+                date: { $first: '$timestamp' },
                 transactions: { $push: '$$ROOT' },
-                amountDay: { $sum: '$amount' }
+                amountDay: {
+                    '$sum': {
+                        $cond : { if: { $eq: ['$shouldCount', true]}, then: '$amount', else: 0}
+                    }
+                }
             }
         },
-        { $sort: { '_id.day': -1 }},
+        { $sort: { '_id.day': -1 } },
         {
             $group: {
                 _id: {
@@ -121,7 +125,7 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
                 year: year,
                 month: month
             }
-        },  
+        },
     ]);
     return transactions;
 };
