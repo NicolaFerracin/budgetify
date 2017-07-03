@@ -10,7 +10,9 @@ mixin transactionDay(day)
             for transaction, index in transactions
                 - const time = h.moment(transaction.timestamp).format('hh:mm') 
                 div.t-body(id=transaction._id)
-                    if transaction.amount >= 0
+                    if !transaction.shouldCount
+                        span.t-amount.text-muted #{transaction.amount} #{currencySymbol}
+                    else if transaction.amount >= 0
                         span.t-amount.t-income #{transaction.amount} #{currencySymbol}
                     else
                         span.t-amount.t-outcome #{transaction.amount} #{currencySymbol}
