@@ -5,7 +5,7 @@ function initWallet() {
     if (deleteWallet) {
         deleteWallet.addEventListener('click', function() {
             const walletId = deleteWallet.parentElement.parentElement.dataset.wallet;
-             axios
+            axios
                 .delete(`/api/v1/wallet/${walletId}`)
                 .then(res => {
                     window.location = '/dashboard';

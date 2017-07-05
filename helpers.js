@@ -65,4 +65,4 @@ exports.getIconForFlash = (type) => {
 
 exports.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-exports.orderByHour = (transactions) => transactions.sort((x, y) => x.timestamp < y.timestamp)
+exports.orderByHour = (transactions) => transactions.sort((x, y) => x.timestamp < y.timestamp);

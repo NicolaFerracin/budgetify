@@ -15,6 +15,12 @@ aside.main-sidebar
                     span Add Wallet
                     span.pull-right-container
                         i.pull-right.fa.fa-plus-square
+            li(class=currentPath === '/budget' ? 'active' : '')
+                a(href="/budget")
+                    i.fa.fa-bar-chart 
+                    span Create Budget
+                    span.pull-right-container
+                        i.pull-right.fa.fa-plus-square
             if !h.isEmpty(user.wallets)
                 li.header MY WALLETS
                 for wallet in user.wallets
@@ -22,5 +28,14 @@ aside.main-sidebar
                         a(href=`/wallet/${wallet._id}`)
                             i.fa.fa-dollar 
                             span #{wallet.name}
+                            span.pull-right-container
+                                i.pull-right.fa.fa-chevron-right
+            if !h.isEmpty(user.budgets)
+                li.header MY BUDGETS
+                for budget in user.budgets
+                    li(class=currentPath === `/budget/${budget._id}` ? 'active' : '')
+                        a(href=`/budget/${budget._id}/edit`)
+                            i.fa.fa-line-chart 
+                            span #{budget.name}
                             span.pull-right-container
                                 i.pull-right.fa.fa-chevron-right

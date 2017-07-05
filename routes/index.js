@@ -5,6 +5,7 @@ const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const walletController = require('../controllers/walletController');
 const transactionController = require('../controllers/transactionController');
+const budgetController = require('../controllers/budgetController');
 const { catchErrors } = require('../handlers/errors');
 
 router.get('/', (req, res) => {
@@ -14,7 +15,6 @@ router.get('/', (req, res) => {
         res.redirect('/login');
     }
 });
-
 router.get('/dashboard',
     authController.isLoggedIn,
     catchErrors(walletController.dashboard)
@@ -87,6 +87,18 @@ router.post('/categories',
     catchErrors(userController.editCategories)
 );
 
+// Budgets
+router.get('/budget', budgetController.budgetForm);
+router.post('/budget',
+    authController.isLoggedIn,
+    catchErrors(budgetController.addBudget)
+);
+router.post('/budget/:id',
+    authController.isLoggedIn,
+    catchErrors(budgetController.updateBudget)
+);
+router.get('/budget/:id/edit', catchErrors(budgetController.editBudget));
+
 router.get('/favicon.ico', (req, res) => res.sendStatus(204));
 
 // API
@@ -94,5 +106,6 @@ router.get('/api/v1/transaction/:id', catchErrors(transactionController.getTrans
 router.post('/api/v1/transaction/:id', catchErrors(transactionController.editTransaction));
 router.delete('/api/v1/transaction/:id', catchErrors(transactionController.deleteTransaction));
 router.delete('/api/v1/wallet/:id', catchErrors(walletController.deleteWallet));
+router.delete('/api/v1/budget/:id', catchErrors(budgetController.deleteBudget));
 
 module.exports = router;

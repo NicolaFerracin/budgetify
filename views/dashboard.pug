@@ -7,29 +7,41 @@ block content
         h1 Dashboard
 
     section.content
-        .box.box-success.box-solid
-            .box-header.with-border
-                h3.box-title My Wallets
-                .box-tools.pull-right
-                    button.btn.btn-box-tool(type="button" data-widget="collapse")
-                        i.fa.fa-minus
-            .box-body  
-                if wallets && wallets.length
-                    each wallet in wallets
-                        +wallet(wallet)
-                    - const total = h.getTotalByCurrency(wallets)
-                    div
-                        h3.text-right Total: 
-                            if h.isEmpty(total)
-                                | -
-                            else
-                                for c, index in total
-                                    - const currencySymbol = c.currency ? h.currencies[c.currency].symbol : ''
-                                    span #{c.amount}#{currencySymbol}
-                                    if index < total.length -1
-                                        |  | 
-                    a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet
-                else
-                    .text-center
-                        h3 You don't have any wallet. Create one!
+        .col-sm-6
+            .box.box-success.box-solid
+                .box-header.with-border
+                    h3.box-title My Wallets
+                    .box-tools.pull-right
+                        button.btn.btn-box-tool(type="button" data-widget="collapse")
+                            i.fa.fa-minus
+                .box-body  
+                    if !h.isEmpty(wallets)
+                        each wallet in wallets
+                            +wallet(wallet)
+                        - const total = h.getTotalByCurrency(wallets)
+                        div
+                            h3.text-right Total: 
+                                if h.isEmpty(total)
+                                    | -
+                                else
+                                    for c, index in total
+                                        - const currencySymbol = c.currency ? h.currencies[c.currency].symbol : ''
+                                        span #{c.amount}#{currencySymbol}
+                                        if index < total.length -1
+                                            |  | 
                         a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet
+                    else
+                        .text-center
+                            h3 You don't have any wallet. Create one!
+                            a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet
+        .col-sm-6
+            .box.box-success.box-solid
+                .box-header.with-border
+                    h3.box-title My Budgets
+                    .box-tools.pull-right
+                        button.btn.btn-box-tool(type="button" data-widget="collapse")
+                            i.fa.fa-minus
+                .box-body  
+                    if !h.isEmpty(budgets)
+                        each budget in budgets 
+                            p #{budget.name}

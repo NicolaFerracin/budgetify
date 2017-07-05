@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Wallet = mongoose.model('Wallet');
+const Budget = mongoose.model('Budget');
 const Transaction = mongoose.model('Transaction');
 const promisify = require('es6-promisify');
 const authController = require('./authController');
@@ -8,7 +9,8 @@ const { catchErrors } = require('../handlers/errors');
 
 exports.dashboard = async (req, res) => {
     const wallets = await Wallet.find({ owner: req.user._id });
-    res.render('dashboard', { title: 'Dashboard', wallets });
+    const budgets = await Budget.find({ owner: req.user._id });
+    res.render('dashboard', { title: 'Dashboard', wallets, budgets });
 };
 
 exports.walletForm = (req, res) => {

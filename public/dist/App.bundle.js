@@ -13012,6 +13012,10 @@ var _wallet = __webpack_require__(15);
 
 var _wallet2 = _interopRequireDefault(_wallet);
 
+var _budget = __webpack_require__(41);
+
+var _budget2 = _interopRequireDefault(_budget);
+
 var _submitInterceptor = __webpack_require__(13);
 
 var _submitInterceptor2 = _interopRequireDefault(_submitInterceptor);
@@ -13026,6 +13030,7 @@ window.$ = _jquery2.default;
 (0, _autocomplete2.default)(document.getElementById('address'), document.getElementById('lat'), document.getElementById('lng'));
 (0, _transactions2.default)();
 (0, _wallet2.default)();
+(0, _budget2.default)();
 (0, _submitInterceptor2.default)();
 
 /***/ }),
@@ -13109,6 +13114,37 @@ function toComment(sourceMap) {
 
 	return '/*# ' + data + ' */';
 }
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _axios = __webpack_require__(3);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function initBudget() {
+    var deleteBudget = document.getElementById('deleteBudget');
+    if (deleteBudget) {
+        deleteBudget.addEventListener('click', function () {
+            var budgetId = deleteBudget.parentElement.parentElement.dataset.budget;
+            _axios2.default.delete('/api/v1/budget/' + budgetId).then(function (res) {
+                window.location = '/dashboard';
+            });
+        });
+    }
+}
+
+exports.default = initBudget;
 
 /***/ })
 /******/ ]);

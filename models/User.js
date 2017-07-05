@@ -99,9 +99,15 @@ userSchema.virtual('wallets', {
     localField: '_id',
     foreignField: 'owner'
 });
+userSchema.virtual('budgets', {
+    ref: 'Budget',
+    localField: '_id',
+    foreignField: 'owner'
+});
 
 function autopopulate(next) {
     this.populate('wallets');
+    this.populate('budgets');
     next();
 };
 
