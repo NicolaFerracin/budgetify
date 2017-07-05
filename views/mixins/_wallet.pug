@@ -5,14 +5,14 @@ mixin wallet(wallet)
                 .wallet-content-header
                     h3.wallet-name #{wallet.name}
                         small.wallet-description #{wallet.description ? ' - ' + wallet.description : ''}
-                    if !wallet.shouldCount
+                    if wallet.excludeFromTotal
                         div
                             small.text-muted
                                 i.fa.fa-close 
                                 span &nbsp;Not included in total calculations
-                - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
+                - const total = wallet.transactions.filter(t => !t.excludeFromTotal).reduce((res, el) => res += el.amount, 0);
                 - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
-                if !wallet.shouldCount
+                if wallet.excludeFromTotal
                     h3.wallet-total.text-muted #{total} #{currencySymbol}
                 else
                     if total >= 0

@@ -89,7 +89,7 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
                 transactions: { $push: '$$ROOT' },
                 amountDay: {
                     '$sum': {
-                        $cond : { if: { $eq: ['$shouldCount', true]}, then: '$amount', else: 0}
+                        $cond : { if: { $eq: ['$excludeFromTotal', true]}, then: 0, else: '$amount'}
                     }
                 }
             }
@@ -139,7 +139,7 @@ function prepareTransactionForDb(raw, userId) {
         amount: Number(raw.amount).toFixed(2),
         category: raw.category,
         description: raw.description,
-        shouldCount: raw.shouldCount,
+        excludeFromTotal: raw.excludeFromTotal,
         timestamp: date,
         location: raw.location,
         wallet: raw.wallet,

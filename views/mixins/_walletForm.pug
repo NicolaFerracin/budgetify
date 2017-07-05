@@ -27,8 +27,8 @@ mixin walletForm(wallet = {})
                             for c, i in currencies
                                 option(value=i)= `${i} ${c.label} - ${c.symbol}` 
                 .form-group
-                    input(type="checkbox" name="shouldCount" checked=!h.isEmpty(wallet) ? wallet.shouldCount : true) 
-                    label(for=shouldCount) Consider this wallet when calculating totals and budgets?
+                    input(type="checkbox" name="excludeFromTotal" checked=!h.isEmpty(wallet) ? wallet.excludeFromTotal : false) 
+                    label(for=excludeFromTotal) Exclude this wallet from totals?
             .box-footer
                 if !h.isEmpty(wallet)
                     a.btn.btn-danger.btn-flat(type="button" data-action="delete" id="deleteWallet") Delete 

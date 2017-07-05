@@ -11530,7 +11530,7 @@ function onTransactionClick() {
         newState.category = rawData.category;
         newState.description = rawData.description;
         newState.wallet = rawData.wallet;
-        newState.shouldCount = rawData.shouldCount;
+        newState.excludeFromTotal = rawData.excludeFromTotal;
         var dateRaw = new Date(rawData.timestamp);
         var year = dateRaw.getFullYear();
         var month = dateRaw.getMonth() + 1 < 10 ? '0' + (dateRaw.getMonth() + 1) : dateRaw.getMonth() + 1;
@@ -11568,7 +11568,7 @@ function getCurrentState(form) {
         address: form.find('input[name="location[address]"]').val(),
         lat: form.find('input[name="location[coordinates][0]"]').val(),
         lng: form.find('input[name="location[coordinates][1]"]').val(),
-        shouldCount: form.find('input[name="shouldCount"]').is(':checked'),
+        excludeFromTotal: form.find('input[name="excludeFromTotal"]').is(':checked'),
         action: form.attr('action'),
         button: form.find('button[type="submit"]').text(),
         enableDelete: !form.find('#deleteTransaction').hasClass('hidden')
@@ -11589,8 +11589,7 @@ function setNewState(form, newState) {
     form.find('input[name="location[address]"]').val(newState.address);
     form.find('input[name="location[coordinates][0]"]').val(newState.lng);
     form.find('input[name="location[coordinates][1]"]').val(newState.lat);
-    form.find('input[name="shouldCount"]').prop("checked", newState.shouldCount);
-    form.find('input[name="shouldCount"]').prop("checked", newState.shouldCount);
+    form.find('input[name="excludeFromTotal"]').prop("checked", newState.excludeFromTotal);
     form.attr('action', newState.action);
     form.find('button[type="submit"]').text(newState.button);
     form.find('#deleteTransaction').toggleClass('hidden', !newState.enableDelete);

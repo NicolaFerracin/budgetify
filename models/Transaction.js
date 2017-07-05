@@ -14,7 +14,7 @@ const transactionSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    shouldCount: {
+    excludeFromTotal: {
         type: Boolean,
         default: false
     },

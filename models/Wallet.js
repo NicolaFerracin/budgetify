@@ -20,7 +20,7 @@ const walletSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    shouldCount: {
+    excludeFromTotal: {
         type: Boolean,
         default: false
     },

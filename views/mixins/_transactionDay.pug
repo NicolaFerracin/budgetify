@@ -10,7 +10,7 @@ mixin transactionDay(day)
             for transaction, index in transactions
                 - const time = h.moment(transaction.timestamp).format('hh:mm') 
                 div.t-body(id=transaction._id)
-                    if !transaction.shouldCount
+                    if transaction.excludeFromTotal
                         span.t-amount.text-muted #{transaction.amount} #{currencySymbol}
                     else if transaction.amount >= 0
                         span.t-amount.t-income #{transaction.amount} #{currencySymbol}
@@ -33,10 +33,10 @@ mixin transactionDay(day)
                             small.text-muted 
                                 i.fa.fa-map-marker
                                 span &nbsp;#{transaction.location['address']}
-                    if !transaction.shouldCount
+                    if transaction.excludeFromTotal
                         div
                             small.text-muted
                                 i.fa.fa-close 
-                                span &nbsp;Not included in total calculations
+                                span &nbsp;Not included in total calculations or budget extimations
                     if index < day.transactions.length - 1
                         hr

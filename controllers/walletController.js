@@ -29,7 +29,7 @@ exports.addWallet = async (req, res) => {
 };
 
 exports.updateWallet = async (req, res) => {
-    req.body.shouldCount = req.body.shouldCount;
+    req.body.excludeFromTotal = req.body.excludeFromTotal;
     const wallet = await Wallet.findOneAndUpdate({ _id: req.params.id}, req.body, {
         new: true,
         runValidators: true
