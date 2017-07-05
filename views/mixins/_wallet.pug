@@ -10,6 +10,11 @@ mixin wallet(wallet)
                             small.text-muted
                                 i.fa.fa-close 
                                 span &nbsp;Not included in total calculations
+                    if wallet.excludeFromBudget
+                        div
+                            small.text-muted
+                                i.fa.fa-close 
+                                span &nbsp;Not included in budgets
                 - const total = wallet.transactions.filter(t => !t.excludeFromTotal).reduce((res, el) => res += el.amount, 0);
                 - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
                 if wallet.excludeFromTotal

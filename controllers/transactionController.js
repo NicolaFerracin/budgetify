@@ -140,6 +140,7 @@ function prepareTransactionForDb(raw, userId) {
         category: raw.category,
         description: raw.description,
         excludeFromTotal: raw.excludeFromTotal,
+        excludeFromBudget: raw.excludeFromBudget,
         timestamp: date,
         location: raw.location,
         wallet: raw.wallet,

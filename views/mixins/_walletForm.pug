@@ -29,6 +29,9 @@ mixin walletForm(wallet = {})
                 .form-group
                     input(type="checkbox" name="excludeFromTotal" checked=!h.isEmpty(wallet) ? wallet.excludeFromTotal : false) 
                     label(for=excludeFromTotal) Exclude this wallet from totals?
+                .form-group
+                    input(type="checkbox" name="excludeFromBudget" checked=!h.isEmpty(wallet) ? wallet.excludeFromBudget : false) 
+                    label(for=excludeFromBudget) Exclude this wallet from budgets?
             .box-footer
                 if !h.isEmpty(wallet)
                     a.btn.btn-danger.btn-flat(type="button" data-action="delete" id="deleteWallet") Delete 

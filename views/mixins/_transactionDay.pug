@@ -37,6 +37,11 @@ mixin transactionDay(day)
                         div
                             small.text-muted
                                 i.fa.fa-close 
-                                span &nbsp;Not included in total calculations or budget extimations
+                                span &nbsp;Not included in total calculations
+                    if transaction.excludeFromBudget
+                        div
+                            small.text-muted
+                                i.fa.fa-close 
+                                span &nbsp;Not included in budgets
                     if index < day.transactions.length - 1
                         hr

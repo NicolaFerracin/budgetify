@@ -18,6 +18,10 @@ const transactionSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    excludeFromBudget: {
+        type: Boolean,
+        default: false
+    },
     timestamp: {
         type: Date,
         default: Date.now()

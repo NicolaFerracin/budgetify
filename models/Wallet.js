@@ -24,6 +24,10 @@ const walletSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    excludeFromBudget: {
+        type: Boolean,
+        default: false
+    },
     owner: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',

@@ -30,6 +30,7 @@ exports.addWallet = async (req, res) => {
 
 exports.updateWallet = async (req, res) => {
     req.body.excludeFromTotal = req.body.excludeFromTotal;
+    req.body.excludeFromBudget = req.body.excludeFromBudget;
     const wallet = await Wallet.findOneAndUpdate({ _id: req.params.id}, req.body, {
         new: true,
         runValidators: true

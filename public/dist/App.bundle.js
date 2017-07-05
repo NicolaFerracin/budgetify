@@ -11531,6 +11531,7 @@ function onTransactionClick() {
         newState.description = rawData.description;
         newState.wallet = rawData.wallet;
         newState.excludeFromTotal = rawData.excludeFromTotal;
+        newState.excludeFromBudget = rawData.excludeFromBudget;
         var dateRaw = new Date(rawData.timestamp);
         var year = dateRaw.getFullYear();
         var month = dateRaw.getMonth() + 1 < 10 ? '0' + (dateRaw.getMonth() + 1) : dateRaw.getMonth() + 1;
@@ -11569,6 +11570,7 @@ function getCurrentState(form) {
         lat: form.find('input[name="location[coordinates][0]"]').val(),
         lng: form.find('input[name="location[coordinates][1]"]').val(),
         excludeFromTotal: form.find('input[name="excludeFromTotal"]').is(':checked'),
+        excludeFromBudget: form.find('input[name="excludeFromBudget"]').is(':checked'),
         action: form.attr('action'),
         button: form.find('button[type="submit"]').text(),
         enableDelete: !form.find('#deleteTransaction').hasClass('hidden')
@@ -11590,6 +11592,7 @@ function setNewState(form, newState) {
     form.find('input[name="location[coordinates][0]"]').val(newState.lng);
     form.find('input[name="location[coordinates][1]"]').val(newState.lat);
     form.find('input[name="excludeFromTotal"]').prop("checked", newState.excludeFromTotal);
+    form.find('input[name="excludeFromBudget"]').prop("checked", newState.excludeFromBudget);
     form.attr('action', newState.action);
     form.find('button[type="submit"]').text(newState.button);
     form.find('#deleteTransaction').toggleClass('hidden', !newState.enableDelete);
