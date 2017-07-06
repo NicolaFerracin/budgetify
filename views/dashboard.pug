@@ -45,3 +45,7 @@ block content
                     if !h.isEmpty(budgets)
                         each budget in budgets 
                             p #{budget.name}
+                    else
+                        .text-center
+                            h3 You don't have any saving budget. Create one!
+                            a.btn.btn-primary.btn-flat(href="/budget") Create Budget

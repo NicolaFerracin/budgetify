@@ -12,7 +12,7 @@ mixin budgetForm(budget = {}, wallets = user.wallets)
                     textarea.form-control(type="text" rows="5" name="description" placeholder="Enter a description") #{budget.description}
                 .form-group
                     label(for="amount") Amount
-                    input.form-control(type="number" step=".01" name="amount" required placeholder="How much you want to save?" value=budget.amount)
+                    input.form-control(type="number" step=".01" name="amount" required placeholder="How much do you want to save?" value=budget.amount)
                 .form-group
                     label(for="wallets") Wallets
                     p
