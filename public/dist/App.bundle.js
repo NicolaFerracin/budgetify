@@ -11401,7 +11401,20 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var form = void 0;
+var quantityErrorMsg = void 0;
+var currencyErrorMsg = void 0;
+var budgetWallets = void 0;
+
 function initBudget() {
+    form = document.getElementById('budget-form');
+    quantityErrorMsg = document.getElementById('quantity-error');
+    currencyErrorMsg = document.getElementById('currency-error');
+    budgetWallets = document.querySelectorAll('input[name="wallets"]');
+    onDeletion();
+    onSubmit();
+}
+function onDeletion() {
     var deleteBudget = document.getElementById('deleteBudget');
     if (deleteBudget) {
         deleteBudget.addEventListener('click', function () {
@@ -11411,6 +11424,65 @@ function initBudget() {
             });
         });
     }
+}
+
+document.checkWallets = function () {
+    checkForErrors(budgetWallets);
+};
+
+function onSubmit() {
+    if (form) {
+        checkForErrors(budgetWallets);
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!checkForErrors(budgetWallets)) {
+                this.submit();
+                form.querySelector('[type="submit"').disabled = true;
+            }
+        });
+    }
+}
+
+function checkForErrors(wallets) {
+    var hasErrors = false;
+    if (!isAtLeastOnWalletSelected(wallets)) {
+        quantityErrorMsg.classList.remove('hidden');
+        hasErrors = true;
+    } else {
+        quantityErrorMsg.classList.add('hidden');
+        hasErrors = false;
+    }
+    if (haveWalletsDifferentCurrency(wallets)) {
+        currencyErrorMsg.classList.remove('hidden');
+        hasErrors = true;
+    } else {
+        currencyErrorMsg.classList.add('hidden');
+        hasErrors = hasErrors ? true : false;
+    }
+    return hasErrors;
+}
+
+function isAtLeastOnWalletSelected(wallets) {
+    for (var i = 0; i < wallets.length; i++) {
+        if (wallets[i].checked) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function haveWalletsDifferentCurrency(wallets) {
+    var selected = [];
+    for (var i = 0; i < wallets.length; i++) {
+        if (selected.length === 0) {
+            if (wallets[i].checked) {
+                selected.push(wallets[i].dataset.currency);
+            }
+        } else if (wallets[i].checked && selected.indexOf(wallets[i].dataset.currency) < 0) {
+            return true;
+        }
+    }
+    return false;
 }
 
 exports.default = initBudget;
@@ -11476,16 +11548,15 @@ function setupSubmitInterceptor() {
 
 function formSubmitInterceptor() {
     var forms = document.querySelectorAll('form');
-    if (!forms) {
-        return;
-    }
-    forms.forEach(function (f) {
-        f.addEventListener('submit', function () {
-            f.querySelectorAll('[type="submit"]').forEach(function (submitBtn) {
-                return submitBtn.disabled = true;
+    if (forms) {
+        forms.forEach(function (f) {
+            f.addEventListener('submit', function () {
+                f.querySelectorAll('[type="submit"]:not(.exclude)').forEach(function (submitBtn) {
+                    return submitBtn.disabled = true;
+                });
             });
         });
-    });
+    }
 }
 
 exports.default = setupSubmitInterceptor;

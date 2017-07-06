@@ -2,7 +2,7 @@ mixin budgetForm(budget = {}, wallets = user.wallets)
     .box.box-success
         .box-header.with-border
             h3.box-title Create Saving Budget
-        form(method="POST" action=`/budget/${budget._id || ''}` data-budget=budget._id)
+        form(id="budget-form" method="POST" action=`/budget/${budget._id || ''}` data-budget=budget._id)
             .box-body
                 .form-group
                     label(for="name") Name
@@ -15,22 +15,27 @@ mixin budgetForm(budget = {}, wallets = user.wallets)
                     input.form-control(type="number" step=".01" name="amount" required placeholder="How much do you want to save?" value=budget.amount)
                 .form-group
                     label(for="wallets") Wallets
-                    p
-                        small.text-muted *Make sure to select at least one wallet or the budget will be invalid.
-                    p
-                        small.text-muted *Selected wallets must share the same currency, as it is not be possible to calculate cross-currency budgets.
+                    div.has-error.hidden(id="quantity-error")
+                        p
+                            small.help-block
+                                | Please, make sure to select at least one wallet.
+                    div.has-error.hidden(id="currency-error")
+                        p
+                            small.help-block
+                                | Selected wallets must share the same currency, as it is not be possible to calculate cross-currency budgets.
                     if !h.isEmpty(budget)
                         - const budgetWalletIds = budget.wallets.reduce((res, w) => { res += `${w._id},`; return res }, '')
 
                     for wallet in wallets
-                        - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
-                        .checkbox
-                            label(for="wallets" data-wallet=wallet._id data-currency=currencySymbol)
-                                input(type="checkbox" value=wallet._id name="wallets" checked=budgetWalletIds && budgetWalletIds.indexOf(wallet._id) >= 0) 
-                                | #{wallet.name} - #{currencySymbol}
+                        if !wallet.excludeFromBudget
+                            - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
+                            .checkbox
+                                label(for="wallets")
+                                    input(type="checkbox" onclick="checkWallets();" value=wallet._id name="wallets" data-wallet=wallet._id data-currency=wallet.currency checked=((budgetWalletIds && budgetWalletIds.indexOf(wallet._id) >= 0) || true))
+                                    | #{wallet.name} - #{currencySymbol}
 
             .box-footer
                 if !h.isEmpty(budget)
                     a.btn.btn-danger.btn-flat(type="button" data-action="delete" id="deleteBudget") Delete 
                         span.fa.fa-trash-o
-                button.btn.btn-primary.btn-flat.pull-right(type="submit") Submit
+                button.btn.btn-primary.btn-flat.pull-right.exclude(type="submit") Submit
