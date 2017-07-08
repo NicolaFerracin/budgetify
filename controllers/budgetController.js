@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 const Budget = mongoose.model('Budget');
-// const promisify = require('es6-promisify');
 
 exports.budgetForm = (req, res) => {
     res.render('editBudget', { title: 'Create Budget' });
+};
+
+exports.budget = async (req, res) => {
+    const budget = await Budget
+        .findOne({ _id: req.params.id, owner: req.user._id });
+    res.render('budget', { title: budget.name, budget });
 };
 
 exports.addBudget = async (req, res) => {
@@ -18,6 +23,7 @@ exports.addBudget = async (req, res) => {
 };
 
 exports.updateBudget = async (req, res) => {
+    console.log(req.body)
     req.body.wallets = req.body.wallets;
     if (!req.body.wallets || req.body.wallets.length <= 0) {
         req.flash('error', 'Please, make sure to choose at least one Wallet.');

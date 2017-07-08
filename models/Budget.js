@@ -21,6 +21,14 @@ const budgetSchema = new mongoose.Schema({
             ref: 'Wallet',
         }]
     },
+    start: {
+        type: Date,
+        default: Date.now()
+    },
+    end: {
+        type: Date,
+        default: null
+    },
     created: {
         type: Date,
         default: Date.now()
