@@ -44,7 +44,8 @@ block content
                 .box-body  
                     if !h.isEmpty(budgets)
                         each budget in budgets 
-                            p #{budget.name}
+                            a.budget(href=`/budget/${budget._id}`)
+                                p #{budget.name}
                     else
                         .text-center
                             h3 You don't have any saving budget. Create one!
