@@ -48,6 +48,9 @@ const transactionSchema = new mongoose.Schema({
         ref: 'User',
         required: 'A transaction must be linked to a user'
     }
+}, {
+    toJson: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
 module.exports = mongoose.model('Transaction', transactionSchema);

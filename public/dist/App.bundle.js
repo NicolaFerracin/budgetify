@@ -11414,6 +11414,7 @@ function initBudget() {
     onDeletion();
     onSubmit();
 }
+
 function onDeletion() {
     var deleteBudget = document.getElementById('deleteBudget');
     if (deleteBudget) {

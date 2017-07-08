@@ -13,6 +13,7 @@ function initBudget() {
     onDeletion();
     onSubmit();
 }
+
 function onDeletion() {
     const deleteBudget = document.getElementById('deleteBudget');
     if (deleteBudget) {

@@ -30,10 +30,11 @@ const budgetSchema = new mongoose.Schema({
         ref: 'User',
         required: 'A budget must have an owner'
     }
-}, {
-        toJson: { virtuals: true },
-        toObject: { virtuals: true }
-    });
+}, 
+{
+    toJson: { virtuals: true },
+    toObject: { virtuals: true }
+});
 
 function autopopulate(next) {
     this.populate('wallets');
