@@ -4,11 +4,13 @@ let form;
 let quantityErrorMsg;
 let currencyErrorMsg;
 let budgetWallets;
+let dateErrorMsg;
 
 function initBudget() {
     form = document.getElementById('budget-form');
     quantityErrorMsg = document.getElementById('quantity-error');
     currencyErrorMsg = document.getElementById('currency-error');
+    dateErrorMsg = document.getElementById('date-error');
     budgetWallets = document.querySelectorAll('input[name="wallets"]');
     onDeletion();
     onSubmit();
@@ -47,12 +49,19 @@ function onSubmit() {
 
 function checkForErrors(wallets) {
     let hasErrors = false;
+    if (isEndDateBeforeStartDate()) {
+        dateErrorMsg.classList.remove('hidden');
+        hasErrors = true;
+    } else {
+        dateErrorMsg.classList.add('hidden');
+        hasErrors = hasErrors ? true : false;
+    }
     if (!isAtLeastOnWalletSelected(wallets)) {
         quantityErrorMsg.classList.remove('hidden');
         hasErrors = true;
     } else {
         quantityErrorMsg.classList.add('hidden');
-        hasErrors = false;
+        hasErrors = hasErrors ? true : false;
     }
     if (haveWalletsDifferentCurrency(wallets)) {
         currencyErrorMsg.classList.remove('hidden');
@@ -62,6 +71,14 @@ function checkForErrors(wallets) {
         hasErrors = hasErrors ? true : false;
     }
     return hasErrors;
+}
+
+function isEndDateBeforeStartDate() {
+    const start = new Date(form.querySelector('input[name="start"]').value);
+    const end = new Date(form.querySelector('input[name="end"]').value);
+    if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
+        return start.getTime() > end.getTime();
+    }
 }
 
 function isAtLeastOnWalletSelected(wallets) {
