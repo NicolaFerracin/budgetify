@@ -93,6 +93,7 @@ router.post('/budget',
     authController.isLoggedIn,
     catchErrors(budgetController.addBudget)
 );
+router.get('/budget/:id', catchErrors(budgetController.budget));
 router.post('/budget/:id',
     authController.isLoggedIn,
     catchErrors(budgetController.updateBudget)
