@@ -16,21 +16,20 @@ exports.addBudget = async (req, res) => {
         req.flash('error', 'Please, make sure to choose at least one Wallet.');
         return req.redirect('back');
     }
-    req.body.owner = req.user._id;
-    req.body.months = generateBudgetMonths(req.body);
-    const budget = await (new Budget(req.body)).save();
+    const budget = prepareBudgetForDb(req.body, req.user._id);
+    await (new Budget(budget)).save();
     req.flash('success', `<strong>${req.body.name}</strong> budget created with success!`);
     res.redirect('/dashboard');
 };
 
 exports.updateBudget = async (req, res) => {
-    console.log(req.body)
     req.body.wallets = req.body.wallets;
     if (!req.body.wallets || req.body.wallets.length <= 0) {
         req.flash('error', 'Please, make sure to choose at least one Wallet.');
         return res.redirect('back');
     }
-    const budget = await Budget.findOneAndUpdate({ _id: req.params.id}, req.body, {
+    const updatedBudget = prepareBudgetForDb(req.body, req.user._id);
+    const budget = await Budget.findOneAndUpdate({ _id: req.params.id}, updatedBudget, {
         new: true,
         runValidators: true
     }).exec();
@@ -82,4 +81,14 @@ function generateBudgetMonths(budget) {
         start.setMonth(start.getMonth() + 1);
     }
     return budget.months;
+}
+
+function prepareBudgetForDb(raw, userId) {
+    const budget = raw;
+    if (!budget.start || budget.start === '') {
+        budget.start = new Date();
+    }
+    budget.owner = userId;
+    budget.months = generateBudgetMonths(raw);
+    return budget;
 }
