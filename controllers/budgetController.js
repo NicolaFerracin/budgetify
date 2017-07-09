@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Budget = mongoose.model('Budget');
+const transactionController = require('./transactionController');
 
 exports.budgetForm = (req, res) => {
     res.render('editBudget', { title: 'Create Budget' });
@@ -10,8 +11,10 @@ exports.budget = async (req, res) => {
         .findOne({ _id: req.params.id, owner: req.user._id });
     const year = req.query.y ? Number(req.query.y) : new Date().getFullYear();
     const budgetYear = await getBudgetYear(req.user._id, budget._id, year);
+    const walletIds = budget.wallets.map(w => mongoose.Types.ObjectId(w.id));
+    const transactionYear = await transactionController.getTransactionsForYear(req.user._id, walletIds, year);
     const calendar = await getBudgetCalendar(req.user._id, budget._id);
-    res.render('budget', { title: budget.name, budget, calendar, budgetYear, query: year });
+    res.render('budget', { title: budget.name, budget, calendar, budgetYear, query: year, transactionYear: transactionYear[0] });
 };
 
 exports.addBudget = async (req, res) => {

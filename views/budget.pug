@@ -11,11 +11,10 @@ block content
         a.btn.btn-default.btn-flat.header-right(type="button" href=`/budget/${budget.id}/edit`) Edit
 
     section.content
-        //- - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
+        - const budgetTotal = budgetYear.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12
-                //- h2.text-center Balance: #{total} #{currencySymbol}
-                h2.text-center Balance: 
+                h2.text-center #{transactionYear.amountYear}#{currencySymbol} saved of #{budgetTotal}#{currencySymbol} planned in #{query}
         .row
             .col-md-2
                 if !h.isEmpty(calendar)
@@ -45,14 +44,18 @@ block content
                                 tbody
                                     tr
                                         th Month
-                                        th Saved
-                                        th Budget 
-                                        th Difference
+                                        th Saved<br>
+                                            small How much you saved for a given month
+                                        th Budget<br>
+                                            small How much you planned to save
+                                        th Difference<br>
+                                            small If greater than 0, you are outperforming!
                                         th Total Running Savings
                                     for month in budgetYear
                                         tr(data-month=month.id)
+                                            - const saved = transactionYear.months.filter(t => t.month === month.month).map(t => t.amountMonth);
                                             td #{h.months[month.month - 1]}
-                                            td This is how much you saved for the month #{currencySymbol}
+                                            td #{h.isEmpty(saved) ? 0 : saved} #{currencySymbol}
                                             td
                                                 span(data-widget="budgetMonth" data-trigger=month.id) #{month.amount} #{currencySymbol}
                                                 .month-action.hidden(id=month.id)
@@ -60,6 +63,6 @@ block content
                                                     .month-action-icons
                                                         i.fa.fa-check.save
                                                         i.fa.fa-close.cancel
-                                            td This is savings - budget for the month #{currencySymbol}
+                                            td #{saved - month.amount} #{currencySymbol}
                                             td This is how much you saved - budget starting from budget.start to budget.end #{currencySymbol}
                                     

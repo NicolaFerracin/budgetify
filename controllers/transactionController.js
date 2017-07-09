@@ -130,6 +130,85 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
     return transactions;
 };
 
+exports.getTransactionsForYear = async (userId, walletIds, year) => {
+    const transactions = await Transaction.aggregate([
+        {
+            $match: {
+                owner: userId,
+                wallet: { "$in": walletIds }
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    year: { $year: '$timestamp' },
+                    month: { $month: '$timestamp' },
+                    day: { $dayOfMonth: '$timestamp' }
+                },
+                date: { $first: '$timestamp' },
+                transactions: { $push: '$$ROOT' },
+                amountDay: {
+                    '$sum': {
+                        $cond: { 
+                            if: {
+                                $or: 
+                                    [{ $eq: ['$excludeFromTotal', true]},
+                                    { $eq: ['$excludeFromBudget', true]}]
+                                }, 
+                            then: 0, 
+                            else: '$amount'
+                        }
+                    }
+                }
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    year: '$_id.year',
+                    month: '$_id.month',
+                },
+                amountMonth: { $sum: '$amountDay' },
+                days: {
+                    $push: {
+                        date: '$date',
+                        transactions: '$transactions',
+                        amountDay: '$amountDay'
+                    }
+                }
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    year: '$_id.year'
+                },
+                amountYear: { $sum: '$amountMonth' },
+                months: {
+                    $push: {
+                        month: '$_id.month',
+                        amountMonth: '$amountMonth'
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                year: '$_id.year',
+                months: '$months',
+                amountYear: true,
+                _id: 0
+            }
+        },
+        {
+            $match: {
+                year: year
+            }
+        },
+    ]);
+    return transactions;
+};
+
 function prepareTransactionForDb(raw, userId) {
     const date = new Date(raw.date);
     [hours, minutes] = raw.time.split(':');
