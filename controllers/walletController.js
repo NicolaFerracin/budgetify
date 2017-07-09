@@ -5,11 +5,16 @@ const Transaction = mongoose.model('Transaction');
 const promisify = require('es6-promisify');
 const authController = require('./authController');
 const transactionController = require('./transactionController');
+const budgetController = require('./budgetController');
 const { catchErrors } = require('../handlers/errors');
 
 exports.dashboard = async (req, res) => {
     const wallets = await Wallet.find({ owner: req.user._id });
     const budgets = await Budget.find({ owner: req.user._id });
+    for (let i = 0; i < budgets.length; i++) {
+        total = await budgetController.getBudgetTotal(req.user._id, budgets[i]._id)
+        budgets[i].total = total[0].total;
+    }
     res.render('dashboard', { title: 'Dashboard', wallets, budgets });
 };
 

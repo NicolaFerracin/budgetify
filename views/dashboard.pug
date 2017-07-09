@@ -44,8 +44,12 @@ block content
                 .box-body  
                     if !h.isEmpty(budgets)
                         each budget in budgets 
+                            - const saved = h.getSavedAmountPerBudget(budget.wallets)
                             a.budget(href=`/budget/${budget._id}`)
-                                p #{budget.name}
+                                p 
+                                    span Name: #{budget.name} | 
+                                    span Total Planned: #{budget.total} | 
+                                    span Total Saved: #{saved}
                     else
                         .text-center
                             h3 You don't have any saving budget. Create one!

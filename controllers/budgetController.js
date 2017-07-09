@@ -176,7 +176,7 @@ async function getBudgetYear(userId, budgetId, year) {
     return result;
 };
 
-async function getBudgetTotal(userId, budgetId) {
+exports.getBudgetTotal = async function(userId, budgetId) {
     const result = await Budget.aggregate([
         {
             $match: {
@@ -185,17 +185,17 @@ async function getBudgetTotal(userId, budgetId) {
             }
         },
         { $unwind: '$months' },
-        {
+        {           
             $group: {
-                _id: {
-                    year: '$months.year',
-                },
-                amount: { $sum: '$months.amount' }
-            }
+                 _id: null, 
+                total: { 
+                    $sum: "$months.amount" 
+                }
+            } 
         },
         {
             $project: {
-                amount: '$amount',
+                total: '$total',
                 _id: 0
             }
         }
