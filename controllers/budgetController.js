@@ -17,6 +17,7 @@ exports.addBudget = async (req, res) => {
         return req.redirect('back');
     }
     req.body.owner = req.user._id;
+    req.body.months = generateBudgetMonths(req.body);
     const budget = await (new Budget(req.body)).save();
     req.flash('success', `<strong>${req.body.name}</strong> budget created with success!`);
     res.redirect('/dashboard');
@@ -54,4 +55,31 @@ const confirmOwner = (budget, user) => {
     if (!budget.owner.equals(user._id)) {
         throw Error('You must own a budget in order to edit it')
     }
+}
+
+function generateBudgetMonths(budget) {
+    /**
+     * set start and end date range. Logic:
+     * - if start is not set, use now
+     * - if end is before now, then use it as a final date
+     * - else use now as a final date for the range
+     */ 
+    const now = new Date();
+    const start = budget.start ? new Date(budget.start) : new Date();
+    const end = budget.end ? (new Date(budget.end).getTime() < now.getTime() ? new Date(budget.end) : now) : now;
+    budget.months = budget.months ? budget.months : [];
+    const existingMonths = budget.months.reduce((res, m) => {
+        res.push(`${m.month}-${m.year}`)
+        return res;
+    }, []);
+    while (`${start.getMonth()}-${start.getFullYear()}` <= `${end.getMonth()}-${end.getFullYear()}`) {
+        const monthYear = `${start.getMonth()}-${start.getFullYear()}`;
+        if (existingMonths.indexOf(monthYear) >= 0) {
+            continue;
+        }
+        const entry = { month: start.getMonth() + 1, year: start.getFullYear(), amount: budget.amount };
+        budget.months.push(entry);
+        start.setMonth(start.getMonth() + 1);
+    }
+    return budget.months;
 }
