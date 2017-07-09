@@ -45,12 +45,11 @@ block content
                                     tr
                                         th Month
                                         th Saved<br>
-                                            small How much you saved for a given month
+                                            small How much you saved
                                         th Budget<br>
                                             small How much you planned to save
                                         th Difference<br>
                                             small If greater than 0, you are outperforming!
-                                        th Total Running Savings
                                     for month in budgetYear
                                         tr(data-month=month.id)
                                             - const saved = transactionYear.months.filter(t => t.month === month.month).map(t => t.amountMonth);
@@ -63,6 +62,4 @@ block content
                                                     .month-action-icons
                                                         i.fa.fa-check.save
                                                         i.fa.fa-close.cancel
-                                            td #{saved - month.amount} #{currencySymbol}
-                                            td This is how much you saved - budget starting from budget.start to budget.end #{currencySymbol}
-                                    
+                                            td #{saved - month.amount} #{currencySymbol}                                    

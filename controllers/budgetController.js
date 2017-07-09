@@ -175,3 +175,30 @@ async function getBudgetYear(userId, budgetId, year) {
     ]);
     return result;
 };
+
+async function getBudgetTotal(userId, budgetId) {
+    const result = await Budget.aggregate([
+        {
+            $match: {
+                owner: userId,
+                _id: budgetId
+            }
+        },
+        { $unwind: '$months' },
+        {
+            $group: {
+                _id: {
+                    year: '$months.year',
+                },
+                amount: { $sum: '$months.amount' }
+            }
+        },
+        {
+            $project: {
+                amount: '$amount',
+                _id: 0
+            }
+        }
+    ]);
+    return result;
+};
