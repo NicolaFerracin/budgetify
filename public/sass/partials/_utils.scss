@@ -8,3 +8,12 @@
         float: right;
     }
 }
+
+i {
+    &.save {
+        color: #00a65a;
+    }
+    &.cancel {
+        color: #f56954;
+    }
+}

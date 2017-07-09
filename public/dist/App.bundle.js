@@ -11415,6 +11415,7 @@ function initBudget() {
     budgetWallets = document.querySelectorAll('input[name="wallets"]');
     onDeletion();
     onSubmit();
+    singleBudgetView();
 }
 
 function onDeletion() {
@@ -11501,6 +11502,56 @@ function haveWalletsDifferentCurrency(wallets) {
         }
     }
     return false;
+}
+
+function singleBudgetView() {
+    var table = document.getElementsByClassName('box-budget-month')[0];
+    if (table) {
+        // toggle edit
+        var readOnlyAmount = document.querySelectorAll('[data-widget="budgetMonth"]');
+        readOnlyAmount.forEach(function (el) {
+            return el.addEventListener('click', function (e) {
+                var trigger = this.dataset.trigger;
+                this.classList.add('hidden');
+                document.getElementById(trigger).classList.remove('hidden');
+            });
+        });
+
+        // cancel edit
+        var cancelIcons = document.querySelectorAll('i.cancel');
+        cancelIcons.forEach(function (i) {
+            return i.addEventListener('click', function (e) {
+                var parent = this.parentElement.parentElement;
+                parent.classList.add('hidden');
+                document.querySelector('[data-trigger="' + parent.id + '"').classList.remove('hidden');
+            });
+        });
+
+        // save edit
+        var saveIcons = document.querySelectorAll('i.save');
+        saveIcons.forEach(function (i) {
+            return i.addEventListener('click', function (e) {
+                var parent = this.parentElement.parentElement;
+                var amount = parent.querySelector('input[name="monthAmount"]').value;
+                var budgetId = document.querySelector('.box-budget-month').dataset.budget;
+                this.parentElement.classList.add('hidden');
+                (0, _axios2.default)({
+                    method: 'POST',
+                    url: '/api/v1/budget/' + budgetId + '/month',
+                    data: {
+                        id: parent.id,
+                        amount: amount
+                    }
+                }).then(function (res) {
+                    if (res.data.ok) {
+                        location.reload();
+                    } else {
+                        alert('Ops! It seems we experienced an error. Please reload the page and try again.');
+                    }
+                });
+            });
+        });
+    }
 }
 
 exports.default = initBudget;

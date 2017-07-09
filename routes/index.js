@@ -105,6 +105,7 @@ router.get('/favicon.ico', (req, res) => res.sendStatus(204));
 // API
 router.get('/api/v1/transaction/:id', catchErrors(transactionController.getTransaction));
 router.post('/api/v1/transaction/:id', catchErrors(transactionController.editTransaction));
+router.post('/api/v1/budget/:id/month', catchErrors(budgetController.updateMonth));
 router.delete('/api/v1/transaction/:id', catchErrors(transactionController.deleteTransaction));
 router.delete('/api/v1/wallet/:id', catchErrors(walletController.deleteWallet));
 router.delete('/api/v1/budget/:id', catchErrors(budgetController.deleteBudget));

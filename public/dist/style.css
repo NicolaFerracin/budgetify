@@ -8169,6 +8169,12 @@ html {
   .label-has-action button {
     float: right; }
 
+i.save {
+  color: #00a65a; }
+
+i.cancel {
+  color: #f56954; }
+
 .login-box, .register-box {
   margin: auto !important;
   padding-top: 7%; }
@@ -8269,5 +8275,16 @@ form textarea {
 
 .box-budget-month th, .box-budget-month td {
   text-align: center; }
+
+.box-budget-month .month-action-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around; }
+  .box-budget-month .month-action-icons i {
+    cursor: pointer;
+    margin: 10px;
+    font-size: 2em; }
 
 /*# sourceMappingURL=style.css.map*/

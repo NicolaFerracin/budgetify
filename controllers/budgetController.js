@@ -53,6 +53,16 @@ exports.deleteBudget = async (req, res) => {
     res.sendStatus(200);
 };
 
+exports.updateMonth = async (req, res) => {
+    const budget = await Budget
+        .update({ 
+            _id: req.params.id, 
+            owner: req.user._id,
+            'months._id': req.body.id
+        }, { $set: { 'months.$.amount': req.body.amount }});
+    res.send(budget);
+};
+
 const confirmOwner = (budget, user) => {
     if (!budget.owner.equals(user._id)) {
         throw Error('You must own a budget in order to edit it')
@@ -138,32 +148,19 @@ async function getBudgetYear(userId, budgetId, year) {
                 _id: {
                     year: '$months.year',
                     months: '$months.month',
-                    amount: '$months.amount'
+                    amount: '$months.amount',
+                    id: '$months._id'
                 },
+                
             }
         },
-        { $sort: { '_id.year': -1, '_id.months': -1 } },
-        // {
-        //     $group: {
-        //         _id: {
-        //             year: '$_id.year',
-        //             month: '$_id.month',
-        //         },
-        //         amountMonth: { $sum: '$amountDay' },
-        //         days: {
-        //             $push: {
-        //                 date: '$date',
-        //                 transactions: '$transactions',
-        //                 amountDay: '$amountDay'
-        //             }
-        //         }
-        //     }
-        // },
+        { $sort: { '_id.year': -1, '_id.months': -1 }},
         {
             $project: {
                 year: '$_id.year',
                 month: '$_id.months',
                 amount: '$_id.amount',
+                id: '$_id.id',
                 _id: 0
             }
         },

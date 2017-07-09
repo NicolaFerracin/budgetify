@@ -14,6 +14,7 @@ function initBudget() {
     budgetWallets = document.querySelectorAll('input[name="wallets"]');
     onDeletion();
     onSubmit();
+    singleBudgetView();
 }
 
 function onDeletion() {
@@ -102,6 +103,51 @@ function haveWalletsDifferentCurrency(wallets) {
         }
     }
     return false;
+}
+
+function singleBudgetView() {
+    const table = document.getElementsByClassName('box-budget-month')[0];
+    if (table) {
+        // toggle edit
+        const readOnlyAmount = document.querySelectorAll('[data-widget="budgetMonth"]');
+        readOnlyAmount.forEach(el => el.addEventListener('click', function(e) {
+            const trigger = this.dataset.trigger;
+            this.classList.add('hidden');
+            document.getElementById(trigger).classList.remove('hidden');
+        }));
+
+        // cancel edit
+        const cancelIcons = document.querySelectorAll('i.cancel');
+        cancelIcons.forEach(i => i.addEventListener('click', function(e) {
+            const parent = this.parentElement.parentElement;
+            parent.classList.add('hidden');
+            document.querySelector(`[data-trigger="${parent.id}"`).classList.remove('hidden');
+        }));
+
+        // save edit
+        const saveIcons = document.querySelectorAll('i.save');
+        saveIcons.forEach(i => i.addEventListener('click', function(e) {
+            const parent = this.parentElement.parentElement;
+            const amount = parent.querySelector('input[name="monthAmount"]').value;
+            const budgetId = document.querySelector('.box-budget-month').dataset.budget;
+            this.parentElement.classList.add('hidden');
+            axios({
+                method: 'POST',
+                url: `/api/v1/budget/${budgetId}/month`,
+                data: {
+                    id: parent.id,
+                    amount
+                }
+            })
+            .then(res => {
+                if (res.data.ok) {
+                    location.reload();
+                } else {
+                    alert('Ops! It seems we experienced an error. Please reload the page and try again.');
+                }
+            });
+        }));
+    }
 }
 
 export default initBudget;
