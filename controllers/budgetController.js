@@ -8,10 +8,10 @@ exports.budgetForm = (req, res) => {
 exports.budget = async (req, res) => {
     const budget = await Budget
         .findOne({ _id: req.params.id, owner: req.user._id });
+    const year = req.query.y ? Number(req.query.y) : new Date().getFullYear();
+    const budgetYear = await getBudgetYear(req.user._id, budget._id, year);
     const calendar = await getBudgetCalendar(req.user._id, budget._id);
-    console.log(calendar)
-    // return aggregation with all calculations done
-    res.render('budget', { title: budget.name, budget, calendar });
+    res.render('budget', { title: budget.name, budget, calendar, budgetYear });
 };
 
 exports.addBudget = async (req, res) => {
@@ -113,7 +113,7 @@ async function getBudgetCalendar(userId, budgetId) {
                 }
             }
         },
-        { $sort: { '_id.year': 1 }},
+        { $sort: { '_id.year': -1 }},
         {
             $project: {
                 year: '$_id.year',
@@ -122,4 +122,56 @@ async function getBudgetCalendar(userId, budgetId) {
         }
     ]);
     return calendar;
+};
+
+async function getBudgetYear(userId, budgetId, year) {
+    const result = await Budget.aggregate([
+        {
+            $match: {
+                owner: userId,
+                _id: budgetId
+            }
+        },
+        { $unwind: '$months' },
+        {
+            $group: {
+                _id: {
+                    year: '$months.year',
+                    months: '$months.month',
+                    amount: '$months.amount'
+                },
+            }
+        },
+        { $sort: { '_id.year': -1, '_id.months': -1 } },
+        // {
+        //     $group: {
+        //         _id: {
+        //             year: '$_id.year',
+        //             month: '$_id.month',
+        //         },
+        //         amountMonth: { $sum: '$amountDay' },
+        //         days: {
+        //             $push: {
+        //                 date: '$date',
+        //                 transactions: '$transactions',
+        //                 amountDay: '$amountDay'
+        //             }
+        //         }
+        //     }
+        // },
+        {
+            $project: {
+                year: '$_id.year',
+                month: '$_id.months',
+                amount: '$_id.amount',
+                _id: 0
+            }
+        },
+        {
+            $match: {
+                year: year
+            }
+        },
+    ]);
+    return result;
 };

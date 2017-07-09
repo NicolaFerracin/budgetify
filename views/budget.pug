@@ -32,7 +32,8 @@ block content
                                         li.t-calendar-year
                                             a(href=`/budget/${budget._id}?y=${year.year}`) #{year.year}&nbsp;
                                                 i.fa.fa-angle-double-right
-                            
+
+        pre=h.dump(budgetYear)                    
     //-         .col-md-6.col-md-offset-1
     //-             if h.isEmpty(transactions)
     //-                 h4.text-center No transaction found for #{h.months[query.month - 1]} #{query.year}

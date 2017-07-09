@@ -30,8 +30,8 @@ const budgetSchema = new mongoose.Schema({
         default: null
     },
     months: [{
-        month: String,
-        year: String,
+        month: Number,
+        year: Number,
         amount: Number
     }],
     created: {
