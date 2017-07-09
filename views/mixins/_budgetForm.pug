@@ -15,14 +15,14 @@ mixin budgetForm(budget = {}, wallets = user.wallets)
                     input.form-control(type="number" step=".01" name="amount" required placeholder="How much do you want to save each month?" value=budget.amount)
                 .form-group
                     label(for="start-date") Start Date
-                    input.form-control(type="date" name="start" value=h.moment(budget.start).format('YYYY-MM-DD'))
+                    input.form-control(type="date" name="start" value=budget.start ? h.moment(budget.start).format('YYYY-MM-DD') : null)
                 .form-group
                     label(for="end-date") End Date
                     div.has-error.hidden(id="date-error")
                         p
                             small.help-block
                                 | The End Date cannot be before the Start Date.
-                    input.form-control(type="date" name="end" value=h.moment(budget.end).format('YYYY-MM-DD'))
+                    input.form-control(type="date" name="end" value=budget.end ? h.moment(budget.end).format('YYYY-MM-DD') : null)
                 .form-group
                     label(for="wallets") Wallets
                     div.has-error.hidden(id="quantity-error")
