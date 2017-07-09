@@ -8267,15 +8267,7 @@ form textarea {
   .t-calendar-month a {
     color: inherit; }
 
-.box-budget-month .box-body {
-  cursor: pointer; }
-
-.box-budget-month-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between; }
+.box-budget-month th, .box-budget-month td {
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map*/

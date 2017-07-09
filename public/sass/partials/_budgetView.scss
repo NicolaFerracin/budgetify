@@ -1,9 +1,5 @@
 .box-budget-month {
-    .box-body {
-        cursor: pointer;
-    }
-    &-content {
-        display: flex;
-        justify-content: space-between;
+    th, td {
+        text-align: center;
     }
 }

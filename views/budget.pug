@@ -35,24 +35,28 @@ block content
                
             .col-md-6.col-md-offset-1
                 if h.isEmpty(budgetYear)
-                    h4.text-center No budeget found for #{query.year}
+                    h4.text-center No budget found for #{query}.
                 else
-                    for month in budgetYear
-                        .box.box-success.box-budget-month
-                            .box-header.with-border
-                                h3.box-title #{h.months[month.month - 1]} #{month.year}
-                            .box-body.box-budget-month-content
-                                p.text-center
-                                    strong Saved
-                                    <br> This is how much you saved for the month #{currencySymbol}
-                                p.text-center
-                                    strong Budget
-                                    <br> this is the budget that can also be edited #{month.amount} #{currencySymbol}
-                                p.text-center
-                                    strong Difference
-                                    <br> This is savings - budget for the month #{currencySymbol}
-                                p.text-center
-                                    strong Running savings
-                                    <br> This is how much you saved - budget starting from budget.start to budget.end #{currencySymbol}
-
-    //-             include includes/transactionModal
+                    .box.box-success.box-budget-month
+                        .box-header
+                            h3.box-title #{query}
+                        .box-body.no-padding
+                            table.table
+                                tbody
+                                    tr
+                                        th Month
+                                        th Saved
+                                        th Budget 
+                                        th Difference
+                                        th Total Running Savings
+                                    for month in budgetYear    
+                                        tr(data-month=month.month data-year=month.year)
+                                            td #{h.months[month.month - 1]}
+                                            td This is how much you saved for the month #{currencySymbol}
+                                            td
+                                                span #{month.amount}
+                                                input.hidden(type="number" value=month.amount)
+                                                | &nbsp;#{currencySymbol}
+                                            td This is savings - budget for the month #{currencySymbol}
+                                            td This is how much you saved - budget starting from budget.start to budget.end #{currencySymbol}
+                                    

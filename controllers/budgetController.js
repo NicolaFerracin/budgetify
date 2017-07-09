@@ -11,7 +11,7 @@ exports.budget = async (req, res) => {
     const year = req.query.y ? Number(req.query.y) : new Date().getFullYear();
     const budgetYear = await getBudgetYear(req.user._id, budget._id, year);
     const calendar = await getBudgetCalendar(req.user._id, budget._id);
-    res.render('budget', { title: budget.name, budget, calendar, budgetYear });
+    res.render('budget', { title: budget.name, budget, calendar, budgetYear, query: year });
 };
 
 exports.addBudget = async (req, res) => {
