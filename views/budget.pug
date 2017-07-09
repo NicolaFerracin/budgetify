@@ -32,46 +32,27 @@ block content
                                         li.t-calendar-year
                                             a(href=`/budget/${budget._id}?y=${year.year}`) #{year.year}&nbsp;
                                                 i.fa.fa-angle-double-right
-
-        pre=h.dump(budgetYear)                    
-    //-         .col-md-6.col-md-offset-1
-    //-             if h.isEmpty(transactions)
-    //-                 h4.text-center No transaction found for #{h.months[query.month - 1]} #{query.year}
-    //-             else
-    //-                 - const month = transactions[0]
-    //-                 .month
-    //-                     h4.text-center #{h.months[month.month - 1]} #{month.year}
-    //-                     h4.text-center #{month.amountMonth} #{currencySymbol}
-    //-                     for day in month.days
-    //-                         +transactionDay(day)
-                            
-    //-             button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
+               
+            .col-md-6.col-md-offset-1
+                if h.isEmpty(budgetYear)
+                    h4.text-center No budeget found for #{query.year}
+                else
+                    for month in budgetYear
+                        .box.box-success.box-budget-month
+                            .box-header.with-border
+                                h3.box-title #{h.months[month.month - 1]} #{month.year}
+                            .box-body.box-budget-month-content
+                                p.text-center
+                                    strong Saved
+                                    <br> This is how much you saved for the month #{currencySymbol}
+                                p.text-center
+                                    strong Budget
+                                    <br> this is the budget that can also be edited #{month.amount} #{currencySymbol}
+                                p.text-center
+                                    strong Difference
+                                    <br> This is savings - budget for the month #{currencySymbol}
+                                p.text-center
+                                    strong Running savings
+                                    <br> This is how much you saved - budget starting from budget.start to budget.end #{currencySymbol}
 
     //-             include includes/transactionModal
-
-    //-             .modal.fade.in(id="edit-categories")
-    //-                 .modal-dialog
-    //-                         .modal-content
-    //-                             .modal-header
-    //-                                 button.close(type="button" data-dismiss="modal" aria-label="Close")
-    //-                                     span(aria-hidden="true") ×
-    //-                                 h4.modal-title Edit Categories
-    //-                                 p Don't forget to save to apply the changes
-    //-                             form(id="new-category")
-    //-                                 .modal-body
-    //-                                     .input-group.margin
-    //-                                         input.form-control(type="text" name="new-category" placeholder="Add New Category")
-    //-                                         span.input-group-btn
-    //-                                             button.btn.btn-success.btn-flat(type="submit") Add
-    //-                             form(method="POST" action="/categories" id="categories-form")
-    //-                                 .modal-body
-    //-                                     ul.categories-list(id="categories-list")
-    //-                                         - const categories = user.categories.sort()
-    //-                                         for category in categories
-    //-                                             li(data-value=category)
-    //-                                                 i.fa.fa-remove(onclick="this.parentElement.remove()") &nbsp;
-    //-                                                 span=`${category}`
-                                    
-    //-                                 .modal-footer
-    //-                                     button.btn.btn-default.btn-flat.pull-left(type="button" data-dismiss="modal") Close
-    //-                                     button.btn.btn-primary.btn-flat(type="submit") Save
