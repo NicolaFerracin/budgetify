@@ -2,6 +2,9 @@
     th, td {
         text-align: center;
     }
+    input {   
+        width: 100%;
+    }
     .month-action {
         &-icons {
             display: flex;
@@ -10,7 +13,6 @@
                 cursor: pointer;
                 margin: 10px;
                 font-size: 2em;
-                
             }
         }
     }

@@ -8276,6 +8276,9 @@ form textarea {
 .box-budget-month th, .box-budget-month td {
   text-align: center; }
 
+.box-budget-month input {
+  width: 100%; }
+
 .box-budget-month .month-action-icons {
   display: -webkit-box;
   display: -ms-flexbox;
