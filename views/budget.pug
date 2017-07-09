@@ -14,7 +14,7 @@ block content
         - const budgetTotal = budgetYear.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12
-                h2.text-center #{transactionYear.amountYear}#{currencySymbol} saved of #{budgetTotal}#{currencySymbol} planned in #{query}
+                h2.text-center #{transactionYear ? transactionYear.amountYear : 0}#{currencySymbol} saved of #{budgetTotal}#{currencySymbol} planned in #{query}
         .row
             .col-md-2
                 if !h.isEmpty(calendar)
@@ -52,7 +52,7 @@ block content
                                             small If greater than 0, you are outperforming!
                                     for month in budgetYear
                                         tr(data-month=month.id)
-                                            - const saved = transactionYear.months.filter(t => t.month === month.month).map(t => t.amountMonth);
+                                            - const saved = transactionYear ? transactionYear.months.filter(t => t.month === month.month).map(t => t.amountMonth) : 0;
                                             td #{h.months[month.month - 1]}
                                             td #{h.isEmpty(saved) ? 0 : saved} #{currencySymbol}
                                             td
