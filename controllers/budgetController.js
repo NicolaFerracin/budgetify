@@ -8,7 +8,10 @@ exports.budgetForm = (req, res) => {
 exports.budget = async (req, res) => {
     const budget = await Budget
         .findOne({ _id: req.params.id, owner: req.user._id });
-    res.render('budget', { title: budget.name, budget });
+    const calendar = await getBudgetCalendar(req.user._id, budget._id);
+    console.log(calendar)
+    // return aggregation with all calculations done
+    res.render('budget', { title: budget.name, budget, calendar });
 };
 
 exports.addBudget = async (req, res) => {
@@ -71,7 +74,7 @@ function generateBudgetMonths(budget) {
         res.push(`${m.month}-${m.year}`)
         return res;
     }, []);
-    while (`${start.getMonth()}-${start.getFullYear()}` <= `${end.getMonth()}-${end.getFullYear()}`) {
+    while (start.getMonth() <= end.getMonth() || start.getFullYear() < end.getFullYear()) {
         const monthYear = `${start.getMonth()}-${start.getFullYear()}`;
         if (existingMonths.indexOf(monthYear) >= 0) {
             continue;
@@ -92,3 +95,31 @@ function prepareBudgetForDb(raw, userId) {
     budget.months = generateBudgetMonths(raw);
     return budget;
 }
+
+
+async function getBudgetCalendar(userId, budgetId) {
+    const calendar = await Budget.aggregate([
+        {
+            $match: {
+                owner: userId,
+                _id: budgetId
+            }
+        },
+        { $unwind: '$months' },
+        {
+            $group: {
+                _id: {
+                    year: '$months.year'
+                }
+            }
+        },
+        { $sort: { '_id.year': 1 }},
+        {
+            $project: {
+                year: '$_id.year',
+                _id: 0
+            }
+        }
+    ]);
+    return calendar;
+};

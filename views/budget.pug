@@ -4,38 +4,35 @@ include mixins/_transactionDay
 
 block content
     section.content-header
-        pre=h.dump(budget)
-    //-     - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
-    //-     h1 #{wallet.name}
-    //-         if wallet.description || wallet.currency
-    //-             small #{wallet.description} - #{wallet.currency}
-    //-     a.btn.btn-default.btn-flat.header-right(type="button" href=`/wallet/${wallet.id}/edit`) Edit
+        - const currencySymbol = budget.wallets[0].currency ? h.currencies[budget.wallets[0].currency].symbol : ''
+        h1 #{budget.name}
+            if budget.description || budget.wallets[0].currency
+                small #{budget.description} - #{budget.wallets[0].currency}
+        a.btn.btn-default.btn-flat.header-right(type="button" href=`/budget/${budget.id}/edit`) Edit
 
-    //- section.content
-    //-     - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
-    //-     .row
-    //-         .col-xs-12
-    //-             h2.text-center Balance: #{total} #{currencySymbol}
-    //-     .row
-    //-         .col-md-2
-    //-             if !h.isEmpty(calendar)
-    //-                 .box.box-widget
-    //-                     .box.box-success.box-solid
-    //-                         .box-header.with-border
-    //-                             h3.box-title Calendar
-    //-                             .box-tools.pull-right
-    //-                                 button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
-    //-                                     i.fa.fa-minus
-    //-                         .box-body.t-calendar.text-center
-    //-                             ul
-    //-                                 for year in calendar
-    //-                                     li.t-calendar-year #{year.year}
-    //-                                         ul
-    //-                                             for month in year.months
-    //-                                                 li.t-calendar-month 
-    //-                                                     a(href=`/wallet/${wallet._id}?y=${year.year}&m=${month.month}`) #{h.months[month.month - 1]}&nbsp;
-    //-                                                         i.fa.fa-angle-double-right
-
+    section.content
+        //- - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
+        .row
+            .col-xs-12
+                //- h2.text-center Balance: #{total} #{currencySymbol}
+                h2.text-center Balance: 
+        .row
+            .col-md-2
+                if !h.isEmpty(calendar)
+                    .box.box-widget
+                        .box.box-success.box-solid
+                            .box-header.with-border
+                                h3.box-title Calendar
+                                .box-tools.pull-right
+                                    button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
+                                        i.fa.fa-minus
+                            .box-body.t-calendar.text-center
+                                ul
+                                    for year in calendar
+                                        li.t-calendar-year
+                                            a(href=`/budget/${budget._id}?y=${year.year}`) #{year.year}&nbsp;
+                                                i.fa.fa-angle-double-right
+                            
     //-         .col-md-6.col-md-offset-1
     //-             if h.isEmpty(transactions)
     //-                 h4.text-center No transaction found for #{h.months[query.month - 1]} #{query.year}
