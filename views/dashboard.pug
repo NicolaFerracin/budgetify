@@ -45,11 +45,12 @@ block content
                     if !h.isEmpty(budgets)
                         each budget in budgets 
                             - const saved = h.getSavedAmountPerBudget(budget.wallets)
+                            - const currencySymbol = budget.wallets[0].currency ? h.currencies[budget.wallets[0].currency].symbol : ''
                             a.budget(href=`/budget/${budget._id}`)
-                                p 
-                                    span Name: #{budget.name} | 
-                                    span Total Planned: #{budget.total} | 
-                                    span Total Saved: #{saved}
+                                h3 
+                                    span #{budget.name} 
+                                    span You saved #{saved}#{currencySymbol} out of #{budget.total}#{currencySymbol} planned
+                            hr
                     else
                         .text-center
                             h3 You don't have any saving budget. Create one!
