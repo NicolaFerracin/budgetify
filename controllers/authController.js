@@ -132,7 +132,7 @@ exports.facebookCallback = passport.authenticate('facebook', {
 exports.google = passport.authenticate('google', { scope : ['profile', 'email'] });
 
 exports.googleCallback = passport.authenticate('google', {
-    failureRedirect: '/login',
+    failureRedirect: '/app/login',
     failureFlash: 'Failed login!',
     successRedirect: '/app'
 });

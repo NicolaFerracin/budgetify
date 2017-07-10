@@ -6,8 +6,6 @@ exports.moment = moment;
 
 exports.dump = (obj) => JSON.stringify(obj, null, 2);
 
-// exports.icon = (name) => fs.readFileSync(`./public/images/icons/${name}.svg`);
-
 exports.yearForFooter = () => {
     const year = new Date().getFullYear();
     return year === 2017 ? year : `2017 - ${year}`;
