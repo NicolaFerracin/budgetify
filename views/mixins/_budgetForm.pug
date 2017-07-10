@@ -34,13 +34,13 @@ mixin budgetForm(budget = {}, wallets = user.wallets)
                             small.help-block
                                 | Selected wallets must share the same currency, as it is not be possible to calculate cross-currency budgets.
                     - const budgetWalletIds = budget.wallets ? budget.wallets.reduce((res, w) => { res += `${w._id},`; return res }, '') : ''
-                    for wallet in wallets
-                        if !wallet.excludeFromBudget
-                            - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
-                            .checkbox
-                                label(for="wallets")
-                                    input(type="checkbox" onclick="checkWallets();" value=wallet._id name="wallets" data-wallet=wallet._id data-currency=wallet.currency checked=budgetWalletIds && budgetWalletIds.indexOf(wallet._id) >= 0)
-                                    | #{wallet.name} - #{currencySymbol}
+                        for wallet in wallets
+                            if !wallet.excludeFromBudget
+                                - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : '' 
+                                .checkbox
+                                    label(for=wallet._id)
+                                        input(type="checkbox" onclick="checkWallets();" value=wallet._id name="wallets" id=wallet._id data-wallet=wallet._id data-currency=wallet.currency checked=budgetWalletIds === '' ? false : budgetWalletIds.indexOf(wallet._id) >= 0)
+                                        | #{wallet.name} - #{currencySymbol}
 
             .box-footer
                 if !h.isEmpty(budget)

@@ -26,12 +26,14 @@ mixin walletForm(wallet = {})
                             - const currencies = h.currencies
                             for c, i in currencies
                                 option(value=i)= `${i} ${c.label} - ${c.symbol}` 
-                .form-group
-                    input(type="checkbox" name="excludeFromTotal" checked=!h.isEmpty(wallet) ? wallet.excludeFromTotal : false) 
-                    label(for=excludeFromTotal) Exclude this wallet from totals?
-                .form-group
-                    input(type="checkbox" name="excludeFromBudget" checked=!h.isEmpty(wallet) ? wallet.excludeFromBudget : false) 
-                    label(for=excludeFromBudget) Exclude this wallet from budgets?
+                .checkbox
+                    label(for="excludeFromTotal")
+                        input(type="checkbox" id="excludeFromTotal" name="excludeFromTotal" checked=!h.isEmpty(wallet) ? wallet.excludeFromTotal : false) 
+                        | Exclude this wallet from totals?
+                .checkbox
+                    label(for="excludeFromBudget")
+                        input(type="checkbox" id="excludeFromBudget" name="excludeFromBudget" checked=!h.isEmpty(wallet) ? wallet.excludeFromBudget : false) 
+                        | Exclude this wallet from budgets?
             .box-footer
                 if !h.isEmpty(wallet)
                     a.btn.btn-danger.btn-flat(type="button" data-action="delete" id="deleteWallet") Delete 
