@@ -25,7 +25,7 @@ function onDeletion() {
             axios
                 .delete(`/api/v1/budget/${budgetId}`)
                 .then(res => {
-                    window.location = '/dashboard';
+                    window.location = '/app/dashboard';
                 });
         });
     }

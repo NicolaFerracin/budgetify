@@ -25,7 +25,7 @@ exports.addBudget = async (req, res) => {
     const budget = prepareBudgetForDb(req.body, req.user._id);
     await (new Budget(budget)).save();
     req.flash('success', `<strong>${req.body.name}</strong> budget created with success!`);
-    res.redirect('/dashboard');
+    res.redirect('/app/dashboard');
 };
 
 exports.updateBudget = async (req, res) => {
@@ -40,7 +40,7 @@ exports.updateBudget = async (req, res) => {
         runValidators: true
     }).exec();
     req.flash('success', `Succesfully updated <strong>${budget.name}</strong>.`);
-    res.redirect(`/budget/${budget._id}/edit`);
+    res.redirect(`/app/budget/${budget._id}/edit`);
 };
 
 exports.editBudget = async (req, res) => {

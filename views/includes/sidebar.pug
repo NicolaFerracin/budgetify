@@ -3,20 +3,20 @@ aside.main-sidebar
         ul.sidebar-menu(data-widget="tree")
             li.header NAVIGATION
             li(class=currentPath === '/dashboard' ? 'active' : '')
-                a(href="/dashboard")
+                a(href="/app/dashboard")
                     i.fa.fa-home
                     span Dashboard
                     span.pull-right-container
                         i.pull-right.fa.fa-chevron-right
             li.header ACTIONS
             li(class=currentPath === '/wallet' ? 'active' : '')
-                a(href="/wallet")
+                a(href="/app/wallet")
                     i.fa.fa-money 
                     span Add Wallet
                     span.pull-right-container
                         i.pull-right.fa.fa-plus-square
             li(class=currentPath === '/budget' ? 'active' : '')
-                a(href="/budget")
+                a(href="/app/budget")
                     i.fa.fa-bar-chart 
                     span Create Budget
                     span.pull-right-container
@@ -25,7 +25,7 @@ aside.main-sidebar
                 li.header MY WALLETS
                 for wallet in user.wallets
                     li(class=currentPath === `/wallet/${wallet._id}` ? 'active' : '')
-                        a(href=`/wallet/${wallet._id}`)
+                        a(href=`/app/wallet/${wallet._id}`)
                             i.fa.fa-dollar 
                             span #{wallet.name}
                             span.pull-right-container
@@ -34,7 +34,7 @@ aside.main-sidebar
                 li.header MY BUDGETS
                 for budget in user.budgets
                     li(class=currentPath === `/budget/${budget._id}` ? 'active' : '')
-                        a(href=`/budget/${budget._id}`)
+                        a(href=`/app/budget/${budget._id}`)
                             i.fa.fa-line-chart 
                             span #{budget.name}
                             span.pull-right-container

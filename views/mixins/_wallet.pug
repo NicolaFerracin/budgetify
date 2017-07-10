@@ -1,6 +1,6 @@
 mixin wallet(wallet)
     if wallet
-        a.wallet(href=`/wallet/${wallet._id}`)
+        a.wallet(href=`/app/wallet/${wallet._id}`)
             .wallet-content
                 .wallet-content-header
                     h3.wallet-name #{wallet.name}

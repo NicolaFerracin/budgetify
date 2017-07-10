@@ -4,11 +4,12 @@ include mixins/_transactionDay
 
 block content
     section.content-header
-        - const currencySymbol = budget.wallets[0].currency ? h.currencies[budget.wallets[0].currency].symbol : ''
+        - const currency = !h.isEmpty(budget.wallets) ? budget.wallets[0].currency : null
+        - const currencySymbol = currency ? h.currencies[currency].symbol : ''
         h1 #{budget.name}
-            if budget.description || budget.wallets[0].currency
-                small #{budget.description} - #{budget.wallets[0].currency}
-        a.btn.btn-default.btn-flat.header-right(type="button" href=`/budget/${budget.id}/edit`) Edit
+            if budget.description || currency
+                small #{budget.description} - #{currency}
+        a.btn.btn-default.btn-flat.header-right(type="button" href=`/app/budget/${budget.id}/edit`) Edit
 
     section.content
         - const budgetTotal = budgetYear.reduce((res, el) => res += el.amount, 0);
@@ -29,7 +30,7 @@ block content
                                 ul
                                     for year in calendar
                                         li.calendar-year
-                                            a(href=`/budget/${budget._id}?y=${year.year}`) #{year.year}&nbsp;
+                                            a(href=`/app/budget/${budget._id}?y=${year.year}`) #{year.year}&nbsp;
                                                 i.fa.fa-angle-double-right
                
             .col-md-6.col-md-offset-1

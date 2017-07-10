@@ -2,7 +2,7 @@ mixin budgetForm(budget = {}, wallets = user.wallets)
     .box.box-success
         .box-header.with-border
             h3.box-title Create Saving Budget
-        form(id="budget-form" method="POST" action=`/budget/${budget._id || ''}` data-budget=budget._id)
+        form(id="budget-form" method="POST" action=`/app/budget/${budget._id || ''}` data-budget=budget._id)
             .box-body
                 .form-group
                     label(for="name") Name

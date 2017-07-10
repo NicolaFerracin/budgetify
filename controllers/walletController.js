@@ -32,7 +32,7 @@ exports.addWallet = async (req, res) => {
     req.body.owner = req.user._id;
     const wallet = await (new Wallet(req.body)).save();
     req.flash('success', `<strong>${req.body.name}</strong> wallet created with success!`);
-    res.redirect('/');
+    res.redirect('/app');
 };
 
 exports.updateWallet = async (req, res) => {
@@ -42,8 +42,8 @@ exports.updateWallet = async (req, res) => {
         new: true,
         runValidators: true
     }).exec();
-    req.flash('success', `Succesfully updated <strong>${wallet.name}</strong>. <a href="/wallet/${wallet._id}">Go to wallet</a>`);
-    res.redirect(`/wallet/${wallet._id}/edit`);
+    req.flash('success', `Succesfully updated <strong>${wallet.name}</strong>. <a href="/app/wallet/${wallet._id}">Go to wallet</a>`);
+    res.redirect(`/app/wallet/${wallet._id}/edit`);
 };
 
 exports.wallet = async (req, res) => {
@@ -58,6 +58,10 @@ exports.wallet = async (req, res) => {
 };
 
 exports.deleteWallet = async (req, res) => {
+    await Budget.update(
+        { owner: req.user._id },
+        { $pull: { wallets: req.params.id }}
+    );
     await Transaction.remove(
         { wallet: req.params.id }
     );

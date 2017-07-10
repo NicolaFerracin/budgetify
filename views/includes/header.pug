@@ -1,6 +1,6 @@
 header.main-header
     if user
-        a.logo(href="/dashboard") 
+        a.logo(href="/app/dashboard") 
             span.logo-mini 
                 strong B
             span.logo-lg 
@@ -8,13 +8,13 @@ header.main-header
                 | udgetify
     nav.navbar.navbar-static-top(class=user ? '' : 'no-user')
         if user
-            a.sidebar-toggle(href="/dashboard" data-toggle="push-menu" role="button")
+            a.sidebar-toggle(href="/app/dashboard" data-toggle="push-menu" role="button")
                 span.sr-only Toggle navigation
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
         else 
-            a.logo.logo-light.logo-full(href="/login") 
+            a.logo.logo-light.logo-full(href="/app/login") 
                 span 
                     strong B
                     | udgetify
@@ -23,11 +23,11 @@ header.main-header
                 if user
                     if !user.google.email && !user.facebook.email
                         li
-                            a(href="/account") Account
+                            a(href="/app/account") Account
                     li
-                        a(href="/logout") Logout
+                        a(href="/app/logout") Logout
                 else
                     li
-                        a(href="/register") Register
+                        a(href="/app/register") Register
                     li
-                        a(href="/login") Login
+                        a(href="/app/login") Login

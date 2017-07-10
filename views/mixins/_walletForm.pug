@@ -2,7 +2,7 @@ mixin walletForm(wallet = {})
     .box.box-success
         .box-header.with-border
             h3.box-title New Wallet
-        form(method="POST" action=`/wallet/${wallet._id || ''}` data-wallet=wallet._id)
+        form(method="POST" action=`/app/wallet/${wallet._id || ''}` data-wallet=wallet._id)
             .box-body
                 .form-group
                     label(for="name") Name

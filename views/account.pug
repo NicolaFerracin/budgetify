@@ -7,10 +7,10 @@ block content
             if !user.isActive
                 p This account has not been activated yet.
                 p Please check your email or click the button below to receive a new activation link.
-                form(method="POST" action="/activate/resend")
+                form(method="POST" action="/app/activate/resend")
                     button.btn.btn-primary.btn-block.btn-flat(type="submit") Send new activation link
             else
-                form(method="POST" action="/account/updateAccount")
+                form(method="POST" action="/app/account/updateAccount")
                     .form-group.has-feedback
                         input.form-control(type="text" name="name" value=user.name)
                         span.glyphicon.glyphicon-user.form-control-feedback
@@ -24,7 +24,7 @@ block content
                 hr
 
                 p.login-box-msg Change password
-                form(method="POST" action="/account/changePassword")
+                form(method="POST" action="/app/account/changePassword")
                     .form-group.has-feedback
                         input.form-control(type="password" name="old-password" placeholder="Insert current password")
                         span.glyphicon.glyphicon-lock.form-control-feedback

@@ -32,11 +32,11 @@ block content
                                         span #{c.amount}#{currencySymbol}
                                         if index < total.length -1
                                             |  | 
-                        a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet
+                        a.btn.btn-primary.btn-flat(href="/app/wallet") Add Wallet
                     else
                         .text-center
                             h3 You don't have any wallet. Create one!
-                            a.btn.btn-primary.btn-flat(href="/wallet") Add Wallet
+                            a.btn.btn-primary.btn-flat(href="/app/wallet") Add Wallet
         .col-sm-6
             .box.box-success.box-solid
                 .box-header.with-border
@@ -53,8 +53,8 @@ block content
                     if !h.isEmpty(budgets)
                         each budget in budgets 
                             - const saved = h.getSavedAmountPerBudget(budget.wallets)
-                            - const currencySymbol = budget.wallets[0].currency ? h.currencies[budget.wallets[0].currency].symbol : ''
-                            a.budget(href=`/budget/${budget._id}`)
+                            - const currencySymbol = !h.isEmpty(budget.wallets) ? h.currencies[budget.wallets[0].currency].symbol : ''
+                            a.budget(href=`/app/budget/${budget._id}`)
                                 h3 
                                     span #{budget.name} 
                                     span You saved #{saved}#{currencySymbol} out of #{budget.total}#{currencySymbol} planned
@@ -62,4 +62,4 @@ block content
                     else
                         .text-center
                             h3 You don't have any saving budget. Create one!
-                            a.btn.btn-primary.btn-flat(href="/budget") Create Budget
+                            a.btn.btn-primary.btn-flat(href="/app/budget") Create Budget

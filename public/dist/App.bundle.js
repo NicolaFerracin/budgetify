@@ -11424,7 +11424,7 @@ function onDeletion() {
         deleteBudget.addEventListener('click', function () {
             var budgetId = deleteBudget.parentElement.parentElement.dataset.budget;
             _axios2.default.delete('/api/v1/budget/' + budgetId).then(function (res) {
-                window.location = '/dashboard';
+                window.location = '/app/dashboard';
             });
         });
     }
@@ -11754,8 +11754,6 @@ function setNewState(form, newState) {
     form.find('select[name="category"]').val(newState.category);
     form.find('input[name="amount"]').val(newState.amount);
     form.find('input[name="date"]').val(newState.date);
-    console.log(form.find('input[name="date"]'));
-    console.log(newState.date);
     form.find('input[name="time"]').val(newState.time);
     form.find('input[name="description"]').val(newState.description);
     form.find('input[name="wallet"]').val(newState.wallet);
@@ -11795,7 +11793,7 @@ function initWallet() {
         deleteWallet.addEventListener('click', function () {
             var walletId = deleteWallet.parentElement.parentElement.dataset.wallet;
             _axios2.default.delete('/api/v1/wallet/' + walletId).then(function (res) {
-                window.location = '/dashboard';
+                window.location = '/app/dashboard';
             });
         });
     }

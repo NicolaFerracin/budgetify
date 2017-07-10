@@ -8,7 +8,7 @@ block content
         h1 #{wallet.name}
             if wallet.description || wallet.currency
                 small #{wallet.description} - #{wallet.currency}
-        a.btn.btn-default.btn-flat.header-right(type="button" href=`/wallet/${wallet.id}/edit`) Edit
+        a.btn.btn-default.btn-flat.header-right(type="button" href=`/app/wallet/${wallet.id}/edit`) Edit
 
     section.content
         - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
@@ -32,7 +32,7 @@ block content
                                             ul
                                                 for month in year.months
                                                     li.calendar-month 
-                                                        a(href=`/wallet/${wallet._id}?y=${year.year}&m=${month.month}`) #{h.months[month.month - 1]}&nbsp;
+                                                        a(href=`/app/wallet/${wallet._id}?y=${year.year}&m=${month.month}`) #{h.months[month.month - 1]}&nbsp;
                                                             i.fa.fa-angle-double-right
 
             .col-md-6.col-md-offset-1
@@ -64,7 +64,7 @@ block content
                                             input.form-control(type="text" name="new-category" placeholder="Add New Category")
                                             span.input-group-btn
                                                 button.btn.btn-success.btn-flat(type="submit") Add
-                                form(method="POST" action="/categories" id="categories-form")
+                                form(method="POST" action="/app/categories" id="categories-form")
                                     .modal-body
                                         ul.categories-list(id="categories-list")
                                             - const categories = user.categories.sort()

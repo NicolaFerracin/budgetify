@@ -8,7 +8,7 @@ function initWallet() {
             axios
                 .delete(`/api/v1/wallet/${walletId}`)
                 .then(res => {
-                    window.location = '/dashboard';
+                    window.location = '/app/dashboard';
                 });
         });
     }

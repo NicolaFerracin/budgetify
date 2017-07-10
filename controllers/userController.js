@@ -55,7 +55,7 @@ exports.register = async (req, res, next) => {
     });
     await req.login(user);
     req.flash('success', `Welcome to Budgetify! You have been emailed an activation link. Please check your inbox and activate your account.`);
-    res.redirect('/dashboard');
+    res.redirect('/app/dashboard');
 };
 
 exports.activateAccount = async (req, res) => {
@@ -64,14 +64,14 @@ exports.activateAccount = async (req, res) => {
     });
     if (!user) {
         req.flash('error', 'Invalid activation link.');
-        return res.redirect('/login');
+        return res.redirect('/app/login');
     }
     user.isActive = true;
     user.activateAccountToken = undefined;
     const updatedUser = await user.save();
     await req.login(updatedUser);
     req.flash('success', 'Account activated with success!');
-    res.redirect('/login');
+    res.redirect('/app/login');
 };
 
 exports.resendActivation = async (req, res) => {
@@ -81,7 +81,7 @@ exports.resendActivation = async (req, res) => {
     });
     if (!user) {
         req.flash('error', 'We experienced a problem while checking your account. Please try to login again.');
-        return res.redirect('/logout');
+        return res.redirect('/app/logout');
     }
     if (user.isActive) {
         req.flash('info', 'This account is already active.');

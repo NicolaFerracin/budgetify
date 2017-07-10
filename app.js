@@ -54,8 +54,12 @@ app.use((req, res, next) => {
 });
 
 // routes
-const routes = require('./routes/index');
-app.use('/', routes);
+const appRoutes = require('./routes/app');
+const apiRoutes = require('./routes/api');
+const indexRoutes = require('./routes/index');
+app.use('/app', appRoutes);
+app.use('/', apiRoutes);
+app.use('/', indexRoutes);
 
 // error handlers
 app.use(errorHandlers.notFound);
