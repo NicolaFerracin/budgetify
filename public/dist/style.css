@@ -8306,4 +8306,60 @@ form textarea {
         -ms-flex-pack: justify;
             justify-content: space-between; }
 
+.menu {
+  position: absolute;
+  right: 0;
+  margin: 20px; }
+  .menu a {
+    color: white; }
+  .menu a:hover, .menu a:focus {
+    color: #00a65a; }
+
+.budgetify-landing {
+  height: 100%;
+  background: url("/img/bg.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  background-color: rgba(0, 20, 0, 0.6);
+  background-blend-mode: darken; }
+  .budgetify-landing .budgetify-header {
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+    color: white; }
+    .budgetify-landing .budgetify-header h1 {
+      margin-bottom: 50px; }
+    .budgetify-landing .budgetify-header p {
+      font-size: 1.5em; }
+    .budgetify-landing .budgetify-header .header-action a {
+      margin: 20px 10px; }
+    .budgetify-landing .budgetify-header .header-section {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between; }
+      .budgetify-landing .budgetify-header .header-section div {
+        margin: 0 20px;
+        -ms-flex-preferred-size: 50%;
+            flex-basis: 50%; }
+        .budgetify-landing .budgetify-header .header-section div i {
+          font-size: 15em; }
+
+.budgetify-contacts a {
+  color: inherit; }
+  .budgetify-contacts a i {
+    font-size: 5em;
+    margin: 50px 50px; }
+
+.budgetify-contacts a:hover, .budgetify-contacts a:focus {
+  color: #00a65a; }
+
 /*# sourceMappingURL=style.css.map*/

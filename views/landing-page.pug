@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= h.siteName.text
+    include meta
+    include styles
+  block body
+    .menu
+        a(href="/about") About
+    .budgetify-landing
+        .budgetify-header
+            .container
+                h1 
+                    strong B
+                    span udgetify
+                h3 Track of your expenses. Plan your savings.
+                h3 All in one place.
+                .header-action
+                    a.btn.btn-flat.btn-lg.btn-primary(href="/app/login") Login
+                    a.btn.btn-flat.btn-lg.btn-default(href="/app/register") Register
+                .header-section
+                    div
+                        i.fa.fa-money
+                        h4 Create as many Wallets as you want. Add Transactions to them, complete with category, date, time, location and much more.
+                    div
+                        i.fa.fa-line-chart
+                        h4 Add a Budget to plan your savings. Adjust your plans for each month and track your progress.

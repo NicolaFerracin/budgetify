@@ -1,0 +1,65 @@
+.menu {
+    position: absolute;
+    right: 0;
+    margin: 20px;
+    a {
+        color: white;
+    }
+    a:hover, a:focus {
+        color: #00a65a;
+    }
+}
+
+.budgetify-landing {
+    height: 100%;
+    background: url('/img/bg.jpeg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: rgba(0,20,0,0.6);
+    background-blend-mode: darken;
+    .budgetify-header {
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        color: white;
+        h1 {
+            margin-bottom: 50px;
+        }
+        p {
+            font-size: 1.5em;
+        }
+        .header-action {
+            a {
+                margin: 20px 10px;
+            }
+        }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            div {
+                i {
+                    font-size: 15em;
+                }    
+                margin: 0 20px;
+                flex-basis: 50%;
+            }
+        }
+    }
+}
+
+.budgetify-contacts {
+    a {
+        color: inherit;
+        i {
+            font-size: 5em;
+            margin: 50px 50px;
+        }
+    }
+    a:hover, a:focus {
+        color: #00a65a;
+    }
+}
