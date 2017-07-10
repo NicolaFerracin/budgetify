@@ -49,7 +49,7 @@ exports.register = async (req, res, next) => {
     });
     const register = promisify(User.register, User);
     await register(user, req.body.password);
-    const activateUrl = `https://${req.headers.host}/activate/${user.activateAccountToken}`;
+    const activateUrl = `https://${req.headers.host}/app/activate/${user.activateAccountToken}`;
     await mail.send({
         user,
         subject: 'Account Activation',
@@ -91,7 +91,7 @@ exports.resendActivation = async (req, res) => {
         return res.redirect('back');
     }
     user.activateAccountToken = crypto.randomBytes(20).toString('hex');
-    const activateUrl = `https://${req.headers.host}/activate/${user.activateAccountToken}`;
+    const activateUrl = `https://${req.headers.host}/app/activate/${user.activateAccountToken}`;
     await mail.send({
         user,
         subject: 'Account Activation',
@@ -129,7 +129,7 @@ exports.updateAccount = async (req, res) => {
         if (updates.email != user.email) {
             updates.activateAccountToken = crypto.randomBytes(20).toString('hex');
             updates.isActive = false;
-            const activateUrl = `https://${req.headers.host}/activate/${updates.activateAccountToken}`;
+            const activateUrl = `https://${req.headers.host}/app/activate/${updates.activateAccountToken}`;
             await mail.send({
                 user,
                 subject: 'Account Activation',
