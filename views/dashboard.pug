@@ -14,7 +14,10 @@ block content
                     .box-tools.pull-right
                         button.btn.btn-box-tool(type="button" data-widget="collapse")
                             i.fa.fa-minus
-                .box-body  
+                .box-body
+                    div
+                        p.text-center Create a Wallet and add Transactions to it to keep track of your expenses.
+                    hr
                     if !h.isEmpty(wallets)
                         each wallet in wallets
                             +wallet(wallet)
@@ -41,7 +44,12 @@ block content
                     .box-tools.pull-right
                         button.btn.btn-box-tool(type="button" data-widget="collapse")
                             i.fa.fa-minus
-                .box-body  
+                .box-body
+                    div
+                        p.text-center Budgets can help you stay on track with your savings. Create a Budget, set the amount of money you'd like to save and start saving!
+                        p.text-center Each Budget can keep track of the Transactions of different Wallets, as long as all Wallets share the same currency.
+                        p.text-center When you create a Budget you can choose the default monthly amount you'd like to save. You can then tweak and change the amount for every single month.
+                    hr 
                     if !h.isEmpty(budgets)
                         each budget in budgets 
                             - const saved = h.getSavedAmountPerBudget(budget.wallets)
