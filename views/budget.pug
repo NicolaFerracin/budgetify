@@ -25,10 +25,10 @@ block content
                                 .box-tools.pull-right
                                     button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
                                         i.fa.fa-minus
-                            .box-body.t-calendar.text-center
+                            .box-body.calendar.text-center
                                 ul
                                     for year in calendar
-                                        li.t-calendar-year
+                                        li.calendar-year
                                             a(href=`/budget/${budget._id}?y=${year.year}`) #{year.year}&nbsp;
                                                 i.fa.fa-angle-double-right
                
@@ -56,7 +56,8 @@ block content
                                             td #{h.months[month.month - 1]}
                                             td #{h.isEmpty(saved) ? 0 : saved} #{currencySymbol}
                                             td
-                                                span(data-widget="budgetMonth" data-trigger=month.id) #{month.amount} #{currencySymbol}
+                                                span #{month.amount} #{currencySymbol}&nbsp;&nbsp;
+                                                    i.fa.fa-pencil(data-widget="budgetMonth" data-trigger=month.id)
                                                 .month-action.hidden(id=month.id)
                                                     input(type="number" name="monthAmount" value=month.amount)
                                                     .month-action-icons

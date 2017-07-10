@@ -11508,11 +11508,11 @@ function singleBudgetView() {
     var table = document.getElementsByClassName('box-budget-month')[0];
     if (table) {
         // toggle edit
-        var readOnlyAmount = document.querySelectorAll('[data-widget="budgetMonth"]');
-        readOnlyAmount.forEach(function (el) {
+        var editTrigger = document.querySelectorAll('[data-widget="budgetMonth"]');
+        editTrigger.forEach(function (el) {
             return el.addEventListener('click', function (e) {
                 var trigger = this.dataset.trigger;
-                this.classList.add('hidden');
+                this.parentElement.classList.add('hidden');
                 document.getElementById(trigger).classList.remove('hidden');
             });
         });
@@ -11523,7 +11523,7 @@ function singleBudgetView() {
             return i.addEventListener('click', function (e) {
                 var parent = this.parentElement.parentElement;
                 parent.classList.add('hidden');
-                document.querySelector('[data-trigger="' + parent.id + '"').classList.remove('hidden');
+                document.querySelector('[data-trigger="' + parent.id + '"').parentElement.classList.remove('hidden');
             });
         });
 

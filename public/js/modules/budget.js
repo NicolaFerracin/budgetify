@@ -109,10 +109,10 @@ function singleBudgetView() {
     const table = document.getElementsByClassName('box-budget-month')[0];
     if (table) {
         // toggle edit
-        const readOnlyAmount = document.querySelectorAll('[data-widget="budgetMonth"]');
-        readOnlyAmount.forEach(el => el.addEventListener('click', function(e) {
+        const editTrigger = document.querySelectorAll('[data-widget="budgetMonth"]');
+        editTrigger.forEach(el => el.addEventListener('click', function(e) {
             const trigger = this.dataset.trigger;
-            this.classList.add('hidden');
+            this.parentElement.classList.add('hidden');
             document.getElementById(trigger).classList.remove('hidden');
         }));
 
@@ -121,7 +121,7 @@ function singleBudgetView() {
         cancelIcons.forEach(i => i.addEventListener('click', function(e) {
             const parent = this.parentElement.parentElement;
             parent.classList.add('hidden');
-            document.querySelector(`[data-trigger="${parent.id}"`).classList.remove('hidden');
+            document.querySelector(`[data-trigger="${parent.id}"`).parentElement.classList.remove('hidden');
         }));
 
         // save edit

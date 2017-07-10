@@ -1,4 +1,4 @@
-.t-calendar {
+.calendar {
     ul {
         padding: 0;
     }
@@ -6,7 +6,10 @@
         font-weight: bold;
         list-style: none;
         margin-bottom: 20px;
-        font-size: 20px;
+        font-size: 20px;   
+        a {
+            color: inherit;
+        }
     }
     
     &-month {

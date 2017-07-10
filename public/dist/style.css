@@ -8232,24 +8232,29 @@ form textarea {
   .box-transactions-day .t-amount.t-outcome {
     color: #E50714; }
 
-.t-calendar ul {
+.calendar ul {
   padding: 0; }
 
-.t-calendar-year {
+.calendar-year {
   font-weight: bold;
   list-style: none;
   margin-bottom: 20px;
   font-size: 20px; }
+  .calendar-year a {
+    color: inherit; }
 
-.t-calendar-month {
+.calendar-month {
   list-style: none;
   font-weight: initial;
   font-size: initial; }
-  .t-calendar-month a {
+  .calendar-month a {
     color: inherit; }
 
 .box-budget-month th, .box-budget-month td {
   text-align: center; }
+
+.box-budget-month td i.fa-pencil {
+  cursor: pointer; }
 
 .box-budget-month input {
   width: 100%; }

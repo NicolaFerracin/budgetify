@@ -25,13 +25,13 @@ block content
                                 .box-tools.pull-right
                                     button.btn.btn-box-tool(type="button" data-widget="collapse" data-target="#box1")
                                         i.fa.fa-minus
-                            .box-body.t-calendar.text-center
+                            .box-body.calendar.text-center
                                 ul
                                     for year in calendar
-                                        li.t-calendar-year #{year.year}
+                                        li.calendar-year #{year.year}
                                             ul
                                                 for month in year.months
-                                                    li.t-calendar-month 
+                                                    li.calendar-month 
                                                         a(href=`/wallet/${wallet._id}?y=${year.year}&m=${month.month}`) #{h.months[month.month - 1]}&nbsp;
                                                             i.fa.fa-angle-double-right
 
