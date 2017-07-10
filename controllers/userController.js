@@ -12,6 +12,9 @@ exports.loginForm = (req, res) => {
 };
 
 exports.registerForm = (req, res) => {
+    if (req.isAuthenticated()){
+        return res.redirect('dashboard');
+    }
     res.render('register', { title: 'Register' });
 };
 
