@@ -8222,6 +8222,9 @@ form textarea {
 .modal-backdrop {
   z-index: 1000; }
 
+.t-add {
+  margin-bottom: 20px; }
+
 .box-transactions-day .box-body {
   cursor: pointer; }
 

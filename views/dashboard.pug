@@ -24,12 +24,12 @@ block content
                         - const total = h.getTotalByCurrency(wallets)
                         div
                             h3.text-right Total: 
-                                if h.isEmpty(total.toFixed(2))
+                                if h.isEmpty(total)
                                     | -
                                 else
                                     for c, index in total
                                         - const currencySymbol = c.currency ? h.currencies[c.currency].symbol : ''
-                                        span #{c.amount}#{currencySymbol}
+                                        span #{c.amount.toFixed(2)}#{currencySymbol}
                                         if index < total.length -1
                                             |  | 
                         a.btn.btn-primary.btn-flat(href="/app/wallet") Add Wallet

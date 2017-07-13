@@ -11,10 +11,10 @@ block content
         a.btn.btn-default.btn-flat.header-right(type="button" href=`/app/wallet/${wallet.id}/edit`) Edit
 
     section.content
-        - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
+        - const total = wallet.transactions.filter(t => !t.excludeFromTotal).reduce((res, t) => res += t.amount, 0);
         .row
-            .col-xs-12
-                h2.text-center Balance: #{total.toFixed(2)} #{currencySymbol}
+            .col-xs-12.text-center
+                h2 Balance: #{total.toFixed(2)} #{currencySymbol}
         .row
             .col-md-2
                 if !h.isEmpty(calendar)
@@ -37,16 +37,17 @@ block content
 
             .col-md-6.col-md-offset-1
                 if h.isEmpty(transactions)
-                    h4.text-center No transaction found for #{h.months[query.month - 1]} #{query.year}
+                    h4.text-center No transaction found for #{h.months[query.month - 1]} #{query.year}  
+                    button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
                 else
                     - const month = transactions[0]
                     .month
                         h4.text-center #{h.months[month.month - 1]} #{month.year}
-                        h4.text-center #{month.amountMonth} #{currencySymbol}
+                        h4.text-center #{month.amountMonth.toFixed(2)} #{currencySymbol} 
+                        .text-center
+                            button.btn.btn-primary.btn-flat.t-add(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
                         for day in month.days
                             +transactionDay(day)
-                            
-                button.btn.btn-primary.btn-flat(type="button" data-toggle="modal" data-target="#transaction-modal") Add Transaction
 
                 include includes/transactionModal
 
