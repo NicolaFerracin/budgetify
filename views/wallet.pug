@@ -14,7 +14,7 @@ block content
         - const total = wallet.transactions.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12
-                h2.text-center Balance: #{total} #{currencySymbol}
+                h2.text-center Balance: #{total.toFixed(2)} #{currencySymbol}
         .row
             .col-md-2
                 if !h.isEmpty(calendar)

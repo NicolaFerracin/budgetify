@@ -18,10 +18,10 @@ mixin wallet(wallet)
                 - const total = wallet.transactions.filter(t => !t.excludeFromTotal).reduce((res, el) => res += el.amount, 0);
                 - const currencySymbol = wallet.currency ? h.currencies[wallet.currency].symbol : ''
                 if wallet.excludeFromTotal
-                    h3.wallet-total.text-muted #{total} #{currencySymbol}
+                    h3.wallet-total.text-muted #{total.toFixed(2)} #{currencySymbol}
                 else
                     if total >= 0
-                        h3.wallet-total.income #{total} #{currencySymbol}
+                        h3.wallet-total.income #{total.toFixed(2)} #{currencySymbol}
                     else
-                        h3.wallet-total.outcome #{total} #{currencySymbol}
+                        h3.wallet-total.outcome #{total.toFixed(2)} #{currencySymbol}
         hr

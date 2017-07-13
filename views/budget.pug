@@ -15,7 +15,7 @@ block content
         - const budgetTotal = budgetYear.reduce((res, el) => res += el.amount, 0);
         .row
             .col-xs-12
-                h2.text-center #{transactionYear ? transactionYear.amountYear : 0}#{currencySymbol} saved of #{budgetTotal}#{currencySymbol} planned in #{query}
+                h2.text-center #{transactionYear ? transactionYear.amountYear : 0}#{currencySymbol} saved of #{budgetTotal.toFixed(2)}#{currencySymbol} planned in #{query}
         .row
             .col-md-2
                 if !h.isEmpty(calendar)
