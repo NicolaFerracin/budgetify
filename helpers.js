@@ -66,9 +66,13 @@ exports.months = ['January', 'February', 'March', 'April', 'May', 'June', 'July'
 
 exports.orderByHour = (transactions) => transactions.sort((x, y) => x.timestamp < y.timestamp);
 
-exports.getSavedAmountPerBudget = (wallets) => {
+exports.getSavedAmountPerBudget = (start, end, wallets) => {
+    if (!end) {
+        end = new Date();
+    }
     return wallets.reduce((res, w) => {
-        res += w.transactions.filter(t => !t.excludeFromBudget)
+        res += w.transactions
+            .filter(t => !t.excludeFromBudget && t.timestamp.getMonth() >= start.getMonth() && t.timestamp.getMonth() <= end.getMonth())
             .reduce((res, t) => {
                 res += t.amount;
                 return res;

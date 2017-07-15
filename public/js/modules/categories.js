@@ -25,7 +25,7 @@ function initForm() {
         e.preventDefault();
         const newCategory = newCategoryForm.getElementsByTagName('input')[0].value.trim();
         if (newCategory && newCategory != '') {
-            listContainer.innerHTML = `<li data-value="${newCategory}">${newCategory} <span class="fa fa-remove" onclick="this.parentElement.remove()"></li>` + listContainer.innerHTML;
+            listContainer.innerHTML = `<li data-value="${newCategory}"><i class="fa fa-remove" onclick="this.parentElement.remove()"></i><span> ${newCategory}</span></li>` + listContainer.innerHTML;
         }
     }
 }

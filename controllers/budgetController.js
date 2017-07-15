@@ -12,7 +12,9 @@ exports.budget = async (req, res) => {
     const year = req.query.y ? Number(req.query.y) : new Date().getFullYear();
     const budgetYear = await getBudgetYear(req.user._id, budget._id, year);
     const walletIds = budget.wallets.map(w => mongoose.Types.ObjectId(w.id));
-    const transactionYear = await transactionController.getTransactionsForYear(req.user._id, walletIds, year);
+    const startMonth = budget.start.getMonth() + 1;
+    const endMonth = budget.end ? budget.end.getMonth() + 1 : new Date().getMonth() + 1;
+    const transactionYear = await transactionController.getTransactionsForYear(req.user._id, walletIds, year, startMonth, endMonth);
     const calendar = await getBudgetCalendar(req.user._id, budget._id);
     res.render('budget', { title: budget.name, budget, calendar, budgetYear, query: year, transactionYear: transactionYear[0] });
 };

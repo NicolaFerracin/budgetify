@@ -52,7 +52,7 @@ block content
                     hr 
                     if !h.isEmpty(budgets)
                         each budget in budgets 
-                            - const saved = h.getSavedAmountPerBudget(budget.wallets)
+                            - const saved = h.getSavedAmountPerBudget(budget.start, budget.end, budget.wallets)
                             - const currencySymbol = !h.isEmpty(budget.wallets) ? h.currencies[budget.wallets[0].currency].symbol : ''
                             a.budget(href=`/app/budget/${budget._id}`)
                                 h3 

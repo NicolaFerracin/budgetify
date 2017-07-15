@@ -130,7 +130,7 @@ exports.getTransactionsForMonth = async (userId, walletId, year, month) => {
     return transactions;
 };
 
-exports.getTransactionsForYear = async (userId, walletIds, year) => {
+exports.getTransactionsForYear = async (userId, walletIds, year, startMonth, endMonth) => {
     const transactions = await Transaction.aggregate([
         {
             $match: {
@@ -176,6 +176,11 @@ exports.getTransactionsForYear = async (userId, walletIds, year) => {
                         amountDay: '$amountDay'
                     }
                 }
+            }
+        },
+        {
+            $match: {
+                '_id.month': { $gte: startMonth, $lte: endMonth }
             }
         },
         {
