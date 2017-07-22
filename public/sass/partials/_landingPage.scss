@@ -1,7 +1,8 @@
 .menu {
     position: absolute;
     right: 0;
-    margin: 20px;
+    top: 0;
+    padding: 20px;
     a {
         color: white;
     }
@@ -10,7 +11,7 @@
     }
 }
 
-.budgetify-landing {
+body { 
     height: 100%;
     background: url('/img/bg.jpeg') no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -19,11 +20,13 @@
     background-size: cover;
     background-color: rgba(0,20,0,0.6);
     background-blend-mode: darken;
+}
+
+.budgetify-landing {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    height: 100%;
     .budgetify-header {
-        height: 100%;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
         text-align: center;
         color: white;
         h1 {
@@ -38,14 +41,8 @@
             }
         }
         .header-section {
-            display: flex;
-            justify-content: space-between;
-            div {
-                i {
-                    font-size: 15em;
-                }    
-                margin: 0 20px;
-                flex-basis: 50%;
+            div i {
+                font-size: 15em;
             }
         }
     }

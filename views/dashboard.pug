@@ -6,8 +6,8 @@ block content
     section.content-header 
         h1 Dashboard
 
-    section.content
-        .col-sm-6
+    section.content.row
+        .col-md-6
             .box.box-success.box-solid
                 .box-header.with-border
                     h3.box-title My Wallets
@@ -37,7 +37,7 @@ block content
                         .text-center
                             h3 You don't have any wallet. Create one!
                             a.btn.btn-primary.btn-flat(href="/app/wallet") Add Wallet
-        .col-sm-6
+        .col-md-6
             .box.box-success.box-solid
                 .box-header.with-border
                     h3.box-title My Budgets
@@ -55,9 +55,11 @@ block content
                             - const saved = h.getSavedAmountPerBudget(budget.start, budget.end, budget.wallets)
                             - const currencySymbol = !h.isEmpty(budget.wallets) ? h.currencies[budget.wallets[0].currency].symbol : ''
                             a.budget(href=`/app/budget/${budget._id}`)
-                                h3 
-                                    span #{budget.name} 
-                                    span You saved #{saved.toFixed(2)}#{currencySymbol} out of #{budget.total.toFixed(2)}#{currencySymbol} planned
+                                .budget-content
+                                    h3.budget-name
+                                        span #{budget.name} 
+                                    h3.budget-total
+                                        span You saved #{saved.toFixed(2)}#{currencySymbol} out of #{budget.total.toFixed(2)}#{currencySymbol} planned
                             hr
                     else
                         .text-center

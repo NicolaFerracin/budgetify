@@ -8190,8 +8190,13 @@ form textarea {
 .logo-light {
   background-color: #00a65a !important; }
 
-.logo-full {
+.logo.logo-light.logo-full {
   width: 230px !important; }
+
+@media (max-width: 767px) {
+  .logo.logo-light.logo-full {
+    width: 100% !important;
+    float: none; } }
 
 .content-header .header-right {
   position: absolute;
@@ -8289,6 +8294,19 @@ form textarea {
             justify-content: space-between;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
+    @media (max-width: 767px) {
+      .wallet .wallet-content {
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        text-align: center; } }
     .wallet .wallet-content .wallet-name {
       display: inline-block; }
     .wallet .wallet-content .wallet-total {
@@ -8301,39 +8319,42 @@ form textarea {
 .box .budget {
   color: inherit;
   text-decoration: none; }
-  .box .budget h3 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between; }
+
+.box .budget-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center; }
 
 .menu {
   position: absolute;
   right: 0;
-  margin: 20px; }
+  top: 0;
+  padding: 20px; }
   .menu a {
     color: white; }
   .menu a:hover, .menu a:focus {
     color: #00a65a; }
 
-.budgetify-landing {
+body {
   height: 100%;
   background: url("/img/bg.jpeg") no-repeat center center fixed;
   background-size: cover;
   background-color: rgba(0, 20, 0, 0.6);
   background-blend-mode: darken; }
+
+.budgetify-landing {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  height: 100%; }
   .budgetify-landing .budgetify-header {
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
     text-align: center;
     color: white; }
     .budgetify-landing .budgetify-header h1 {
@@ -8342,19 +8363,8 @@ form textarea {
       font-size: 1.5em; }
     .budgetify-landing .budgetify-header .header-action a {
       margin: 20px 10px; }
-    .budgetify-landing .budgetify-header .header-section {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-pack: justify;
-          -ms-flex-pack: justify;
-              justify-content: space-between; }
-      .budgetify-landing .budgetify-header .header-section div {
-        margin: 0 20px;
-        -ms-flex-preferred-size: 50%;
-            flex-basis: 50%; }
-        .budgetify-landing .budgetify-header .header-section div i {
-          font-size: 15em; }
+    .budgetify-landing .budgetify-header .header-section div i {
+      font-size: 15em; }
 
 .budgetify-contacts a {
   color: inherit; }

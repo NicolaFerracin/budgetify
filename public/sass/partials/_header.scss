@@ -2,8 +2,16 @@
     background-color: $green !important;
 }
 
-.logo-full {
+
+.logo.logo-light.logo-full {
     width: 230px !important;
+}
+
+@media (max-width: 767px) {
+    .logo.logo-light.logo-full {
+        width: 100% !important;
+        float: none;
+    }
 }
 
 .content-header {

@@ -5,7 +5,7 @@ mixin transactionDay(day)
     .box.box-success.box-transactions-day
         .box-header.with-border
             h3.box-title= date.format('DD MMM [-] dddd')
-            h3.box-title.pull-right #{day.amountDay} #{currencySymbol}
+            h3.box-title.pull-right #{day.amountDay.toFixed(2)} #{currencySymbol}
         .box-body
             for transaction, index in transactions
                 - const time = h.moment(transaction.timestamp).format('hh:mm') 
